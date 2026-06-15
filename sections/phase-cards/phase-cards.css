@@ -1,0 +1,26 @@
+/* ============================================================
+   PATTERN — Phase / timeline cards
+   A labeled card pair for staged content (e.g. Years 1–2 / 3–4).
+   ============================================================ */
+.phasecards { padding: clamp(var(--space-11), 6.5vw, var(--space-16)) 0; }
+.phasecards--tint { background: var(--paper); }
+.phasecards .container { max-width: 1080px; }
+.phasecards-intro { font-size: var(--text-lg); color: var(--contrast); line-height: 1.6; margin: 0 0 var(--space-7); max-width: 66ch; }
+.phase-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-6);
+  margin-bottom: var(--space-7);
+}
+.phase {
+  background: var(--base);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--uga-red);
+  padding: clamp(var(--space-6), 3vw, var(--space-8));
+  box-shadow: var(--shadow-card);
+}
+.phase-tag { font-family: var(--font-condensed); font-weight: 600; font-size: var(--text-sm); letter-spacing: 0.12em; text-transform: uppercase; color: var(--uga-red); }
+.phase-title { font-family: var(--font-serif); font-weight: 400; font-size: var(--heading-4); margin: var(--space-2) 0 var(--space-3); }
+.phase p { margin: 0; color: var(--contrast); line-height: 1.6; }
+
+@media (max-width: 640px) { .phase-grid { grid-template-columns: 1fr; } }

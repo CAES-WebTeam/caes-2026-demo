@@ -1,0 +1,18 @@
+.announcement {
+  background: var(--uga-red);
+  color: var(--base);
+  position: relative;
+}
+.announcement-inner {
+  display: flex; align-items: center; justify-content: center;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--gutter);
+  font-size: var(--text-sm); text-align: center;
+  font-family: var(--font-sans);
+}
+.announcement a {
+  color: var(--base);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font-weight: 600;
+}

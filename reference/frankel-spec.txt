@@ -1,0 +1,335 @@
+CAES Functional + Technical Specifications
+Core Functionality Documentation
+User Management System
+● User registration and authentication processes
+○ WordPress includes built-in user registration accessible via wp-login.php.
+○ If you’d prefer more controlled onboarding, plugins like User Registration or
+Profile Builder extend the native system with custom registration forms, email
+verification, and approval workflows.
+○ Two-factor authentication (2FA) can be added via plugins such as DUO, WP 2FA
+or Google Authenticator.
+○ SSO integration is worth considering as it can eliminate password management
+entirely for authenticated users (Kaptiv8 has developed a plugin for this purpose).
+● Profile management capabilities
+○ WordPress natively supports basic profile fields (name, email, bio, website).
+○ Extended profile capabilities - custom fields, profile photo upload, additional
+contact information - typically require a plugin such as Ultimate Member or
+BuddyPress depending on the complexity needed.
+● Role-based access control and permissions
+○ WordPress ships with five default roles: Administrator, Editor, Author, Contributor,
+and Subscriber - each with a defined capability set.
+○ For a site like Field Report, custom roles will likely be needed (e.g., a
+Faculty/Staff role with limited publishing rights).
+○ Plugins like Members or User Role Editor allow granular capability assignment
+without custom code.
+○ Content restriction by role can be handled natively or via a membership/access
+plugin.
+● Password reset and account recovery procedures
+○ WordPress handles password reset natively via emailed reset links through
+wp-login.php.
+○ Email deliverability should be ensured via an SMTP plugin (WP Mail SMTP or
+similar) rather than relying on PHP mail, which is frequently blocked or marked as
+spam.
+○ SSO Integration as noted above can remove this need
+
+-- 1 of 9 --
+
+Content Management Features
+● Content creation, editing, and publishing workflows
+○ WordPress's native block editor (Gutenberg) handles most content creation
+needs.
+○ For structured editorial workflows - draft, review, scheduled publish, approval
+chains - plugins like PublishPress or Oasis Workflow add formal workflow states
+beyond WordPress's native draft/pending/publish model.
+○ Post scheduling, sticky posts, and revision history are all native WordPress
+features.
+● Media library and asset management system
+○ The native WordPress media library handles upload, storage, and basic
+organization.
+○ Plugins like FileBird or Real Media Library add folder-based organization.
+○ Image editing (crop, rotate, scale) is available natively.
+○ SVG upload support requires a small plugin or code filter due to security
+restrictions.
+○ All uploaded media should have defined naming conventions and alt text
+requirements documented in the spec.
+● SEO optimization tools and meta data management
+○ WordPress does not include SEO tooling natively. The standard recommendation
+is Yoast SEO or Rank Math, both of which provide meta title and description
+management, Open Graph and Twitter Card tags, XML sitemap generation,
+canonical URL control, schema markup, and readability analysis.
+○ Either plugin should be specified by name with configuration standards
+documented (e.g., title tag format, default OG image, noindex rules for archive
+pages).
+Search and Navigation Features
+● Site-wide search functionality
+○ WordPress native search is functional but limited — it searches post titles and
+content only, excludes custom fields by default, and has no relevance ranking.
+○ For a content-rich site as this one will be, replacing or augmenting native search
+with SearchWP is recommended. Filtering by content type, taxonomy, or date is a
+common requirement that native search cannot fulfill without extension. Search
+WP has the ability to search the content of .pdf files as well as web pages.
+● Breadcrumb navigation and site map generation
+○ Breadcrumbs are not native to WordPress core and are typically output by an
+SEO plugin (Yoast and Rank Math both include breadcrumb functionality) or a
+dedicated plugin like Breadcrumb NavXT.
+
+-- 2 of 9 --
+
+○ XML sitemaps can be generated automatically by Yoast or Rank Math and
+submitted to Google Search Console.
+● Related content and recommendation systems
+○ Native WordPress has no related content functionality.
+○ Suggestion is the use of taxonomy-based relationships (posts sharing categories
+or tags surfaced via a widget or block)
+● Category-based navigation
+○ WordPress taxonomies (outlined above) form the backbone of category
+navigation.
+○ Mega menus, filterable archive pages, and taxonomy landing pages with custom
+templates are all achievable within WordPress, for example by integrating
+Custom Post Types with Advanced Custom Fields. Other diverse block-based
+menu systems can be used if building in Gutenberg.
+Personnel Integration
+● Directory/bio content migration from CAES
+○ All directory / bio content will be relocated from the main CAES site to the ‘Field
+Report’ site
+○ This requires defining a People custom post type with structured custom fields
+(name, title, department, headshot, bio, contact information, research areas, etc.)
+- typically implemented via ACF (Advanced Custom Fields).
+○ Migration from the source site will require either manual re-entry, a CSV import
+process, or a scripted migration depending on how the CAES data is structured.
+● Biography card integration within pages
+○ Once the People Custom Post Type (CPT) is established, individual bio cards
+need to be embeddable within page content
+○ The recommended approach is a custom Gutenberg block or ACF field that
+allows an editor to select a person from the directory and output a formatted card
+— photo, name, title, and link to full profile — inline within any page or post.
+○ This keeps profile data centralized (one source of truth) while allowing flexible
+placement throughout the site.
+Technical Specifications
+Performance Requirements
+● Page load time targets
+○ Industry standard targets for WordPress are under 2.5 seconds for Largest
+Contentful Paint (LCP) and a Google PageSpeed Insights score of 80+ on mobile
+and 90+ on desktop
+○ Core Web Vitals (LCP, CLS, INP) should be specified as the measurement
+framework, with Google Search Console and PageSpeed Insights as monitoring
+
+-- 3 of 9 --
+
+tools.
+● Caching strategy and CDN implementation
+○ A layered caching strategy is standard: object caching (Redis or Memcached at
+the server level), page caching, and browser caching via cache-control headers.
+○ CDN delivery — Cloudflare being the most common — should be specified for
+static assets (images, CSS, JS).
+○ Cloudflare's free tier covers most university and nonprofit use cases; the Pro tier
+adds image optimization and additional performance rules.
+● Image optimization specifications
+○ All uploaded images should be served in modern formats (WebP with JPEG
+fallback).
+○ WordPress 5.8+ generates WebP versions natively if the server supports it;
+plugins like Imagify or ShortPixel handle conversion and compression
+automatically on upload.
+○ Maximum upload dimensions should be defined (suggest, 2400px wide
+maximum) to prevent oversized originals being stored.
+○ Lazy loading is enabled by default in WordPress core for images below the fold.
+Security and Compliance
+● Data protection and privacy policy implementation
+○ It is recommended to rely on UGA’s master privacy policy, which is linked from its
+mandatory global footer.
+○ A cookie consent solution (CookieYes or Complianz are commonly used) should
+be specified if the site uses analytics, advertising, or any tracking scripts.
+○ The privacy policy page should be linked in the site footer and referenced in any
+data collection forms.
+● SSL certificate requirements and HTTPS enforcement
+○ SSL is a baseline requirement. The certificate should be in place at the hosting
+level before launch, with HTTPS enforcement via 301 redirect from HTTP at
+either the server or WordPress level.
+Integration Requirements
+● Third-party service APIs, if applicable
+○ Any external data sources — event feeds, research databases, institutional APIs
+from the broader UGA/CAES ecosystem — should be inventoried and
+documented with authentication method (API key, OAuth), data refresh
+frequency, and fallback behavior if the API is unavailable.
+○ REST API integrations in WordPress are typically handled via scheduled
+WP-Cron jobs or server-side cron for pulling external data.
+
+-- 4 of 9 --
+
+● Social media platform integrations
+○ Since no social media integrations have been specified, it is recommended that
+icons/links for various social media channels be housed in the footer.
+● Marketing automation tool integrations, if applicable
+○ If the site connects to a marketing platform (Slate, Mailchimp, HubSpot,
+Salesforce Marketing Cloud, etc.), the integration method should be specified —
+typically via the platform's official WordPress plugin or a form plugin with native
+integration (Gravity Forms has extensive third-party connectors). List
+segmentation, trigger events, and data field mapping should be documented.
+Accessibility and Standards Compliance
+● WCAG 2.1 AA compliance requirements
+○ WCAG 2.1 AA is the standard baseline for institutional and government-adjacent
+websites and should be specified as a hard requirement.
+○ The theme and any custom sections must meet all Level A and AA success
+criteria.
+○ Automated testing tools (Axe, WAVE, Lighthouse accessibility audit) should be
+run during QA, with manual keyboard and screen reader testing required before
+launch.
+● Screen reader compatibility and semantic HTML structure
+○ All templates should use proper semantic HTML5 elements — nav, main, article,
+section, aside, header, footer — rather than div-only markup. ARIA landmarks
+and labels should be applied where semantic HTML alone is insufficient.
+○ Heading hierarchy (H1 through H6) must be logical and consistent across all
+page templates, with a single H1 per page representing the primary topic.
+● Keyboard navigation support
+○ All interactive elements — menus, modals, forms, accordions, tabs, carousels —
+must be fully operable via keyboard alone.
+○ Focus states must be visible (not suppressed via outline:none without a
+replacement style). Tab order must follow logical reading order.
+○ Modal dialogs must trap focus within them when open and return focus to the
+trigger element when closed.
+● Color contrast and visual accessibility standards
+○ Normal text requires a minimum contrast ratio of 4.5:1 against its background;
+large text (18pt+ or 14pt+ bold) requires 3:1.
+○ UI components and focus indicators require 3:1 against adjacent colors.
+○ All color choices should be verified against these ratios using a tool like the
+WebAIM Contrast Checker before finalizing the design system.
+
+-- 5 of 9 --
+
+● Alternative text for images and multimedia content
+○ All informational images require descriptive alt text.
+○ Decorative images should use empty alt attributes (alt="") so screen readers skip
+them.
+○ The WordPress media library alt text field should be populated at upload as a
+workflow standard.
+○ Videos require captions (auto-generated captions from YouTube or Vimeo are not
+sufficient — they must be reviewed and corrected).
+○ Audio content requires transcripts.
+API documentation and integration specifications
+● ‘Field Report’ API Integration specifications to be inserted here if available.
+Security requirements and compliance checklists
+● Defer to UGA EITS and/or internal departmental hosting requirements and compliance.
+Degrees/Programs Database - Taxonomy Structure
+● = Taxonomy Group
+○ = Taxonomy Category
+Example Taxonomy Groups + Taxonomies for a “Programs” CPT:
+● Program Type:
+○ Undergraduate (Majors & Minors)
+○ Graduate (Masters & PhD)
+○ Certificates
+○ Preprofessional Programs
+○ Double Dawgs
+● Interest/Areas of Study:
+○ Animals
+○ Business
+○ Economics
+○ Education
+○ Environment and Sustainability
+○ Food Health and Nutrition
+○ Insects
+○ Law
+○ Global Leadership
+○ Marketing and Communications
+○ Medicine
+○ Plants
+○ Robotics and Technology
+
+-- 6 of 9 --
+
+● Department:
+○ Agricultural & Applied Economics
+○ Agricultural Leadership, Education & Communication
+○ Animal & Dairy Science
+○ Crop & Soil Sciences
+○ Entomology
+○ Food Science & Technology
+○ Horticulture
+○ Plant Pathology
+○ Poultry Science
+Personnel Directory - Taxonomy Structure
+Shift to a listing of ALL employees in CAES (would refrain from including students). This should
+address department heads and other individuals being hard to find. Would contain the following
+filters and be searchable by keyword. NOTE: Client’s plan is to build this directory within the
+Field Report site.
+● = Taxonomy Group
+○ = Taxonomy Category
+Sort By:
+● Employee Type:
+○ Faculty
+○ Retired & Emeritus Faculty
+○ College Staff
+○ Extension Staff
+○ Others?
+● Administration & Leadership
+○ Dean & Director
+○ Associate & Assistant Deans
+○ Assistant Provosts
+○ Department Heads
+○ Unit Heads
+○ Advisory Council
+○ Faculty Council
+○ Staff Representative Group
+● Campus:
+○ Athens
+○ Griffin
+○ Tifton
+● Department:
+○ Agricultural & Applied Economics
+○ Agricultural Leadership, Education & Communication
+
+-- 7 of 9 --
+
+○ Animal & Dairy Science
+○ Crop & Soil Sciences
+○ Entomology
+○ Food Science & Technology
+○ Horticulture
+○ Plant Pathology
+○ Poultry Science
+● Offices & Units:
+○ Academic and Student Affairs - Griffin
+○ Business Office - Griffin
+○ CAES - Contracts & Grants
+○ CAES Business Office - Athens
+○ CAES Business Office - Tifton
+○ Campus Director's Office - Griffin
+○ Development & Alumni Relations
+○ Experimental Statistics - Tifton
+○ Facilities Management - Griffin
+○ Facilities Support
+○ Field Research Services - Griffin
+○ Field Research Services - Tifton
+○ Library - Griffin
+○ Office of Continuing Education - Griffin
+○ Office of Information Technology (OIT)
+○ Office of Learning and Organizational Development (OLOD)
+○ Office of Marketing and Communications (OMC)
+○ Physical Plant - Tifton
+○ UGA Tifton Campus Conference Center
+● Research & Education Centers:
+○ ADS Eatonton Beef Research Unit
+○ Attapulgus Research and Education Center
+○ Blueberry Research and Demonstration Farm
+○ C.M. Stripling Irrigation Research Park
+○ Georgia Mountain Research and Education Center
+○ J. Phil Campbell Sr. Research and Education Center
+○ Northwest Research and Education Center
+○ Southeast Research and Education Center
+○ Southwest Research and Education Center
+○ UGA Grand Farm
+○ Vidalia Onion & Vegetable Research Center
+● Labs & Programs:
+○ Agricultural & Environmental Services Lab (AESL)
+○ Animal Waste Awareness in Research and Extension
+○ CAES Greenhouses
+○ Center for Applied Genetic Technologies (CAGT)
+
+-- 8 of 9 --
+
+○ Feed the Future Innovation Lab for Peanut
+○ National Environmentally Sound Production Agriculture Laboratory (NESPAL)
+○ Plant Genome Mapping Laboratory
+○ Southern Regional Extension Forestry (SREF)
+
+-- 9 of 9 --
+

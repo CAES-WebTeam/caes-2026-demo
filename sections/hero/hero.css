@@ -1,0 +1,181 @@
+/* Row split: colored panel (~1/3) + photo (~2/3). overflow:hidden tidies the
+   card's overhang onto the photo. */
+.hero {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  overflow: hidden;
+  background: var(--paper-2);
+}
+
+/* Left panel — solid brand color (swap the token to retheme) + a faint dotted
+   texture echoing the site motif. Anchors and vertically centers the card. */
+.hero-panel {
+  flex: 1.1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;            /* push the card toward the seam */
+  background-color: var(--uga-olympic);
+  padding: clamp(var(--space-10), 6vw, var(--space-14)) 0
+           clamp(var(--space-10), 6vw, var(--space-14)) var(--gutter);
+}
+.hero-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.08) 1px, transparent 0);
+  background-size: 18px 18px;
+  pointer-events: none;
+}
+
+/* Right photo — background-image on a div (not <img>) so cover + aspect-ratio
+   own the crop, and the box height drives the whole row. */
+.hero-image {
+  flex: 1.9;
+  background-size: cover;
+  background-position: center;
+  aspect-ratio: 3 / 2;
+}
+
+/* The card juts out of the panel and floats over the photo seam. Wider here so
+   the headline wraps less and the card stays short. */
+.hero-card {
+  position: relative;
+  z-index: 2;
+  background: var(--base);
+  width: clamp(340px, 38vw, 560px);
+  margin-right: calc(-1 * clamp(var(--space-6), 4vw, var(--space-10)));
+  padding: clamp(var(--space-7), 3.4vw, var(--space-10));
+  box-shadow: 0 30px 60px -28px rgba(0, 0, 0, 0.25);
+}
+
+.hero-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-5);
+  margin-bottom: clamp(var(--space-7), 3.5vw, 44px);
+}
+
+.hero-card h1 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: var(--heading-1);
+  letter-spacing: -0.015em;
+  line-height: 1.04;
+  margin: 0;
+  color: var(--contrast);
+  text-wrap: balance;
+}
+
+.hero-card .red-rule {
+  margin: var(--space-5) 0 var(--space-5);
+}
+
+.hero-card .hero-sub {
+  font-size: var(--text-base);
+  color: var(--contrast);
+  margin: 0 0 var(--space-3);
+  max-width: 44ch;
+}
+
+.hero-card .hero-sub.italic {
+  font-style: italic;
+  color: var(--contrast);
+  font-weight: 500;
+  margin-bottom: var(--space-7);
+}
+
+.hero-ctas {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.hero-nav {
+  position: absolute;
+  top: clamp(20px, 3vw, 36px);
+  right: clamp(20px, 4vw, 56px);
+  z-index: 10;
+  display: flex;
+  gap: var(--space-3);
+}
+
+.pill-btn {
+  background: var(--uga-red);
+  color: var(--base);
+  border: 0;
+  border-radius: 999px;
+  padding: var(--space-2) var(--space-5);
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: var(--text-sm);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  text-decoration: none;
+  transition: background .2s var(--ease);
+  min-height: 40px;
+}
+
+.pill-btn:hover {
+  background: var(--uga-red-deep);
+}
+
+/* In-between (tablet): the panel gets too narrow for a floating card to look
+   right, so the white card simply fills the whole left panel — a clean
+   two-pane split (white left, photo right) until it stacks. */
+@media (max-width: 1300px) and (min-width: 981px) {
+  .hero-panel {
+    align-items: stretch;             /* card fills the panel width */
+    padding: 0;                       /* no teal border around the card */
+  }
+  .hero-panel::before { display: none; }
+  .hero-card {
+    width: auto;
+    flex: 1;                          /* card fills the panel height too */
+    margin-right: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;          /* re-center the content inside the card */
+    padding: clamp(var(--space-8), 5vw, var(--space-12));
+  }
+}
+
+/* Stack: photo on top, card below — the card stops floating and pulls up to
+   overlap the photo's lower edge. */
+@media (max-width: 980px) {
+  .hero {
+    flex-direction: column;
+    background: transparent;
+  }
+
+  .hero-panel {
+    flex: none;
+    display: block;
+    padding: 0;
+  }
+  .hero-panel::before { display: none; }
+
+  .hero-image {
+    flex: none;
+    order: -1;                       /* photo on top */
+    width: 100%;
+    aspect-ratio: var(--ratio-landscape);
+  }
+
+  .hero-card {
+    width: auto;
+    margin: calc(-1 * clamp(var(--space-8), 8vw, var(--space-10))) var(--gutter) 2rem;
+  }
+
+  .hero-nav {
+    position: static;
+    padding: var(--space-4) var(--gutter);
+    justify-content: flex-end;
+    background: rgba(0, 0, 0, 0.4);
+  }
+}

@@ -1,0 +1,39 @@
+/* Block preview shell — only used on standalone block pages.
+   Adds a label header and centers the block in the page. */
+.block-meta {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--base);
+  border-bottom: 1px solid var(--rule);
+  padding: var(--space-4) var(--gutter);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--contrast-3);
+}
+.block-meta strong {
+  color: var(--contrast);
+  font-weight: 700;
+  font-family: var(--font-condensed);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-size: 14px;
+  margin-right: var(--space-2);
+}
+.block-meta a {
+  color: var(--uga-red);
+  text-decoration: none;
+  font-weight: 600;
+}
+.block-meta a:hover { text-decoration: underline; }
+
+.block-stage {
+  /* The block lives directly inside body — nothing else needed.
+     This class is reserved for any block that needs extra padding
+     when previewed in isolation (e.g. an inline element). */
+  padding: 0;
+}

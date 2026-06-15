@@ -1,0 +1,35 @@
+/* Styles scoped to .uga-global */
+.uga-global {
+  background: var(--contrast);
+  color: var(--base);
+  font-size: var(--text-sm);
+  padding: var(--space-3) 0;
+  position: relative;
+  z-index: 70;
+}
+.uga-global-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+.uga-wordmark {
+  font-family: var(--font-condensed);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-size: var(--text-sm);
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  text-decoration: none;
+  color: var(--base);
+  width: 148px;
+}
+.uga-global-links { display: flex; gap: var(--space-5); }
+.uga-global-links a {
+  color: var(--base);
+  text-decoration: none;
+  font-size: var(--text-sm);
+  opacity: 0.95;
+}
+.uga-global-links a:hover { color: var(--uga-red-tint); text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 720px) { .uga-global-links { display: none; } }

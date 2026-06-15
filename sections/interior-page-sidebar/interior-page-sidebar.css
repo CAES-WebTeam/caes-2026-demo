@@ -1,0 +1,57 @@
+/* ============================================================
+   INTERIOR PAGE WITH SIDEBAR — a single content
+   column with a RIGHT section-navigation rail.
+
+   Reuses interior-page.css for the shared design language (header,
+   content rhythm, full-width on-page zone, footer band, cards) — this
+   file only adds the two-column shell and the rail. Load order in the
+   HTML: interior-page.css, then this file.
+
+   The rail shows the page's DIRECT PARENT and that parent's child
+   pages (the current page's siblings) — never the parent's own
+   siblings. Breadcrumbs handle climbing further up, which keeps the
+   rail short and scoped to where you are.
+   ============================================================ */
+
+/* Two-column shell: content (left) + section rail (right) */
+.sp-shell {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: clamp(var(--space-8), 5vw, var(--space-12));
+  align-items: start;
+  padding-top: clamp(var(--space-8), 5vw, var(--space-10));
+  padding-bottom: clamp(var(--space-10), 6vw, var(--space-14));
+}
+
+/* Section rail: boxed panel on desktop → CollapsibleNav disclosure on mobile */
+.sp-sidebar { border: 1px solid var(--rule); background: var(--base); }
+.sp-nav-head,
+.sp-sidebar .cnav-toggle { background: var(--paper); padding: var(--space-4) var(--space-5); }
+.sp-nav-head,
+.sp-sidebar .cnav-toggle[aria-expanded="true"] { border-bottom: 1px solid var(--rule); }
+.sp-nav-head { display: flex; align-items: center; }
+.sp-nav-head-name,
+.sp-sidebar .cnav-toggle-cur {
+  font-family: var(--font-serif); font-weight: 400; font-size: var(--heading-5);
+  line-height: 1.2; color: var(--contrast); text-decoration: none;
+}
+a.sp-nav-head-name:hover { color: var(--uga-red); text-decoration: underline; text-underline-offset: 3px; }
+.sp-sidebar .cnav-body { padding: var(--space-3) 0; }
+/* (the page list reuses interior-page.css's .ip-nav-list) */
+
+/* Explanatory copy + placeholder blocks (mockup annotation only) */
+.sp-note { max-width: 68ch; color: var(--contrast-2); line-height: 1.6; margin: 0 0 var(--space-7); }
+.sp-blocks { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-6); }
+.sp-block {
+  border: 1px dashed var(--rule); background: var(--base);
+  padding: var(--space-9) var(--space-5); text-align: center;
+  font-family: var(--font-condensed); font-size: var(--text-sm); letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--contrast-3);
+}
+
+@media (max-width: 900px) {
+  .sp-shell { grid-template-columns: 1fr; gap: var(--space-9); }
+}
+@media (max-width: 760px) {
+  .sp-blocks { grid-template-columns: 1fr; }
+}

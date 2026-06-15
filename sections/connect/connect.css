@@ -1,0 +1,67 @@
+/* ============================================================
+   PATTERN — Connect / get in touch
+   A red department-promo card + a learn-more link, then profile
+   (contact) cards with circular avatars.
+   ============================================================ */
+.connect { padding: clamp(var(--space-11), 6.5vw, var(--space-16)) 0; }
+.connect--tint { background: var(--paper); }
+.connect .container { max-width: 1080px; }
+
+.connect-learn {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  /* gap: var(--space-5); */
+  align-items: stretch;
+  margin-bottom: var(--space-7);
+}
+.connect-dept-card {
+  position: relative;
+  display: flex; align-items: center; gap: var(--space-4);
+  background: var(--uga-red);
+  color: var(--base);
+  text-decoration: none;
+  padding: var(--space-5) var(--space-6);
+  transition: background .2s var(--ease);
+}
+.connect-dept-card:hover { background: var(--uga-red-deep); }
+.connect-dept-title { font-family: var(--font-serif); font-size: var(--heading-5); color: var(--base); }
+.connect-dept-arrow { margin-left: auto; font-family: var(--font-serif); font-size: 24px; transition: transform .25s var(--ease); }
+.connect-dept-card:hover .connect-dept-arrow { transform: translateX(5px); }
+.connect-learn-link {
+  display: inline-flex; align-items: center; gap: var(--space-3);
+  background: var(--paper); border: 1px solid var(--rule);
+  text-decoration: none; color: var(--contrast);
+  font-family: var(--font-condensed); font-weight: 500; font-size: var(--text-sm);
+  padding: var(--space-5) var(--space-6);
+  transition: border-color .2s var(--ease), color .2s var(--ease);
+}
+.connect-learn-link:hover { border-color: var(--uga-red); color: var(--uga-red); }
+.connect-learn-link span { color: var(--uga-red); }
+
+.connect-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-6); }
+.contact-card {
+  background: var(--base);
+  border: 1px solid var(--rule);
+  padding: clamp(var(--space-6), 3vw, var(--space-7));
+  display: flex; flex-direction: column; gap: var(--space-2);
+}
+.contact-tag {
+  align-self: flex-start;
+  font-family: var(--font-condensed); font-weight: 600; font-size: var(--text-sm);
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--uga-red); background: var(--uga-red-tint);
+  padding: 4px var(--space-3); margin-bottom: var(--space-3);
+}
+.contact-person { display: flex; align-items: center; gap: var(--space-4); }
+.contact-avatar { display: block; width: 56px; height: 56px; border-radius: 50%; overflow: hidden; flex-shrink: 0; background: var(--paper-2); }
+.contact-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.contact-name { font-family: var(--font-serif); font-weight: 400; font-size: var(--heading-5); line-height: 1.15; margin: 0; }
+.contact-role { margin: 0; font-weight: 600; color: var(--contrast); font-size: var(--text-sm); }
+.contact-office { margin: 0; font-size: var(--text-sm); color: var(--contrast-3); line-height: 1.5; }
+.contact-links { list-style: none; margin: var(--space-3) 0 0; padding: 0; display: flex; flex-direction: column; gap: var(--space-1); }
+.contact-links li { margin: 0; }
+.contact-links a { color: var(--uga-red); font-weight: 600; text-decoration: none; font-size: var(--text-sm); }
+.contact-links a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.contact-address { margin: var(--space-3) 0 0; font-size: var(--text-sm); color: var(--contrast-3); line-height: 1.5; }
+
+@media (max-width: 640px) { .connect-learn, .connect-grid { grid-template-columns: 1fr; } }

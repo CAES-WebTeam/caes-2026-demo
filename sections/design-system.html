@@ -1,0 +1,1179 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>CAES — Design System</title>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&family=Archivo+Narrow:wght@500;600;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="_tokens.css" />
+<!-- Real component CSS, reused by the Module demos -->
+<link rel="stylesheet" href="programs/programs.css" />
+<style>
+  body { padding: 56px 0 96px; }
+  .ref { max-width: 1040px; margin: 0 auto; padding: 0 var(--gutter); }
+
+  .ref-back {
+    display: inline-flex; align-items: center; gap: 6px;
+    color: var(--contrast-3); text-decoration: none;
+    font-size: 13px; margin-bottom: 24px;
+  }
+  .ref-back:hover { color: var(--uga-red); text-decoration: underline; text-underline-offset: 3px; }
+
+  .ref-hero { margin-bottom: 40px; }
+  .ref-hero h1 { font-size: clamp(2.4rem, 5vw, 3.5rem); margin: 0 0 16px; line-height: 1.05; }
+  .ref-hero p { color: var(--contrast-2); max-width: 70ch; margin: 0; font-size: 1rem; }
+
+  /* In-page nav (grouped by tier) */
+  .ref-nav {
+    background: var(--base);
+    border: 1px solid var(--rule);
+    padding: 20px 24px;
+    margin-bottom: 16px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px 24px;
+  }
+  .ref-nav-group {
+    font-family: var(--font-condensed);
+    font-size: 14px; font-weight: 600;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--uga-red);
+    margin: 0 0 8px;
+  }
+  .ref-nav ul { list-style: none; padding: 0; margin: 0; }
+  .ref-nav li { margin-bottom: 4px; font-size: 14px; line-height: 1.4; }
+  .ref-nav a { color: var(--contrast-2); text-decoration: none; }
+  .ref-nav a:hover { color: var(--uga-red); text-decoration: underline; text-underline-offset: 3px; }
+
+  .ref-legend {
+    font-size: 13px; color: var(--contrast-2);
+    margin: 0 0 56px; padding: 12px 16px;
+    background: var(--paper-2); border-left: 3px solid var(--uga-red);
+  }
+  .ref-legend code { background: transparent; }
+
+  /* Tier divider */
+  .ref-tier { margin: 88px 0 36px; padding-bottom: 14px; border-bottom: 3px solid var(--uga-red); }
+  .ref-tier:first-of-type { margin-top: 0; }
+  .ref-tier-k {
+    font-family: var(--font-condensed); font-weight: 700;
+    letter-spacing: 0.2em; text-transform: uppercase; font-size: 13px;
+    color: var(--uga-red); margin: 0 0 8px;
+  }
+  .ref-tier h2 { font-family: var(--font-serif); font-weight: 400; font-size: clamp(1.8rem, 3.5vw, 2.4rem); margin: 0 0 10px; }
+  .ref-tier-desc { color: var(--contrast-2); font-size: 15px; margin: 0; max-width: 74ch; line-height: 1.6; }
+
+  /* Category */
+  .ref-cat { margin: 56px 0 0; }
+  .ref-cat-name {
+    font-family: var(--font-condensed);
+    font-size: 14px; font-weight: 600;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--contrast-3);
+    margin: 0 0 6px;
+  }
+  .ref-cat-title {
+    font-family: var(--font-serif); font-weight: 400; font-size: 1.6rem;
+    margin: 0 0 28px; color: var(--contrast);
+  }
+
+  /* Block */
+  .ref-block { padding: 32px 0; border-top: 1px dashed var(--rule); }
+  .ref-block:first-of-type { border-top: 0; padding-top: 0; }
+  .ref-block-meta { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; margin-bottom: 8px; flex-wrap: wrap; }
+  .ref-block-name { font-family: var(--font-condensed); font-size: 14px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--contrast); margin: 0; }
+  .ref-block-tag { font-family: ui-monospace, monospace; font-size: 14px; color: var(--contrast-2); background: var(--paper-2); padding: 2px 8px; border-radius: 3px; }
+  .ref-block-desc { font-size: 14px; color: var(--contrast-2); margin: 0 0 20px; max-width: 64ch; line-height: 1.6; }
+  .ref-block-desc .wp { color: var(--contrast-3); }
+
+  .ref-demo { background: var(--base); border: 1px solid var(--rule); padding: 28px; }
+  .ref-demo > *:last-child { margin-bottom: 0; }
+
+  /* Heading/foundations rows (grid) */
+  .ref-row { display: grid; grid-template-columns: 130px 1fr; gap: 24px; align-items: baseline; padding: 14px 0; border-top: 1px dashed var(--rule); }
+  .ref-row:first-of-type { border-top: 0; }
+  .ref-row-meta { font-family: var(--font-condensed); font-size: 14px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--contrast-3); line-height: 1.4; }
+  .ref-row-meta code { display: inline-block; margin-top: 4px; font-family: ui-monospace, monospace; font-size: 14px; letter-spacing: 0; text-transform: none; color: var(--contrast-2); background: transparent; padding: 0; }
+
+  /* Inline demo row (flex) — buttons / states */
+  .ds-row { display: flex; flex-wrap: wrap; gap: 16px 20px; align-items: center; }
+  .ds-row + .ds-row { margin-top: 24px; padding-top: 24px; border-top: 1px dashed var(--rule); }
+  .ds-row-label { font-family: var(--font-condensed); font-size: 14px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--contrast-3); flex-basis: 110px; line-height: 1.4; }
+  .ref-states { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; }
+  .ref-state { border: 1px solid var(--rule); padding: 20px; background: var(--paper-2); }
+  .ref-state-name { font-family: var(--font-condensed); font-size: 14px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--contrast-2); margin: 0 0 12px; }
+
+  /* Spacing visual */
+  .ref-scale-grid { display: grid; grid-template-columns: 100px 80px 1fr; gap: 12px 24px; align-items: center; }
+  .ref-scale-bar { height: 10px; background: var(--uga-red); }
+
+  /* Color swatches */
+  .ref-swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 16px; }
+  .ref-swatch { display: flex; flex-direction: column; border: 1px solid var(--rule); overflow: hidden; }
+  .ref-swatch-color { height: 60px; }
+  .ref-swatch-meta { padding: 10px 12px; background: var(--base); font-size: 14px; }
+  .ref-swatch-name { font-family: var(--font-condensed); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; font-size: 14px; margin-bottom: 2px; }
+  .ref-swatch-val { font-family: ui-monospace, monospace; color: var(--contrast-3); font-size: 14px; }
+
+  /* Link grid (Patterns / Pages) */
+  .ref-linkgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+  .ref-linkcard { display: block; border: 1px solid var(--rule); background: var(--base); padding: 16px 18px; text-decoration: none; color: var(--contrast); transition: box-shadow .2s var(--ease); }
+  .ref-linkcard:hover { box-shadow: var(--shadow-card-hover); }
+  .ref-linkcard .n { font-family: var(--font-condensed); font-weight: 600; font-size: 14px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--uga-red); }
+  .ref-linkcard .t { font-family: var(--font-serif); font-size: 1.05rem; margin-top: 4px; display: block; line-height: 1.2; }
+
+  /* ---------- Element demos ---------- */
+  .demo-facts { display: flex; flex-wrap: wrap; gap: 20px 56px; margin: 0; padding: 20px 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+  .demo-fact { display: flex; flex-direction: column; gap: 3px; }
+  .demo-fact dt { font-family: var(--font-condensed); font-size: 14px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--contrast-3); }
+  .demo-fact dd { margin: 0; font-family: var(--font-serif); font-size: 1.4rem; line-height: 1.1; color: var(--contrast); }
+
+  .demo-checklist { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px 40px; }
+  .demo-checklist li { display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: start; margin: 0; color: var(--contrast-2); line-height: 1.55; }
+  .demo-check { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 50%; background: var(--uga-red); color: var(--base); flex-shrink: 0; margin-top: 2px; }
+  .demo-check svg { width: 15px; height: 15px; }
+
+  .demo-jobs { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 4px 40px; }
+  .demo-jobs li { display: flex; align-items: baseline; gap: 12px; margin: 0; padding: 12px 0; border-bottom: 1px solid var(--rule); color: var(--contrast); line-height: 1.45; }
+  .demo-job-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--uga-red); flex-shrink: 0; transform: translateY(-2px); }
+
+  .demo-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .demo-step { background: var(--paper); border: 1px solid var(--rule); padding: 24px; margin: 0; display: flex; flex-direction: column; gap: 14px; }
+  .demo-step-num { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background: var(--uga-red-tint); color: var(--uga-red); font-family: var(--font-condensed); font-size: 1.25rem; }
+  .demo-step p { margin: 0; color: var(--contrast-2); line-height: 1.6; }
+
+  .demo-statbars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+  .demo-stat { display: flex; flex-direction: column; gap: 12px; }
+  .demo-stat-num { font-family: var(--font-serif); font-size: 2.4rem; line-height: 1; color: var(--uga-red); }
+  .demo-stat-bar { display: block; height: 8px; background: var(--paper-2); border-radius: 999px; overflow: hidden; }
+  .demo-stat-bar > span { display: block; height: 100%; background: var(--uga-red); border-radius: 999px; }
+  .demo-stat-label { font-family: var(--font-condensed); font-weight: 500; font-size: 15px; color: var(--contrast-2); }
+
+  .demo-tag { display: inline-block; font-family: var(--font-condensed); font-weight: 600; font-size: 14px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--uga-red); background: var(--uga-red-tint); padding: 5px 12px; }
+  .demo-tag--soft { font-family: var(--font-condensed); font-weight: 400; font-size: var(--text-sm); letter-spacing: 0; text-transform: none; color: var(--contrast-2); background: var(--paper-2); padding: 3px var(--space-2); border-radius: 2px; }
+
+  .demo-pull { margin: 0; padding: 8px 0 8px 24px; border-left: 3px solid var(--uga-red); font-family: var(--font-serif); font-size: 1.4rem; line-height: 1.3; font-style: italic; color: var(--contrast); max-width: 48ch; }
+
+  .demo-form { display: flex; gap: 8px; flex-wrap: wrap; align-items: stretch; }
+  .demo-form input[type="email"], .demo-form input[type="text"] { flex: 1 1 240px; min-height: 44px; padding: 10px 14px; border: 1.5px solid var(--rule); background: var(--base); font-family: var(--font-sans); font-size: 16px; color: var(--contrast); border-radius: 0; }
+  .demo-form input:focus { outline: 2px solid var(--uga-olympic); outline-offset: 2px; border-color: var(--contrast); }
+
+  /* Image + caption + aspect-ratio crops */
+  .demo-figure { margin: 0; }
+  .demo-figure img { width: 100%; height: auto; display: block; }
+  .demo-figcaption { font-size: var(--text-xs); color: var(--contrast-2); margin-top: 12px; line-height: 1.5; padding-left: 12px; text-align: center; }
+  .demo-ratios { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .demo-ratio { margin: 0; }
+  .demo-ratio img { width: 100%; object-fit: cover; display: block; background: var(--paper-2); }
+  .demo-ratio--landscape img { aspect-ratio: var(--ratio-landscape); }
+  .demo-ratio--square img { aspect-ratio: var(--ratio-square); }
+  .demo-ratio--portrait img { aspect-ratio: var(--ratio-portrait); }
+  .demo-ratio figcaption { font-family: var(--font-condensed); font-size: 14px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--contrast-3); margin-top: 8px; }
+
+  /* ---------- Module demos ---------- */
+  .demo-card { position: relative; display: block; border: 1px solid var(--rule); background: var(--base); color: var(--contrast); box-shadow: var(--shadow-card); transition: box-shadow .25s var(--ease); overflow: hidden; }
+  .demo-card:hover, .demo-card:focus-within { box-shadow: var(--shadow-card-hover); }
+  .demo-card-img { aspect-ratio: var(--ratio-landscape); background: var(--paper-2) center/cover no-repeat; overflow: hidden; }
+  .demo-card-img > div { width: 100%; height: 100%; transition: transform .5s var(--ease); }
+  .demo-card:hover .demo-card-img > div, .demo-card:focus-within .demo-card-img > div { transform: scale(1.06); }
+  .demo-card-body { padding: 20px 22px 24px; }
+  .demo-card-tag { font-family: var(--font-condensed); font-size: 14px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--uga-red); margin: 10px 0 0; }
+  .demo-card-title { font-family: var(--font-serif); font-size: 1.2rem; line-height: 1.25; margin: 0 0 6px; color: var(--contrast); transition: color .15s var(--ease); }
+  /* Image-less card → adopt the link-card hover (red top-rule wipe, title red, arrow) */
+  .demo-card--link::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: var(--uga-red); transform: scaleX(0); transform-origin: left; transition: transform .25s var(--ease); }
+  .demo-card--link:hover::before, .demo-card--link:focus-within::before { transform: scaleX(1); }
+  .demo-card--link:hover .demo-card-title, .demo-card--link:focus-within .demo-card-title { color: var(--uga-red); }
+  .demo-card-arrow { position: absolute; top: 20px; right: 20px; font-family: var(--font-serif); font-size: 20px; line-height: 1; color: var(--contrast-3); transition: transform .2s var(--ease), color .2s var(--ease); }
+  .demo-card--link:hover .demo-card-arrow, .demo-card--link:focus-within .demo-card-arrow { transform: translateX(4px); color: var(--uga-red); }
+  .demo-card-title:last-child { margin-bottom: 0; }
+  .demo-card-blurb { font-size: 14px; color: var(--contrast-2); margin: 0; line-height: 1.5; }
+
+  /* Link card — image-less, whole surface is one link; signature hover */
+  .demo-linkgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+  .demo-linkcard { position: relative; display: flex; flex-direction: column; background: var(--base); border: 1px solid var(--rule); padding: 24px; overflow: hidden; transition: box-shadow .2s var(--ease); }
+  .demo-linkcard::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: var(--uga-red); transform: scaleX(0); transform-origin: left; transition: transform .25s var(--ease); }
+  .demo-linkcard:hover, .demo-linkcard:focus-within { box-shadow: var(--shadow-card-hover); }
+  .demo-linkcard:hover::before, .demo-linkcard:focus-within::before { transform: scaleX(1); }
+  .demo-linkcard-head { display: flex; align-items: center; gap: 16px; }
+  .demo-linkcard-headings { min-width: 0; padding-right: 28px; }
+  .demo-linkcard-thumb { width: 52px; height: 52px; border-radius: 50%; overflow: hidden; background: var(--paper-2); flex-shrink: 0; }
+  .demo-linkcard-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s var(--ease); }
+  .demo-linkcard:hover .demo-linkcard-thumb img, .demo-linkcard:focus-within .demo-linkcard-thumb img { transform: scale(1.08); }
+  .demo-linkcard-title { font-family: var(--font-condensed); font-weight: 700; font-size: 20px; line-height: 1.2; letter-spacing: 0.02em; text-transform: uppercase; margin: 0; color: var(--contrast); transition: color .15s var(--ease); }
+  .demo-linkcard:hover .demo-linkcard-title, .demo-linkcard:focus-within .demo-linkcard-title { color: var(--uga-red); }
+  .demo-linkcard-title a { text-decoration: none; color: inherit; }
+  .demo-linkcard-title a::after { content: ""; position: absolute; inset: 0; }
+  .demo-linkcard-type { font-family: var(--font-condensed); font-weight: 600; font-size: 14px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--uga-red); margin-top: 8px; }
+  .demo-linkcard-arrow { position: absolute; top: 24px; right: 24px; font-family: var(--font-serif); font-size: 22px; color: var(--contrast-3); transition: transform .2s var(--ease), color .2s var(--ease); }
+  .demo-linkcard:hover .demo-linkcard-arrow, .demo-linkcard:focus-within .demo-linkcard-arrow { transform: translateX(4px); color: var(--uga-red); }
+
+  /* Profile card — circular avatar + identity */
+  .demo-profile { display: flex; flex-direction: column; gap: 8px; background: var(--paper); border: 1px solid var(--rule); padding: 24px; max-width: 320px; }
+  .demo-profile-person { display: flex; align-items: center; gap: 16px; }
+  .demo-profile-avatar { width: 56px; height: 56px; border-radius: 50%; overflow: hidden; flex-shrink: 0; background: var(--paper-2); }
+  .demo-profile-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .demo-profile-name { font-family: var(--font-serif); font-size: 1.2rem; margin: 0; line-height: 1.15; }
+  .demo-profile-role { margin: 0; font-weight: 600; font-size: 14px; color: var(--contrast); }
+  .demo-profile-link { color: var(--uga-red); font-weight: 600; text-decoration: none; font-size: 14px; margin-top: 4px; }
+
+  .demo-accordion { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule); }
+  .demo-accordion li { border-bottom: 1px solid var(--rule); }
+  .demo-accordion-btn { display: flex; width: 100%; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 0; background: transparent; border: 0; cursor: pointer; font-family: var(--font-condensed); font-size: 1rem; font-weight: 500; color: var(--contrast); text-align: left; }
+  .demo-accordion-btn:hover { color: var(--uga-red); }
+  .demo-accordion-icon { color: var(--uga-red); font-size: 1.4rem; }
+  .demo-accordion-body { overflow: hidden; max-height: 0; opacity: 0; transition: max-height .35s var(--ease), opacity .35s var(--ease); }
+  .demo-accordion-btn[aria-expanded="true"] + .demo-accordion-body { max-height: 200px; opacity: 1; }
+  .demo-accordion-body-inner { padding: 0 0 16px; color: var(--contrast-2); font-size: 15px; line-height: 1.55; }
+  @media (prefers-reduced-motion: reduce) { .demo-accordion-body { transition: none; } }
+
+  .focus-demo a, .focus-demo button, .focus-demo input { margin: 4px; }
+
+  /* In-page sticky nav / scroll-spy bar (.pd3-subnav) */
+  .demo-onpage { position: relative; max-width: 540px; background: var(--base); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); display: flex; align-items: center; gap: 20px; }
+  .demo-onpage-label { flex-shrink: 0; padding-left: 4px; font-family: var(--font-condensed); font-weight: 600; font-size: 14px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--contrast-3); }
+  .demo-onpage ul { flex: 1; display: flex; align-items: center; gap: 8px; list-style: none; margin: 0; padding: 0; overflow-x: auto; scrollbar-width: none; }
+  .demo-onpage ul::-webkit-scrollbar { display: none; }
+  .demo-onpage a { display: inline-block; white-space: nowrap; font-family: var(--font-condensed); font-weight: 500; font-size: 14px; letter-spacing: 0.03em; text-decoration: none; color: var(--contrast-2); padding: 18px 12px; border-bottom: 3px solid transparent; cursor: pointer; transition: color .18s var(--ease), border-color .18s var(--ease); }
+  .demo-onpage a:hover { color: var(--contrast); text-decoration: underline; text-underline-offset: 3px; }
+  .demo-onpage a.is-active { color: var(--uga-red); border-bottom-color: var(--uga-red); }
+  .demo-onpage::after { content: ""; position: absolute; top: 0; bottom: 0; right: 0; width: 44px; background: linear-gradient(to right, rgba(255,255,255,0), var(--base)); pointer-events: none; }
+
+  /* Layout bands demo */
+  .demo-bands > div { padding: 24px; color: var(--contrast-2); }
+  .demo-bands > div + div { border-top: 1px solid var(--rule); }
+
+  /* Honor [hidden] on the modal demo over .programs-modal-backdrop display:flex */
+  .programs-modal-backdrop[hidden] { display: none; }
+
+  /* Card carousel (module) — horizontally scroll-snapping photo cards + round arrows */
+  .carousel-track {
+    display: flex; gap: 18px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    padding-bottom: 4px;
+    scrollbar-width: none;
+  }
+  .carousel-track::-webkit-scrollbar { display: none; }
+  .carousel-card {
+    position: relative;
+    flex: 0 0 220px;
+    aspect-ratio: 4 / 5;
+    scroll-snap-align: start;
+    background-size: cover; background-position: center;
+    display: flex; align-items: flex-end;
+    overflow: hidden;
+    text-decoration: none;
+    box-shadow: var(--shadow-card-hover, 0 2px 10px -6px rgba(0,0,0,0.18));
+  }
+  .carousel-card::after {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.66), rgba(0,0,0,0) 55%);
+  }
+  .carousel-card span {
+    position: relative; z-index: 1;
+    font-family: var(--font-serif); color: var(--base);
+    font-size: 1.25rem; line-height: 1.2;
+    padding: 16px; text-wrap: balance;
+  }
+  .carousel-card img,
+  .carousel-card span { transition: transform .4s var(--ease); }
+  .carousel-controls { display: flex; gap: 10px; margin-top: 16px; }
+  .carousel-arrow {
+    width: 44px; height: 44px; border-radius: 50%;
+    border: 1px solid var(--rule); background: var(--base); color: var(--contrast);
+    display: inline-flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: background .2s var(--ease), color .2s var(--ease), border-color .2s var(--ease);
+  }
+  .carousel-arrow:hover { background: var(--uga-red); color: var(--base); border-color: var(--uga-red); }
+
+  @media (max-width: 640px) {
+    .demo-checklist, .demo-steps, .demo-statbars, .demo-ratios { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<main class="ref">
+  <a href="./" class="ref-back">← Back to Block Library</a>
+
+  <header class="ref-hero">
+    <h1>CAES Design System</h1>
+    <p>
+      One reference for the whole theme, organized by <strong>composition scope</strong> — the same
+      mental model WordPress uses. Pieces are reusable across any content type, not tied to the page
+      they debuted on. Read top-to-bottom: each tier builds on the one above it.
+    </p>
+  </header>
+
+  <p class="ref-legend">
+    <strong>Tiers:</strong> Foundations (tokens → <code>theme.json</code>) ·
+    Elements (atomic styled blocks) · Modules (composed units) ·
+    Patterns (full sections) · Pages (templates). Where a style is a non-default treatment of a
+    core block, the tag notes it (e.g. <code>core/list · style variation</code>).
+  </p>
+
+  <nav class="ref-nav" aria-label="Reference sections">
+    <div>
+      <p class="ref-nav-group">Foundations</p>
+      <ul>
+        <li><a href="#headings">Headings</a></li>
+        <li><a href="#fonts">Font stacks</a></li>
+        <li><a href="#scale">Spacing scale</a></li>
+        <li><a href="#color">Color tokens</a></li>
+        <li><a href="#focus">Focus rings</a></li>
+        <li><a href="#landmarks">Landmarks &amp; sectioning</a></li>
+        <li><a href="#bands">Section bands</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="ref-nav-group">Elements</p>
+      <ul>
+        <li><a href="#text">Text &amp; inline</a></li>
+        <li><a href="#image">Image</a></li>
+        <li><a href="#links">Links</a></li>
+        <li><a href="#buttons">Buttons</a></li>
+        <li><a href="#forms">Form fields</a></li>
+        <li><a href="#lists">Lists &amp; details</a></li>
+        <li><a href="#liststyles">List styles</a></li>
+        <li><a href="#table">Tables</a></li>
+        <li><a href="#labels">Labels &amp; tags</a></li>
+        <li><a href="#quotes">Quotes</a></li>
+        <li><a href="#stats">Stats</a></li>
+        <li><a href="#footnotes">Footnotes</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="ref-nav-group">Modules</p>
+      <ul>
+        <li><a href="#media-text">Media &amp; Text</a></li>
+        <li><a href="#cards">Cards</a></li>
+        <li><a href="#accordion">Accordion</a></li>
+        <li><a href="#carousel">Carousel</a></li>
+        <li><a href="#modal">Modal</a></li>
+        <li><a href="#filters">Filters</a></li>
+        <li><a href="#onpage-nav">In-page nav</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="ref-nav-group">Patterns</p>
+      <ul><li><a href="#patterns">Page sections →</a></li></ul>
+      <p class="ref-nav-group" style="margin-top:16px;">Pages</p>
+      <ul><li><a href="#pages">Templates →</a></li></ul>
+    </div>
+  </nav>
+
+  <!-- ===================== FOUNDATIONS ===================== -->
+  <div class="ref-tier" id="foundations">
+    <p class="ref-tier-k">Tier 1</p>
+    <h2>Foundations</h2>
+    <p class="ref-tier-desc">Tokens — type scale, color, spacing, motion, focus. In the WordPress theme these live in <code>theme.json</code> and cascade to everything below.</p>
+  </div>
+
+  <section class="ref-cat" id="headings">
+    <p class="ref-cat-name">Foundations</p>
+    <h2 class="ref-cat-title">Standard headings</h2>
+    <div class="ref-row"><div class="ref-row-meta">H1<br/><code>2.441–3.815rem</code></div><h1 style="margin:0;">Cultivating a more fruitful world</h1></div>
+    <div class="ref-row"><div class="ref-row-meta">H2<br/><code>1.953–3.052rem</code></div><h2 style="margin:0;">From the field, the lab</h2></div>
+    <div class="ref-row"><div class="ref-row-meta">H3<br/><code>1.563–2.441rem</code></div><h3 style="margin:0;">Resilient Forage Systems Initiative</h3></div>
+    <div class="ref-row"><div class="ref-row-meta">H4<br/><code>1.25–1.953rem</code></div><h4 style="margin:0;">A subhead inside a longer article</h4></div>
+    <div class="ref-row"><div class="ref-row-meta">H5<br/><code>1–1.563rem</code></div><h5 style="margin:0;">A smaller heading still in condensed</h5></div>
+    <div class="ref-row"><div class="ref-row-meta">H6<br/><code>0.875rem</code></div><h6 style="margin:0;">Eyebrow-style condensed cap</h6></div>
+  </section>
+
+  <section class="ref-cat" id="fonts">
+    <p class="ref-cat-name">Foundations</p>
+    <h2 class="ref-cat-title">Font stacks</h2>
+    <div class="ref-row"><div class="ref-row-meta">--font-serif<br/><code>display, body</code></div><p style="font-family:var(--font-serif); font-size:22px; margin:0;">Merriweather — the serif used for h1, body copy, and editorial display.</p></div>
+    <div class="ref-row"><div class="ref-row-meta">--font-condensed<br/><code>headings, ui</code></div><p style="font-family:var(--font-condensed); font-size:22px; margin:0; letter-spacing:0.04em;">Oswald — h2–h6, labels, button text, eyebrows.</p></div>
+  </section>
+
+  <section class="ref-cat" id="scale">
+    <p class="ref-cat-name">Foundations</p>
+    <h2 class="ref-cat-title">Spacing scale</h2>
+    <p class="ref-block-desc">0.25rem steps, coarsening at the top. Use for padding, margin, and gap.</p>
+    <div class="ref-demo">
+      <div class="ref-scale-grid">
+        <div class="ref-row-meta">space-1</div><code class="ref-block-tag">0.25rem</code><div class="ref-scale-bar" style="width:var(--space-1);"></div>
+        <div class="ref-row-meta">space-2</div><code class="ref-block-tag">0.5rem</code><div class="ref-scale-bar" style="width:var(--space-2);"></div>
+        <div class="ref-row-meta">space-3</div><code class="ref-block-tag">0.75rem</code><div class="ref-scale-bar" style="width:var(--space-3);"></div>
+        <div class="ref-row-meta">space-4</div><code class="ref-block-tag">1rem</code><div class="ref-scale-bar" style="width:var(--space-4);"></div>
+        <div class="ref-row-meta">space-5</div><code class="ref-block-tag">1.25rem</code><div class="ref-scale-bar" style="width:var(--space-5);"></div>
+        <div class="ref-row-meta">space-6</div><code class="ref-block-tag">1.5rem</code><div class="ref-scale-bar" style="width:var(--space-6);"></div>
+        <div class="ref-row-meta">space-8</div><code class="ref-block-tag">2rem</code><div class="ref-scale-bar" style="width:var(--space-8);"></div>
+        <div class="ref-row-meta">space-10</div><code class="ref-block-tag">3rem</code><div class="ref-scale-bar" style="width:var(--space-10);"></div>
+        <div class="ref-row-meta">space-12</div><code class="ref-block-tag">4rem</code><div class="ref-scale-bar" style="width:var(--space-12);"></div>
+        <div class="ref-row-meta">space-14</div><code class="ref-block-tag">5rem</code><div class="ref-scale-bar" style="width:var(--space-14);"></div>
+        <div class="ref-row-meta">space-16</div><code class="ref-block-tag">8rem</code><div class="ref-scale-bar" style="width:var(--space-16);"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ref-cat" id="color">
+    <p class="ref-cat-name">Foundations</p>
+    <h2 class="ref-cat-title">Color tokens</h2>
+    <p class="ref-block-desc" style="margin-bottom:16px;">UGA Primary — Bulldog Red. Black and white are not separate tokens; use <code>--contrast</code> (near-black) and <code>--base</code> (white) from the neutrals below. <code>--uga-red-deep</code> and <code>--uga-red-tint</code> are custom shades (not in the UGA palette) for the button hover state and light red backgrounds.</p>
+    <div class="ref-swatches" style="margin-bottom:28px;">
+      <div class="ref-swatch"><div class="ref-swatch-color" style="background:var(--uga-red);"></div><div class="ref-swatch-meta"><div class="ref-swatch-name">Bulldog Red</div><div class="ref-swatch-val">--uga-red</div></div></div>
+      <div class="ref-swatch"><div class="ref-swatch-color" style="background:var(--uga-red-deep);"></div><div class="ref-swatch-meta"><div class="ref-swatch-name">Deep Red · hover</div><div class="ref-swatch-val">--uga-red-deep</div></div></div>
+      <div class="ref-swatch"><div class="ref-swatch-color" style="background:var(--uga-red-tint); border:1px solid var(--rule);"></div><div class="ref-swatch-meta"><div class="ref-swatch-name">Red Tint · bg</div><div class="ref-swatch-val">--uga-red-tint</div></div></div>
+    </div>
+    <p class="ref-block-desc" style="margin-bottom:16px;">UGA Accents (use sparingly — max 20% of design).</p>
+    <div class="ref-swatches" style="margin-bottom:28px;">
+      <div class="ref-swatch"><div class="ref-swatch-color" style="background:var(--uga-glory);"></div><div class="ref-swatch-meta"><div class="ref-swatch-name">Glory Glory</div><div class="ref-swatch-val">--uga-glory</div></div></div>
+      <div class="ref-swatch"><div class="ref-swatch-color" style="background:var(--uga-lake-herrick);"></div><div class="ref-swatch-meta"><div class="ref-swatch-name">Lake Herrick</div><div class="ref-swatch-val">--uga-lake-herrick</div></div></div>
+      <div class="ref-swatch"><div class="ref-swatch-color" style="background:var(--uga-olympic);"></div><div class="ref-swatch-meta"><div class="ref-swatch-name">Olympic</div><div class="ref-swatch-val">--uga-olympic</div></div></div>
+      <div class="ref-swatch"><div class="ref-swatch-color" style="background:var(--uga-hedges);"></div><div class="ref-swatch-meta"><div class="ref-swatch-name">Hedges</div><div class="ref-swatch-val">--uga-hedges</div></div></div>
+    </div>
+    <p class="ref-block-desc" style="margin-bottom:16px;">UGA Neutrals — the official university neutral palette.</p>
+    <div class="ref-swatches" style="margin-bottom:28px;">
+      <div class="ref-swatch"><div class="ref-swatch-color" style="background:var(--uga-sanford);"></div><div class="ref-swatch-meta"><div class="ref-swatch-name">Sanford</div><div class="ref-swatch-val">--uga-sanford</div></div></div>
+      <div class="ref-swatch"><div class="ref-swatch-color" style="background:var(--uga-stegeman);"></div><div class="ref-swatch-meta"><div class="ref-swatch-name">Stegeman</div><div class="ref-swatch-val">--uga-stegeman</div></div></div>
+      <div class="ref-swatch"><div class="ref-swatch-color" style="background:var(--uga-creamery); border:1px solid var(--rule);"></div><div class="ref-swatch-meta"><div class="ref-swatch-name">Creamery</div><div class="ref-swatch-val">--uga-creamery</div></div></div>
+      <div class="ref-swatch"><div class="ref-swatch-color" style="background:var(--uga-odyssey); border:1px solid var(--rule);"></div><div class="ref-swatch-meta"><div class="ref-swatch-name">Odyssey</div><div class="ref-swatch-val">--uga-odyssey</div></div></div>
+    </div>
+    <p class="ref-block-desc" style="margin-bottom:16px;">Working neutrals (warm off-whites + soft grays — site palette).</p>
+    <div class="ref-swatches">
+      <div class="ref-swatch"><div class="ref-swatch-color" style="background:var(--contrast);"></div><div class="ref-swatch-meta"><div class="ref-swatch-name">Contrast · text</div><div class="ref-swatch-val">--contrast</div></div></div>
+      <div class="ref-swatch"><div class="ref-swatch-color" style="background:var(--contrast-2);"></div><div class="ref-swatch-meta"><div class="ref-swatch-name">Contrast 2 · body</div><div class="ref-swatch-val">--contrast-2</div></div></div>
+      <div class="ref-swatch"><div class="ref-swatch-color" style="background:var(--contrast-3);"></div><div class="ref-swatch-meta"><div class="ref-swatch-name">Contrast 3 · muted</div><div class="ref-swatch-val">--contrast-3</div></div></div>
+      <div class="ref-swatch"><div class="ref-swatch-color" style="background:var(--base); border:1px solid var(--rule);"></div><div class="ref-swatch-meta"><div class="ref-swatch-name">Base</div><div class="ref-swatch-val">--base</div></div></div>
+      <div class="ref-swatch"><div class="ref-swatch-color" style="background:var(--paper);"></div><div class="ref-swatch-meta"><div class="ref-swatch-name">Paper</div><div class="ref-swatch-val">--paper</div></div></div>
+      <div class="ref-swatch"><div class="ref-swatch-color" style="background:var(--paper-2);"></div><div class="ref-swatch-meta"><div class="ref-swatch-name">Paper 2</div><div class="ref-swatch-val">--paper-2</div></div></div>
+      <div class="ref-swatch"><div class="ref-swatch-color" style="background:var(--rule);"></div><div class="ref-swatch-meta"><div class="ref-swatch-name">Rule</div><div class="ref-swatch-val">--rule</div></div></div>
+    </div>
+  </section>
+
+  <section class="ref-cat" id="focus">
+    <p class="ref-cat-name">Foundations</p>
+    <h2 class="ref-cat-title">Focus rings</h2>
+    <div class="ref-block">
+      <div class="ref-block-meta"><p class="ref-block-name">Global :focus-visible</p><code class="ref-block-tag">3px solid var(--uga-olympic)</code></div>
+      <p class="ref-block-desc">Tab through the controls to see the global focus ring — 3px outline, 3px offset, 4px radius. Components on dark backgrounds override the color to white.</p>
+      <div class="ref-demo focus-demo">
+        <p style="font-size:14px; color:var(--contrast-3); margin:0 0 16px;">Hint — press Tab to walk through these.</p>
+        <a href="#" class="btn">Outline button</a>
+        <a href="#" class="btn btn-filled">Filled button</a>
+        <a href="#" class="link-arrow">Arrow link →</a>
+        <input type="text" placeholder="Text input" style="padding:10px 14px; border:1.5px solid var(--rule); background:var(--base); font-family:var(--font-sans); font-size:16px;" />
+      </div>
+    </div>
+  </section>
+
+  <section class="ref-cat" id="landmarks">
+    <p class="ref-cat-name">Foundations · Accessibility</p>
+    <h2 class="ref-cat-title">Landmarks &amp; sectioning</h2>
+    <div class="ref-block">
+      <div class="ref-block-meta"><p class="ref-block-name">The rule</p><code class="ref-block-tag">landmarks = page wayfinding · headings = content outline</code></div>
+      <p class="ref-block-desc">Landmarks are a table of contents for the <strong>whole page</strong> — a screen-reader user jumps between them via the rotor. Their entire value is being <strong>short and high-signal</strong>, so keep them few and uniquely named. The ARIA spec is explicit: don't create so many regions that the significant ones get lost. When everything is a landmark, nothing is.</p>
+      <p class="ref-block-desc"><strong>Use a landmark only for top-level wayfinding targets:</strong> <code>&lt;header&gt;</code>/banner, <code>&lt;nav&gt;</code> (one per distinct navigation, each named), <code>&lt;main&gt;</code>, <code>&lt;aside&gt;</code>/complementary, <code>&lt;footer&gt;</code>/contentinfo, plus <code>search</code>/<code>form</code> for functional toolbars. A named <code>region</code> is a last resort for a genuinely standalone area a user would navigate <em>to</em> — rare.</p>
+      <p class="ref-block-desc"><strong>Inside <code>&lt;main&gt;</code>, structure content with headings, not landmarks.</strong> A bare <code>&lt;section&gt;</code> is <em>not</em> a landmark — it only becomes a <code>region</code> when you give it an accessible name (<code>aria-label</code>/<code>aria-labelledby</code>). So <strong>do not put <code>aria-labelledby</code> on content sections</strong>; the <code>&lt;h2&gt;</code> inside already drives the heading rotor, which <em>is</em> the content outline. Keep <code>&lt;section id&gt;</code> for styling and jump-link targets — just don't name it into a landmark.</p>
+      <div class="ref-codecompare" style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:8px;">
+        <div>
+          <p class="ref-block-name" style="color:var(--uga-red);">✗ Mints a needless region</p>
+          <pre class="ref-block-tag" style="white-space:pre-wrap; padding:12px;">&lt;section class="news"
+  aria-labelledby="news-h"&gt;
+  &lt;h2 id="news-h"&gt;Latest News&lt;/h2&gt;
+  …
+&lt;/section&gt;</pre>
+        </div>
+        <div>
+          <p class="ref-block-name" style="color:var(--uga-olympic, #00689c);">✓ Heading-navigable, no region</p>
+          <pre class="ref-block-tag" style="white-space:pre-wrap; padding:12px;">&lt;section class="news"&gt;
+  &lt;h2&gt;Latest News&lt;/h2&gt;
+  …
+&lt;/section&gt;</pre>
+        </div>
+      </div>
+      <div class="ref-block-meta" style="margin-top:20px;"><p class="ref-block-name">The masthead = one banner</p><code class="ref-block-tag">one &lt;header role="banner"&gt; · one per page</code></div>
+      <p class="ref-block-desc">The whole top of the page is a <strong>single</strong> banner: wrap the UGA global bar and the CAES top-nav together in one <code>&lt;header role="banner"&gt;</code> at the page level. Don't give each strip its own <code>&lt;header&gt;</code> — a page must have <strong>exactly one</strong> banner, and the UGA bar can't be left as a loose sibling or it becomes content in no landmark. The wrapper is a transparent grouping element; each strip keeps its own styling. The primary <code>&lt;nav aria-label="Primary"&gt;</code> stays a navigation landmark <em>inside</em> the banner.</p>
+      <div class="ref-codecompare" style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:8px;">
+        <div>
+          <p class="ref-block-name" style="color:var(--uga-red);">✗ UGA bar orphaned · 2 banners</p>
+          <pre class="ref-block-tag" style="white-space:pre-wrap; padding:12px;">&lt;div class="uga-global"&gt;…&lt;/div&gt;
+&lt;header role="banner"&gt;
+  …CAES nav…
+&lt;/header&gt;
+&lt;main&gt;…&lt;/main&gt;</pre>
+        </div>
+        <div>
+          <p class="ref-block-name" style="color:var(--uga-olympic, #00689c);">✓ One banner wraps the masthead</p>
+          <pre class="ref-block-tag" style="white-space:pre-wrap; padding:12px;">&lt;header role="banner"&gt;
+  &lt;div class="uga-global"&gt;…&lt;/div&gt;
+  &lt;div class="top-nav"&gt;…CAES nav…&lt;/div&gt;
+&lt;/header&gt;
+&lt;main&gt;…&lt;/main&gt;</pre>
+        </div>
+      </div>
+      <div class="ref-block-meta" style="margin-top:20px;"><p class="ref-block-name">&lt;article&gt; vs &lt;div&gt;/&lt;section&gt;</p><code class="ref-block-tag">article = independently distributable content</code></div>
+      <p class="ref-block-desc">Reserve <code>&lt;article&gt;</code> for self-contained, independently meaningful items — a news story, an event, a research highlight, a person/program card (it should still make sense lifted out of context, like a feed item). The <strong>news and program cards use <code>&lt;article&gt;</code> correctly.</strong> Do <em>not</em> use <code>&lt;article&gt;</code> for supporting callouts or grouping boxes — the "how to pay" info boxes and advisor contact blocks are <code>&lt;div&gt;</code>, because they're not standalone content units (and unnamed articles just add rotor noise).</p>
+    </div>
+  </section>
+
+  <section class="ref-cat" id="bands">
+    <p class="ref-cat-name">Foundations · Layout</p>
+    <h2 class="ref-cat-title">Section background bands</h2>
+    <div class="ref-block">
+      <div class="ref-block-meta"><p class="ref-block-name">Alternating bands</p><code class="ref-block-tag">--base / --paper</code></div>
+      <p class="ref-block-desc">Full-width sections alternate between paper (white) and a warm off-white tint to separate them without rules. Insets flip to the opposite tone so they keep contrast on either band. <span class="wp">WP: applied as section/Group block background colors.</span></p>
+      <div class="ref-demo" style="padding:0; overflow:hidden;">
+        <div class="demo-bands">
+          <div style="background:var(--base);">Base band (white) — <code>--base</code></div>
+          <div style="background:var(--paper);">Paper band (tint) — <code>--paper</code></div>
+          <div style="background:var(--base);">Base band (white) — <code>--base</code></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== ELEMENTS ===================== -->
+  <div class="ref-tier" id="elements">
+    <p class="ref-tier-k">Tier 2</p>
+    <h2>Elements</h2>
+    <p class="ref-tier-desc">The smallest styled pieces — they compose nothing. Most map to a core block; some are non-default <strong>block style variations</strong> (noted in the tag). Reusable in any content, not specific to where they first appeared.</p>
+  </div>
+
+  <section class="ref-cat" id="text">
+    <p class="ref-cat-name">Element</p>
+    <h2 class="ref-cat-title">Text &amp; inline</h2>
+    <div class="ref-block">
+      <div class="ref-block-meta"><p class="ref-block-name">Paragraph</p><code class="ref-block-tag">core/paragraph</code></div>
+      <p class="ref-block-desc">Default body type — Merriweather at 17px / 1.6.</p>
+      <div class="ref-demo">
+        <p>For more than a century, CAES has been turning research into harvests, classrooms into careers, and Georgia's land into a laboratory for what's next. <strong>Bold reads like this</strong>, while <em>italic leans this way</em>. Inline <a href="#">links inherit color and underline on hover</a>, and <code>inline code</code> picks up the monospace treatment.</p>
+      </div>
+    </div>
+    <div class="ref-block">
+      <div class="ref-block-meta"><p class="ref-block-name">Preformatted / Code / Verse</p><code class="ref-block-tag">core/preformatted · core/code · core/verse</code></div>
+      <p class="ref-block-desc">Whitespace-preserving blocks. Code wraps in <code>&lt;pre&gt;&lt;code&gt;</code>; Verse is italic serif for line-break-sensitive text.</p>
+      <div class="ref-demo">
+<pre><code>:root {
+  --uga-red: #BA0C2F;
+  --wide-width: 1240px;
+}</code></pre>
+<pre class="wp-block-verse">In every seed, a season folded —
+the work is the harvest; the harvest is the work.</pre>
+      </div>
+    </div>
+  </section>
+
+  <section class="ref-cat" id="image">
+    <p class="ref-cat-name">Element</p>
+    <h2 class="ref-cat-title">Image</h2>
+    <div class="ref-block">
+      <div class="ref-block-meta"><p class="ref-block-name">Image + caption</p><code class="ref-block-tag">core/image</code></div>
+      <p class="ref-block-desc">Responsive by default (<code>max-width:100%</code>, block). <span class="wp">WP: <code>core/image</code> — <code>figure</code> + <code>figcaption</code>.</span></p>
+      <div class="ref-demo">
+        <figure class="demo-figure">
+          <img src="assets/img/photo-1500382017468-9049fed747ef.jpg" alt="" loading="lazy" style="aspect-ratio:var(--ratio-landscape); object-fit:cover;" />
+          <figcaption class="demo-figcaption">Students evaluate a specialty-crop trial at the Durham Horticulture Farm.</figcaption>
+        </figure>
+      </div>
+    </div>
+    <div class="ref-block">
+      <div class="ref-block-meta"><p class="ref-block-name">Aspect-ratio crops</p><code class="ref-block-tag">--ratio-landscape · --ratio-square · --ratio-portrait</code></div>
+      <p class="ref-block-desc">Crop any source to a ratio token with <code>object-fit: cover</code> — keeps grids tidy regardless of the original dimensions. Tokens: 3:2, 1:1, 4:5.</p>
+      <div class="ref-demo">
+        <div class="demo-ratios">
+          <figure class="demo-ratio demo-ratio--landscape"><img src="assets/img/photo-1530836369250-ef72a3f5cda8.jpg" alt="" loading="lazy" /><figcaption>Landscape · 3:2</figcaption></figure>
+          <figure class="demo-ratio demo-ratio--square"><img src="assets/img/photo-1543269865-cbf427effbad.jpg" alt="" loading="lazy" /><figcaption>Square · 1:1</figcaption></figure>
+          <figure class="demo-ratio demo-ratio--portrait"><img src="assets/img/photo-1581094794329-c8112a89af12.jpg" alt="" loading="lazy" /><figcaption>Portrait · 4:5</figcaption></figure>
+        </div>
+      </div>
+    </div>
+    <div class="ref-block">
+      <div class="ref-block-meta"><p class="ref-block-name">Contained section figure</p><code class="ref-block-tag">.pd3-section-fig</code></div>
+      <p class="ref-block-desc">A full-column image placed below the text it accompanies, with a capped band height (<code>clamp(260px, 30vw, 400px)</code>) so it reads as an accent rather than dominating — never full-bleed. Used between prose sections.</p>
+      <div class="ref-demo">
+        <figure class="demo-figure"><img src="assets/img/photo-1488459716781-31db52582fe9.jpg" alt="" loading="lazy" style="height:clamp(220px,30vw,360px); object-fit:cover;" /></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="ref-cat" id="links">
+    <p class="ref-cat-name">Element</p>
+    <h2 class="ref-cat-title">Links</h2>
+    <div class="ref-block">
+      <div class="ref-block-meta"><p class="ref-block-name">Inline &amp; arrow link</p><code class="ref-block-tag">a · .link-arrow</code></div>
+      <p class="ref-block-desc">Inline links inherit color and underline on hover. <code>.link-arrow</code> is the red, condensed-weight call-to-action used in card footers and section rails. <strong>Exception — links inside a card:</strong> when the whole card (or its title) is the link, the card's own hover cues (shadow, image zoom, title color shift, arrow) carry the affordance, so the card title does <em>not</em> add a hover underline.</p>
+      <div class="ref-demo">
+        <p>Read more about our <a href="#">research initiatives across Georgia</a>.</p>
+        <a href="#" class="link-arrow">Read the latest issue →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="ref-cat" id="buttons">
+    <p class="ref-cat-name">Element</p>
+    <h2 class="ref-cat-title">Buttons</h2>
+    <div class="ref-block">
+      <div class="ref-block-meta"><p class="ref-block-name">Variants</p><code class="ref-block-tag">core/button · style variations</code></div>
+      <p class="ref-block-desc">Pill shape, condensed weight, 44px min hit target. <span class="wp">WP: a single <code>core/button</code> with registered style variations (<code>.btn-filled</code>, <code>.btn-white</code>, <code>.btn-outline-white</code>); the outline is the default.</span></p>
+      <div class="ref-demo">
+        <div class="ds-row"><span class="ds-row-label">Outline</span><a href="#" class="btn">Outline button</a></div>
+        <div class="ds-row"><span class="ds-row-label">Filled</span><a href="#" class="btn btn-filled">Filled button</a></div>
+        <div class="ds-row" style="background:var(--uga-red); padding:20px; margin-left:-20px; margin-right:-20px;"><span class="ds-row-label" style="color:rgba(255,255,255,0.7);">On red</span><a href="#" class="btn btn-white">White on red</a><a href="#" class="btn btn-outline-white">Outline white</a></div>
+      </div>
+    </div>
+    <div class="ref-block">
+      <div class="ref-block-meta"><p class="ref-block-name">States</p><code class="ref-block-tag">:hover / :focus-visible / :disabled</code></div>
+      <p class="ref-block-desc">200ms hover transition; global focus ring; disabled at reduced opacity.</p>
+      <div class="ref-demo">
+        <div class="ref-states">
+          <div class="ref-state"><p class="ref-state-name">Default</p><a href="#" class="btn btn-filled">Apply Now</a></div>
+          <div class="ref-state"><p class="ref-state-name">Disabled</p><a class="btn btn-filled" style="opacity:0.5; pointer-events:none;">Apply Now</a></div>
+          <div class="ref-state"><p class="ref-state-name">Tab to focus</p><a href="#" class="btn btn-filled">Apply Now</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ref-cat" id="forms">
+    <p class="ref-cat-name">Element</p>
+    <h2 class="ref-cat-title">Form fields</h2>
+    <div class="ref-block">
+      <div class="ref-block-meta"><p class="ref-block-name">Text + email input</p><code class="ref-block-tag">input[type="email"|"text"]</code></div>
+      <p class="ref-block-desc">1.5px rule border, paired button, focus ring. <span class="wp">WP: typically supplied by a forms plugin block; the field styling is token-driven.</span></p>
+      <div class="ref-demo">
+        <form class="demo-form" onsubmit="event.preventDefault(); this.querySelector('.demo-form-msg').textContent = 'Submitted (demo only).';">
+          <label for="demo-email" class="sr-only">Email address</label>
+          <input id="demo-email" type="email" placeholder="your@email.com" required />
+          <button type="submit" class="btn btn-filled">Subscribe</button>
+        </form>
+        <p class="demo-form-msg" style="margin-top:12px; color:var(--contrast-3); font-size:14px;"></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="ref-cat" id="lists">
+    <p class="ref-cat-name">Element</p>
+    <h2 class="ref-cat-title">Lists &amp; details</h2>
+    <div class="ref-block">
+      <div class="ref-block-meta"><p class="ref-block-name">List</p><code class="ref-block-tag">core/list + core/list-item</code></div>
+      <p class="ref-block-desc">Ordered or unordered; supports nesting.</p>
+      <div class="ref-demo">
+        <ul><li>Plant &amp; Horticulture<ul><li>Crops &amp; Soil</li><li>Pollinator Ecology</li></ul></li><li>Animal &amp; Dairy</li><li>Food Science &amp; Technology</li></ul>
+        <ol><li>Apply by August 1</li><li>Submit transcripts and recommendations</li><li>Schedule a campus visit</li></ol>
+      </div>
+    </div>
+    <div class="ref-block" id="details">
+      <div class="ref-block-meta"><p class="ref-block-name">Details</p><code class="ref-block-tag">core/details</code></div>
+      <p class="ref-block-desc">Native disclosure / multi-open accordion. Click a summary to expand. Useful for FAQs. (See also the single-select <a href="#accordion">Accordion module</a>.)</p>
+      <div class="ref-demo">
+        <details open><summary>What majors does CAES offer?</summary><p>Twenty-seven undergraduate majors across the agricultural and environmental sciences.</p></details>
+        <details><summary>Are scholarships available for first-year students?</summary><p>Yes — CAES distributes more than $700,000 in scholarship awards every year.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="ref-cat" id="liststyles">
+    <p class="ref-cat-name">Element</p>
+    <h2 class="ref-cat-title">List styles</h2>
+    <div class="ref-block">
+      <div class="ref-block-meta"><p class="ref-block-name">Checklist</p><code class="ref-block-tag">core/list · style variation “Checklist”</code></div>
+      <p class="ref-block-desc">Red circular check marks; flows in two columns, collapses to one on small screens. Good for “what you'll do / what's included” lists anywhere.</p>
+      <div class="ref-demo">
+        <ul class="demo-checklist">
+          <li><span class="demo-check"><svg viewBox="0 0 16 16"><path d="M3 8.5l3.5 3.5L13 5" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Run experiments in lab, collecting and analyzing data.</span></li>
+          <li><span class="demo-check"><svg viewBox="0 0 16 16"><path d="M3 8.5l3.5 3.5L13 5" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Take field trips to nearby farms and nurseries.</span></li>
+          <li><span class="demo-check"><svg viewBox="0 0 16 16"><path d="M3 8.5l3.5 3.5L13 5" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Conduct independent research with a faculty mentor.</span></li>
+          <li><span class="demo-check"><svg viewBox="0 0 16 16"><path d="M3 8.5l3.5 3.5L13 5" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Grow plants in our greenhouses and at UGArden.</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="ref-block">
+      <div class="ref-block-meta"><p class="ref-block-name">Role / dotted list</p><code class="ref-block-tag">core/list · style variation “Dotted”</code></div>
+      <p class="ref-block-desc">Space-efficient list for many short items: red dot markers, hairline rule per row, auto-filling into as many columns as the width allows.</p>
+      <div class="ref-demo">
+        <ul class="demo-jobs">
+          <li><span class="demo-job-dot"></span>Greenhouse, Nursery &amp; Farm Manager</li>
+          <li><span class="demo-job-dot"></span>Landscape Designer / Contractor</li>
+          <li><span class="demo-job-dot"></span>Plant Breeder</li>
+          <li><span class="demo-job-dot"></span>Cooperative Extension Specialist</li>
+          <li><span class="demo-job-dot"></span>Native Plant Restoration Specialist</li>
+          <li><span class="demo-job-dot"></span>Floral Designer</li>
+        </ul>
+      </div>
+    </div>
+    <div class="ref-block">
+      <div class="ref-block-meta"><p class="ref-block-name">Numbered steps</p><code class="ref-block-tag">.demo-steps (custom)</code></div>
+      <p class="ref-block-desc">Sequential guidance as cards, each led by a serif numeral in a tinted circle. Three across, stacking on mobile. <span class="wp">WP: a Columns pattern, or a small custom block.</span></p>
+      <div class="ref-demo">
+        <ol class="demo-steps">
+          <li class="demo-step"><span class="demo-step-num">1</span><p>Volunteer at a local community garden, park, or botanical garden.</p></li>
+          <li class="demo-step"><span class="demo-step-num">2</span><p>Take part in the Young Scholars Program, 4-H, or FFA.</p></li>
+          <li class="demo-step"><span class="demo-step-num">3</span><p>Work at a farm, nursery, or garden center.</p></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="ref-cat" id="table">
+    <p class="ref-cat-name">Element</p>
+    <h2 class="ref-cat-title">Tables</h2>
+    <div class="ref-block">
+      <div class="ref-block-meta"><p class="ref-block-name">Table</p><code class="ref-block-tag">core/table</code></div>
+      <p class="ref-block-desc">Borders, condensed-caps headers. Optional <code>is-style-stripes</code> alternates row backgrounds.</p>
+      <div class="ref-demo">
+        <table>
+          <caption>FY24 sponsored awards by department</caption>
+          <thead><tr><th>Department</th><th>Awards</th><th>Total</th></tr></thead>
+          <tbody>
+            <tr><td>Plant &amp; Soil Sciences</td><td>34</td><td>$24.1M</td></tr>
+            <tr><td>Animal &amp; Dairy Science</td><td>28</td><td>$18.7M</td></tr>
+            <tr><td>Food Science &amp; Technology</td><td>19</td><td>$12.3M</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="ref-cat" id="labels">
+    <p class="ref-cat-name">Element</p>
+    <h2 class="ref-cat-title">Labels, tags &amp; facts</h2>
+    <div class="ref-block">
+      <div class="ref-block-meta"><p class="ref-block-name">Pill / tag</p><code class="ref-block-tag">.tag (inline) · soft variant</code></div>
+      <p class="ref-block-desc">Small condensed-caps label on a light-red field — categorizes cards (audience, phase, topic, status). The <strong>soft variant</strong> (neutral chip, sentence case) is quieter for dense metadata lists where many tags sit together — e.g. areas of expertise on the Our Experts cards.</p>
+      <div class="ref-demo">
+        <span class="demo-tag">Prospective students</span>
+        <span class="demo-tag" style="margin-left:8px;">Current students</span>
+        <span class="demo-tag" style="margin-left:8px;">Years 1–2</span>
+      </div>
+      <div class="ref-demo" style="margin-top:12px;">
+        <span class="demo-tag--soft">Microbiology</span>
+        <span class="demo-tag--soft" style="margin-left:8px;">Food Sciences</span>
+        <span class="demo-tag--soft" style="margin-left:8px;">Animal Production</span>
+      </div>
+    </div>
+    <div class="ref-block">
+      <div class="ref-block-meta"><p class="ref-block-name">Section header</p><code class="ref-block-tag">.section-kicker (h2) · .section-display · .section-lede</code></div>
+      <p class="ref-block-desc"><strong>Changed pattern (accessibility).</strong> The short, descriptive label is now the <em>actual heading</em> — <code>&lt;h2 class="section-kicker"&gt;</code> — with the editorial flourish demoted to a <code>&lt;p class="section-display"&gt;</code> beneath it, and any intro copy as <code>&lt;p class="section-lede"&gt;</code>. Previously a <code>&lt;span class="eyebrow"&gt;</code> label sat <em>before</em> a display <code>&lt;h2&gt;</code>, which stranded the label outside the heading — lost when navigating by headings, and announced as orphan text. Now the heading outline names each section ("About this major," "Coursework," "Careers"). The <code>.eyebrow</code> style survives only for page heroes — there the <code>&lt;h1&gt;</code> is already the descriptive title, so the category label goes <em>after</em> it ("Horticulture" → "Undergraduate Major"), never before. <span class="wp">WP: a Heading block + two Paragraphs, or a custom block.</span></p>
+      <div class="ref-demo">
+        <h2 class="section-kicker">About this major</h2>
+        <p class="section-display">Horticulture is everywhere.</p>
+        <p class="section-lede">Sustainably growing fruits, vegetables, and medicinal herbs to feed and heal a hungry population — from greenhouses to outer space.</p>
+      </div>
+    </div>
+    <div class="ref-block">
+      <div class="ref-block-meta"><p class="ref-block-name">Facts row</p><code class="ref-block-tag">core/list · style variation (dl)</code></div>
+      <p class="ref-block-desc">Key/value facts as a horizontal definition list bracketed by hairline rules — label in condensed caps, value in serif. Reusable as a spec / at-a-glance strip on any detail page.</p>
+      <div class="ref-demo">
+        <dl class="demo-facts">
+          <div class="demo-fact"><dt>Degree</dt><dd>B.S.A.</dd></div>
+          <div class="demo-fact"><dt>Department</dt><dd>Horticulture</dd></div>
+          <div class="demo-fact"><dt>Available at</dt><dd>Athens</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="ref-cat" id="quotes">
+    <p class="ref-cat-name">Element</p>
+    <h2 class="ref-cat-title">Quotes &amp; pullquotes</h2>
+    <div class="ref-block">
+      <div class="ref-block-meta"><p class="ref-block-name">Quote</p><code class="ref-block-tag">core/quote</code></div>
+      <p class="ref-block-desc">Inline blockquote with optional citation. Left red rule, italic serif.</p>
+      <div class="ref-demo">
+        <blockquote class="wp-block-quote"><p>CAES taught me that the best research starts with a question from a farmer — and ends back in the dirt where it began.</p><cite>Dr. Imani Wright, Class of '04</cite></blockquote>
+      </div>
+    </div>
+    <div class="ref-block" id="pullquote">
+      <div class="ref-block-meta"><p class="ref-block-name">Pullquote</p><code class="ref-block-tag">core/pullquote</code></div>
+      <p class="ref-block-desc">Larger, centered, framed by top/bottom rules. A layout device — use sparingly.</p>
+      <div class="ref-demo">
+        <blockquote class="wp-block-pullquote"><p>Georgia's land is our laboratory.</p><cite>— CAES, since 1859</cite></blockquote>
+      </div>
+    </div>
+    <div class="ref-block">
+      <div class="ref-block-meta"><p class="ref-block-name">Accent pullquote</p><code class="ref-block-tag">core/pullquote · style variation “Accent”</code></div>
+      <p class="ref-block-desc">A left-rule, serif-italic pullquote for inline emphasis within a section — a lighter alternative to the centered pullquote above.</p>
+      <div class="ref-demo">
+        <blockquote class="demo-pull">A starting point for an exciting career and life-long pursuit — one that stays with you no matter where in the world you go.</blockquote>
+      </div>
+    </div>
+  </section>
+
+  <section class="ref-cat" id="stats">
+    <p class="ref-cat-name">Element</p>
+    <h2 class="ref-cat-title">Stats</h2>
+    <div class="ref-block">
+      <div class="ref-block-meta"><p class="ref-block-name">Stat / outcome bar</p><code class="ref-block-tag">caes/stat (custom)</code></div>
+      <p class="ref-block-desc">Big serif figure over a thin progress bar (filled to the value) with a condensed label — for survey results and at-a-glance metrics on any page.</p>
+      <div class="ref-demo">
+        <div class="demo-statbars">
+          <div class="demo-stat"><span class="demo-stat-num">50%</span><span class="demo-stat-bar"><span style="width:50%;"></span></span><span class="demo-stat-label">Employed full-time</span></div>
+          <div class="demo-stat"><span class="demo-stat-num">25%</span><span class="demo-stat-bar"><span style="width:25%;"></span></span><span class="demo-stat-label">In internships</span></div>
+          <div class="demo-stat"><span class="demo-stat-num">13%</span><span class="demo-stat-bar"><span style="width:13%;"></span></span><span class="demo-stat-label">Attending graduate school</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ref-cat" id="footnotes">
+    <p class="ref-cat-name">Element</p>
+    <h2 class="ref-cat-title">Footnotes</h2>
+    <div class="ref-block">
+      <div class="ref-block-meta"><p class="ref-block-name">Footnotes</p><code class="ref-block-tag">core/footnotes</code></div>
+      <p class="ref-block-desc">Numbered notes attached to inline references; renders at the foot of the post.</p>
+      <div class="ref-demo">
+        <p>Georgia's peanut industry contributes more than $700M to the state economy each year.<sup><a href="#fn-1">1</a></sup></p>
+        <ol class="wp-block-footnotes"><li id="fn-1">USDA NASS Georgia Field Office, 2024 production summary.</li></ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== MODULES ===================== -->
+  <div class="ref-tier" id="modules">
+    <p class="ref-tier-k">Tier 3</p>
+    <h2>Modules</h2>
+    <p class="ref-tier-desc">Elements composed into one reusable unit. The tiebreaker: a module composes two or more named pieces. Some are core container blocks (Media &amp; Text); others become custom blocks (card, carousel, modal). A module's variations live together — see Cards.</p>
+  </div>
+
+  <section class="ref-cat" id="media-text">
+    <p class="ref-cat-name">Module</p>
+    <h2 class="ref-cat-title">Media &amp; Text</h2>
+    <div class="ref-block">
+      <div class="ref-block-meta"><p class="ref-block-name">Media &amp; Text</p><code class="ref-block-tag">core/media-text</code></div>
+      <p class="ref-block-desc">Paired image + text columns. Defaults to media-on-the-left; add <code>has-media-on-the-right</code> to flip. Stacks below 700px. <span class="wp">WP: core container block — composite, so it lives at the Module tier.</span></p>
+      <div class="ref-demo">
+        <div class="wp-block-media-text">
+          <figure class="wp-block-media-text__media"><img src="assets/img/photo-1581094794329-c8112a89af12.jpg" alt="" loading="lazy" style="aspect-ratio:4/3; object-fit:cover;" /></figure>
+          <div class="wp-block-media-text__content"><h3 style="margin-top:0;">Field-tested at three campuses</h3><p>Tested over eight years across the Athens, Griffin, and Tifton stations.</p><a href="#" class="link-arrow">Read the field report →</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ref-cat" id="cards">
+    <p class="ref-cat-name">Module</p>
+    <h2 class="ref-cat-title">Cards</h2>
+    <div class="ref-block">
+      <div class="ref-block-meta"><p class="ref-block-name">Card — variations</p><code class="ref-block-tag">article.card + a.card-link</code></div>
+      <p class="ref-block-desc">One base card, several fills — image+blurb, image-only, and text-only — shown together to make the shared anatomy obvious. <strong>Accessible link pattern:</strong> the <code>&lt;a class="card-link"&gt;</code> wraps <em>only the title</em>; a CSS <code>::after</code> stretches it across the card. Hover deepens the shadow and zooms the image ~6% (no lift) — except the <strong>image-less</strong> card, which has nothing to zoom and so takes the <a href="#cards">link-card hover</a> (red top-rule, title red, arrow). Card-link titles get <em>no</em> hover underline — the card's own hover cues carry the affordance. <span class="wp">WP: a custom block, or a Columns + Group pattern with a style variation per fill.</span></p>
+      <div class="ref-demo">
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px,1fr)); gap:20px;">
+          <article class="demo-card"><div class="demo-card-img"><div style="background:linear-gradient(135deg,#4a6741,#2d3f29);"></div></div><div class="demo-card-body"><h3 class="demo-card-title"><a href="#" class="card-link">Drought-resistant peanut variety</a></h3><p class="demo-card-blurb">Eight years of field trials show 22% higher yields under water stress.</p><p class="demo-card-tag">Research</p></div></article>
+          <article class="demo-card"><div class="demo-card-img"><div style="background:linear-gradient(135deg,#8a6f3e,#4a3a1f);"></div></div><div class="demo-card-body"><h3 class="demo-card-title"><a href="#" class="card-link">Spring planting forecast</a></h3></div></article>
+          <article class="demo-card demo-card--link"><span class="demo-card-arrow" aria-hidden="true">→</span><div class="demo-card-body"><h3 class="demo-card-title"><a href="#" class="card-link">Dr. Imani Wright, Plant Pathology</a></h3><p class="demo-card-blurb">A text-only card — with no image to zoom, it takes the link-card hover instead (red top-rule, title red, arrow).</p><p class="demo-card-tag">Profile</p></div></article>
+        </div>
+      </div>
+    </div>
+
+    <div class="ref-block">
+      <div class="ref-block-meta"><p class="ref-block-name">Link card — no large image</p><code class="ref-block-tag">.card (link) · hover: top-rule wipe</code></div>
+      <p class="ref-block-desc">When the whole card points to <strong>one</strong> destination and has no hero image, use this instead of the media card's zoom. The hover signature is different on purpose: a red top-rule wipes in left-to-right, the title turns red, the arrow advances, and the shadow deepens (no underline — the card cues do the work). An optional <strong>52px circular thumbnail</strong> adds a visual anchor without making it an image card (it gets a gentle zoom on hover too). Used by the Degrees &amp; Programs directory. <span class="wp">WP: custom block or a Group with the link applied to the title (<code>card-link</code> stretched ::after) — one link only, so no nested interactive elements.</span></p>
+      <div class="ref-demo">
+        <div class="demo-linkgrid">
+          <article class="demo-linkcard">
+            <div class="demo-linkcard-head">
+              <span class="demo-linkcard-thumb"><img src="assets/img/photo-1625246333195-78d9c38ad449.jpg" alt="" loading="lazy" /></span>
+              <div class="demo-linkcard-headings">
+                <h3 class="demo-linkcard-title"><a href="#">Horticulture</a></h3>
+                <span class="demo-linkcard-type">Undergraduate Major</span>
+              </div>
+            </div>
+            <span class="demo-linkcard-arrow" aria-hidden="true">→</span>
+          </article>
+          <article class="demo-linkcard">
+            <div class="demo-linkcard-head">
+              <span class="demo-linkcard-thumb"><img src="assets/img/photo-1500595046743-cd271d694d30.jpg" alt="" loading="lazy" /></span>
+              <div class="demo-linkcard-headings">
+                <h3 class="demo-linkcard-title"><a href="#">Animal &amp; Dairy Science</a></h3>
+                <span class="demo-linkcard-type">Master's</span>
+              </div>
+            </div>
+            <span class="demo-linkcard-arrow" aria-hidden="true">→</span>
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="ref-block">
+      <div class="ref-block-meta"><p class="ref-block-name">Profile card</p><code class="ref-block-tag">.contact-card · circular avatar</code></div>
+      <p class="ref-block-desc">For people — faculty, advisors, contacts. A 56px circular avatar sits beside the name and role; the same circular-image convention as the directory thumbnail, one size up. Used by the advisor contacts on the program-detail page.</p>
+      <div class="ref-demo">
+        <article class="demo-profile">
+          <div class="demo-profile-person">
+            <span class="demo-profile-avatar"><img src="assets/img/photo-1543269865-cbf427effbad.jpg" alt="" loading="lazy" /></span>
+            <div>
+              <h3 class="demo-profile-name">Debbie Hargrave</h3>
+              <p class="demo-profile-role">Academic Advisor</p>
+            </div>
+          </div>
+          <a href="#" class="demo-profile-link">dbh88132@uga.edu</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="ref-cat" id="accordion">
+    <p class="ref-cat-name">Module</p>
+    <h2 class="ref-cat-title">Accordion / tabs</h2>
+    <div class="ref-block">
+      <div class="ref-block-meta"><p class="ref-block-name">Single-select accordion</p><code class="ref-block-tag">role="tablist" / role="tab"</code></div>
+      <p class="ref-block-desc">One row open at a time (used in Student Life). <span class="wp">WP: the native <a href="#details">core/details</a> covers multi-open FAQs; this single-select behavior is a small custom block.</span></p>
+      <div class="ref-demo">
+        <ul class="demo-accordion" role="tablist" aria-label="Demo accordion" id="demoAcc">
+          <li><button type="button" class="demo-accordion-btn" aria-expanded="true"><span>Majors</span><span class="demo-accordion-icon" aria-hidden="true">−</span></button><div class="demo-accordion-body"><div class="demo-accordion-body-inner">Twenty-seven undergraduate majors across the agricultural and environmental sciences.</div></div></li>
+          <li><button type="button" class="demo-accordion-btn" aria-expanded="false"><span>Scholarships</span><span class="demo-accordion-icon" aria-hidden="true">+</span></button><div class="demo-accordion-body"><div class="demo-accordion-body-inner">More than $700,000 in scholarship awards every year.</div></div></li>
+          <li><button type="button" class="demo-accordion-btn" aria-expanded="false"><span>Schedule a Visit</span><span class="demo-accordion-icon" aria-hidden="true">+</span></button><div class="demo-accordion-body"><div class="demo-accordion-body-inner">Walk our campuses in Athens, Griffin, and Tifton.</div></div></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="ref-cat" id="carousel">
+    <p class="ref-cat-name">Module</p>
+    <h2 class="ref-cat-title">Carousel</h2>
+    <div class="ref-block">
+      <div class="ref-block-meta"><p class="ref-block-name">Card carousel</p><code class="ref-block-tag">.carousel-track / .carousel-card / .carousel-arrow</code></div>
+      <p class="ref-block-desc">Horizontally scroll-snapping 4:5 photo cards with a serif label; 44px round arrows scroll one card at a time. <span class="wp">WP: custom block.</span></p>
+      <div class="ref-demo">
+        <div class="carousel-track" id="demoCarouselTrack">
+          <a href="#" class="carousel-card" style="background-image:url('assets/img/photo-1625246333195-78d9c38ad449.jpg');"><span>Plants &amp; Horticulture</span></a>
+          <a href="#" class="carousel-card" style="background-image:url('assets/img/photo-1500595046743-cd271d694d30.jpg');"><span>Animals &amp; Dairy</span></a>
+          <a href="#" class="carousel-card" style="background-image:url('assets/img/photo-1473973266408-ed4e27abdd47.jpg');"><span>Crops &amp; Soil</span></a>
+          <a href="#" class="carousel-card" style="background-image:url('assets/img/photo-1498936178812-4b2e558d2937.jpg');"><span>Insects &amp; Pollinators</span></a>
+          <a href="#" class="carousel-card" style="background-image:url('assets/img/photo-1466692476868-aef1dfb1e735.jpg');"><span>Food, Health &amp; Nutrition</span></a>
+        </div>
+        <div class="carousel-controls">
+          <button class="carousel-arrow" aria-label="Previous" id="demoCarouselPrev"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M9 1L3 7l6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg></button>
+          <button class="carousel-arrow" aria-label="Next" id="demoCarouselNext"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M5 1l6 6-6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ref-cat" id="modal">
+    <p class="ref-cat-name">Module</p>
+    <h2 class="ref-cat-title">Modal</h2>
+    <div class="ref-block">
+      <div class="ref-block-meta"><p class="ref-block-name">Generic &amp; selection modal</p><code class="ref-block-tag">.programs-modal-backdrop / .programs-modal</code></div>
+      <p class="ref-block-desc">Backdrop + dialog scaffolding: centered on desktop, bottom sheet under 640px, with click-outside / Esc / close-button dismiss. The selection variant wires it up as a filter picker with a count-tracking apply button.</p>
+      <div class="ref-demo">
+        <button type="button" class="btn btn-filled" id="demoBasicModalOpen">Open modal</button>
+        <button type="button" class="btn" id="demoModalOpen" style="margin-left:8px;">Open filter modal</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="ref-cat" id="filters">
+    <p class="ref-cat-name">Module</p>
+    <h2 class="ref-cat-title">Filters</h2>
+    <div class="ref-block">
+      <div class="ref-block-meta"><p class="ref-block-name">Filter buttons &amp; chips</p><code class="ref-block-tag">.programs-filter-btn / .programs-chip</code></div>
+      <p class="ref-block-desc">Pill pickers that open a modal — <code>.is-primary</code> marks the primary axis, <code>.is-active</code> shows a selection (with count badge). Applied values surface as black chips; click one to remove it (hover turns it red).</p>
+      <div class="ref-demo">
+        <div class="programs-filter-row">
+          <button type="button" class="programs-filter-btn"><span class="programs-filter-btn-label">Default</span><svg viewBox="0 0 12 8" aria-hidden="true" class="programs-filter-caret"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <button type="button" class="programs-filter-btn is-active"><span class="programs-filter-btn-label">Active</span><span class="programs-filter-count">2</span><svg viewBox="0 0 12 8" aria-hidden="true" class="programs-filter-caret"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <button type="button" class="programs-filter-btn is-primary"><span class="programs-filter-btn-label">Primary</span><svg viewBox="0 0 12 8" aria-hidden="true" class="programs-filter-caret"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </div>
+        <div class="programs-active-chips" style="margin-top:20px;">
+          <button type="button" class="programs-chip">Bachelor's<span aria-hidden="true">×</span><span class="sr-only">Remove filter</span></button>
+          <button type="button" class="programs-chip">Animal &amp; Dairy Science<span aria-hidden="true">×</span><span class="sr-only">Remove filter</span></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ref-cat" id="onpage-nav">
+    <p class="ref-cat-name">Module</p>
+    <h2 class="ref-cat-title">In-page navigation</h2>
+    <div class="ref-block">
+      <div class="ref-block-meta"><p class="ref-block-name">Sticky “On this page” bar</p><code class="ref-block-tag">.pd3-subnav · scroll-spy</code></div>
+      <p class="ref-block-desc">A horizontal section nav that sticks below the page header and highlights the section in view (IntersectionObserver). Overflowing links scroll sideways with a right-edge fade. <span class="wp">WP: relates to the core Table of Contents block; the sticky + scroll-spy behavior is a custom block. Reusable on any long page.</span> Click a tab to see the active state.</p>
+      <div class="ref-demo">
+        <div class="demo-onpage" id="demoOnpage">
+          <span class="demo-onpage-label">On this page</span>
+          <ul>
+            <li><a href="#" class="is-active">About</a></li>
+            <li><a href="#">Coursework</a></li>
+            <li><a href="#">How to Prepare</a></li>
+            <li><a href="#">Hands-On</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Paying</a></li>
+            <li><a href="#">Connect</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PATTERNS ===================== -->
+  <div class="ref-tier" id="patterns">
+    <p class="ref-tier-k">Tier 4</p>
+    <h2>Patterns</h2>
+    <p class="ref-tier-desc">Full-width sections built from modules — the building blocks of a page. Each has its own standalone preview. <span style="color:var(--contrast-3);">WP: registered block patterns / template parts.</span></p>
+  </div>
+  <section class="ref-cat">
+    <div class="ref-linkgrid">
+      <a class="ref-linkcard" href="hero/hero.html"><span class="n">Hero</span><span class="t">Floating card hero</span></a>
+      <a class="ref-linkcard" href="top-nav/top-nav.html"><span class="n">Nav</span><span class="t">Top nav (masthead)</span></a>
+      <a class="ref-linkcard" href="announcement/announcement.html"><span class="n">Notice</span><span class="t">Announcement bar</span></a>
+      <a class="ref-linkcard" href="impact-mosaic/impact-mosaic.html"><span class="n">Stats</span><span class="t">Impact mosaic</span></a>
+      <a class="ref-linkcard" href="student-life/student-life.html"><span class="n">Accordion</span><span class="t">Student Life</span></a>
+      <a class="ref-linkcard" href="news/news.html"><span class="n">Editorial</span><span class="t">Latest News</span></a>
+      <a class="ref-linkcard" href="read-all-about/read-all-about.html"><span class="n">Feature</span><span class="t">Read All About CAES</span></a>
+      <a class="ref-linkcard" href="caes-footer/caes-footer.html"><span class="n">Footer</span><span class="t">CAES footer</span></a>
+      <a class="ref-linkcard" href="uga-footer/uga-footer.html"><span class="n">Footer</span><span class="t">UGA standard footer</span></a>
+    </div>
+
+    <p class="ref-cat-name" style="margin-top:48px;">Extracted from the degree page</p>
+    <p class="ref-block-desc" style="margin-bottom:20px;">Section-level blocks pulled out of the program-detail page — none are degree-specific, so each fits department, faculty, and research-area landing pages too. (The sticky section nav is catalogued as a <a href="#onpage-nav">Module</a>; the stat bars, checklist, steps, facts row, tags, and accent pullquote are <a href="#elements">Elements</a>.)</p>
+    <div class="ref-linkgrid">
+      <a class="ref-linkcard" href="detail-hero/detail-hero.html"><span class="n">Header</span><span class="t">Detail hero — dark, with facts</span></a>
+      <a class="ref-linkcard" href="phase-cards/phase-cards.html"><span class="n">Cards</span><span class="t">Phase / timeline cards</span></a>
+      <a class="ref-linkcard" href="info-cards/info-cards.html"><span class="n">Cards</span><span class="t">Two-up info cards</span></a>
+      <a class="ref-linkcard" href="faq/faq.html"><span class="n">Accordion</span><span class="t">FAQ</span></a>
+      <a class="ref-linkcard" href="connect/connect.html"><span class="n">Contacts</span><span class="t">Connect / get in touch</span></a>
+      <a class="ref-linkcard" href="closing-cta/closing-cta.html"><span class="n">CTA</span><span class="t">Closing CTA band</span></a>
+    </div>
+    <p class="ref-block-desc" style="margin-top:20px;">The <strong>faded-in header photo</strong> is one shared, background-agnostic treatment (<code>.header-photo</code>, defined in <code>_tokens.css</code>) — not per-page code. Add <code>has-header-photo</code> to any header and a masked image rides its right edge, dissolving to transparent on the left so it reveals whatever band sits behind it: the dark detail hero here, and the light interior header on the <a href="../academics.html">Academics landing</a> page (which adds <code>.ip-header--media</code>). Each host tunes width and fade distance per background with the <code>--header-photo-*</code> custom properties — a paler band fades over a longer distance to hide the image edge.</p>
+  </section>
+
+  <!-- ===================== PAGES ===================== -->
+  <div class="ref-tier" id="pages">
+    <p class="ref-tier-k">Tier 5</p>
+    <h2>Pages</h2>
+    <p class="ref-tier-desc">Whole compositions — patterns assembled into a template. <span style="color:var(--contrast-3);">WP: templates.</span></p>
+  </div>
+  <section class="ref-cat">
+    <div class="ref-linkgrid">
+      <a class="ref-linkcard" href="../index.html"><span class="n">Template</span><span class="t">Homepage</span></a>
+      <a class="ref-linkcard" href="../academics.html"><span class="n">Template</span><span class="t">Academics landing</span></a>
+      <a class="ref-linkcard" href="programs/programs.html"><span class="n">Template</span><span class="t">Degrees &amp; Programs</span></a>
+      <a class="ref-linkcard" href="program-detail/program-detail.html"><span class="n">Template</span><span class="t">Program detail</span></a>
+      <a class="ref-linkcard" href="directory/directory.html"><span class="n">Template</span><span class="t">Our People directory</span></a>
+      <a class="ref-linkcard" href="experts/experts.html"><span class="n">Template</span><span class="t">Our Experts (expertise-first)</span></a>
+      <a class="ref-linkcard" href="interior-page/interior-page.html"><span class="n">Template</span><span class="t">Interior page</span></a>
+      <a class="ref-linkcard" href="interior-page-sidebar/interior-page-sidebar.html"><span class="n">Template</span><span class="t">Interior page with sidebar</span></a>
+    </div>
+  </section>
+</main>
+
+<!-- Generic modal demo -->
+<div class="programs-modal-backdrop" id="demoBasicModal" hidden>
+  <div class="programs-modal" role="dialog" aria-modal="true" aria-labelledby="demo-basic-modal-title">
+    <header class="programs-modal-head">
+      <h2 id="demo-basic-modal-title">Schedule a visit</h2>
+      <button type="button" class="programs-modal-close" id="demoBasicModalClose" aria-label="Close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg></button>
+    </header>
+    <div class="programs-modal-body" style="padding: var(--space-6) var(--space-7);">
+      <p>The modal body accepts any content — paragraphs, forms, embeds, lists. The backdrop, escape handler, and click-outside dismiss come with the shell.</p>
+    </div>
+    <footer class="programs-modal-foot">
+      <button type="button" class="programs-modal-clear" id="demoBasicModalCancel">Cancel</button>
+      <button type="button" class="btn btn-filled programs-modal-apply" id="demoBasicModalOk">Got it</button>
+    </footer>
+  </div>
+</div>
+
+<!-- Selection modal demo -->
+<div class="programs-modal-backdrop" id="demoModal" hidden>
+  <div class="programs-modal" role="dialog" aria-modal="true" aria-labelledby="demo-modal-title">
+    <header class="programs-modal-head">
+      <h2 id="demo-modal-title">Program Type</h2>
+      <button type="button" class="programs-modal-close" id="demoModalClose" aria-label="Close filter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg></button>
+    </header>
+    <div class="programs-modal-body">
+      <ul class="programs-modal-list">
+        <li><label class="programs-modal-row"><input type="checkbox" data-modal-row /><span class="programs-modal-check" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 8.5l3.5 3.5L13 5" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="programs-modal-label">Bachelor's</span><span class="programs-modal-count">14</span></label></li>
+        <li><label class="programs-modal-row"><input type="checkbox" data-modal-row /><span class="programs-modal-check" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 8.5l3.5 3.5L13 5" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="programs-modal-label">Master's</span><span class="programs-modal-count">9</span></label></li>
+        <li><label class="programs-modal-row"><input type="checkbox" data-modal-row /><span class="programs-modal-check" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 8.5l3.5 3.5L13 5" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="programs-modal-label">PhD</span><span class="programs-modal-count">5</span></label></li>
+      </ul>
+    </div>
+    <footer class="programs-modal-foot">
+      <button type="button" class="programs-modal-clear" id="demoModalReset" disabled>Reset</button>
+      <button type="button" class="btn btn-filled programs-modal-apply" id="demoModalApply">Show all</button>
+    </footer>
+  </div>
+</div>
+
+<script>
+  // Single-select accordion
+  (function () {
+    var acc = document.getElementById('demoAcc');
+    if (!acc) return;
+    acc.addEventListener('click', function (e) {
+      var btn = e.target.closest('.demo-accordion-btn');
+      if (!btn) return;
+      acc.querySelectorAll('li').forEach(function (li) {
+        var b = li.querySelector('.demo-accordion-btn');
+        var icon = li.querySelector('.demo-accordion-icon');
+        var isThis = b === btn;
+        b.setAttribute('aria-expanded', isThis ? 'true' : 'false');
+        icon.textContent = isThis ? '−' : '+';
+      });
+    });
+  })();
+
+  // Shared modal helper
+  function wireModal(modal, openBtn, closeBtn) {
+    if (!modal || !openBtn) return { open: function(){}, close: function(){} };
+    function open()  { modal.removeAttribute('hidden'); document.body.style.overflow = 'hidden'; if (closeBtn) closeBtn.focus(); }
+    function close() { modal.setAttribute('hidden', '');  document.body.style.overflow = '';      openBtn.focus(); }
+    openBtn.addEventListener('click', open);
+    if (closeBtn) closeBtn.addEventListener('click', close);
+    modal.addEventListener('click', function (e) { if (e.target === modal) close(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !modal.hasAttribute('hidden')) close(); });
+    return { open: open, close: close };
+  }
+  (function () {
+    var modal = document.getElementById('demoBasicModal');
+    if (!modal) return;
+    var api = wireModal(modal, document.getElementById('demoBasicModalOpen'), document.getElementById('demoBasicModalClose'));
+    var cancel = document.getElementById('demoBasicModalCancel');
+    var ok = document.getElementById('demoBasicModalOk');
+    if (cancel) cancel.addEventListener('click', api.close);
+    if (ok) ok.addEventListener('click', api.close);
+  })();
+  (function () {
+    var modal = document.getElementById('demoModal');
+    if (!modal) return;
+    var api = wireModal(modal, document.getElementById('demoModalOpen'), document.getElementById('demoModalClose'));
+    var resetBtn = document.getElementById('demoModalReset');
+    var applyBtn = document.getElementById('demoModalApply');
+    var rows = modal.querySelectorAll('input[data-modal-row]');
+    function refresh() {
+      var n = 0;
+      rows.forEach(function (cb) { var row = cb.closest('.programs-modal-row'); row.classList.toggle('is-on', cb.checked); if (cb.checked) n++; });
+      applyBtn.textContent = n === 0 ? 'Show all' : 'Show ' + n + ' selected';
+      resetBtn.disabled = n === 0;
+    }
+    rows.forEach(function (cb) { cb.addEventListener('change', refresh); });
+    resetBtn.addEventListener('click', function () { rows.forEach(function (cb) { cb.checked = false; }); refresh(); });
+    applyBtn.addEventListener('click', api.close);
+  })();
+
+  // Carousel
+  (function () {
+    var track = document.getElementById('demoCarouselTrack');
+    if (!track) return;
+    function scrollByCard(dir) {
+      var card = track.querySelector('.carousel-card');
+      var w = card ? card.getBoundingClientRect().width + 18 : 320;
+      track.scrollBy({ left: dir * w, behavior: 'smooth' });
+    }
+    var prev = document.getElementById('demoCarouselPrev');
+    var next = document.getElementById('demoCarouselNext');
+    if (prev) prev.addEventListener('click', function () { scrollByCard(-1); });
+    if (next) next.addEventListener('click', function () { scrollByCard(1); });
+  })();
+
+  // In-page nav active toggle
+  (function () {
+    var bar = document.getElementById('demoOnpage');
+    if (!bar) return;
+    bar.addEventListener('click', function (e) {
+      var a = e.target.closest('a'); if (!a) return;
+      e.preventDefault();
+      bar.querySelectorAll('a').forEach(function (x) { x.classList.remove('is-active'); });
+      a.classList.add('is-active');
+    });
+  })();
+</script>
+
+</body>
+</html>

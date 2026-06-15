@@ -1,0 +1,191 @@
+/* ============================================================
+   INTERIOR PAGE — the base interior page (no section rail; the main
+   nav covers where it sits). Layout, in order:
+     1. Header band     (breadcrumb · H1 · one-line intro)
+     2. Body shell      (intro text + a video, side by side)
+     3. Full-width zone (per-page blocks past the intro — e.g. a feed)
+     4. Section footer  (full-width; repeatable, section-wide content)
+   Also the shared design language for interior-page-sidebar.css
+   (the same page plus a right section rail).
+   ============================================================ */
+
+.ip { background: var(--base); }
+
+/* ---------- 1. Header band ---------- */
+.ip-header {
+  padding: clamp(var(--space-9), 6vw, var(--space-12)) 0 clamp(var(--space-7), 4vw, var(--space-9));
+  border-bottom: 1px solid var(--rule);
+}
+.ip-breadcrumb {
+  display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2);
+  font-family: var(--font-condensed); font-size: var(--text-sm);
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--contrast-3); margin-bottom: var(--space-5);
+}
+.ip-breadcrumb a { color: inherit; text-decoration: none; }
+.ip-breadcrumb a:hover { color: var(--uga-red); text-decoration: underline; text-underline-offset: 3px; }
+.ip-breadcrumb [aria-current] { color: var(--contrast); }
+.ip-header h1 { margin: 0 0 var(--space-4); }
+.ip-intro { font-size: var(--text-lg); line-height: 1.55; color: var(--contrast); max-width: 60ch; margin: 0; }
+
+/* Optional decorative photo faded in on the right of the header band. Uses the
+   shared `.header-photo` treatment (see _tokens.css) — add `has-header-photo`
+   alongside this class. Here we only tune the fade for the light header band
+   (a longer fade hides the image edge against the paper) and pull the intro in
+   so it never runs under the photo. */
+.ip-header--media {
+  --header-photo-w: 42%; --header-photo-w-md: 38%; --header-photo-max: 620px;
+  --header-photo-fade: 55%;
+}
+.ip-header--media .ip-intro { max-width: 52ch; }
+@media (max-width: 680px) { .ip-header--media .ip-intro { max-width: 60ch; } }
+.ip-header-inner { display: flex; align-items: center; justify-content: space-between; gap: clamp(var(--space-6), 4vw, var(--space-10)); }
+.ip-header-main { flex: 1; min-width: 0; }
+
+/* Header-right nav: an "up a level" link stacked above the section dropdown */
+.ip-explore-wrap { flex-shrink: 0; display: flex; flex-direction: column; align-items: flex-end; gap: var(--space-2); }
+.ip-explore-up { display: inline-flex; flex-direction: column; align-items: flex-end; gap: 2px; text-decoration: none; }
+.ip-explore-up-cap {
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  font-family: var(--font-condensed); font-weight: 700; font-size: 11px;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--contrast-3);
+}
+.ip-explore-up-cap svg { flex-shrink: 0; }
+.ip-explore-up-name { font-family: var(--font-serif); font-size: var(--heading-5); line-height: 1.15; color: var(--contrast); }
+.ip-explore-up:hover .ip-explore-up-name { color: var(--uga-red); }
+
+/* "Explore this section" — a dropdown, collapsed at all widths */
+.ip-explore { position: relative; }
+.ip-explore .cnav-toggle {
+  width: auto; gap: var(--space-4);
+  border: 1px solid var(--rule); background: var(--base);
+  padding: var(--space-3) var(--space-4) var(--space-3) var(--space-5);
+  transition: border-color .15s var(--ease);
+}
+.ip-explore .cnav-toggle:hover { border-color: var(--contrast); }
+.ip-explore .cnav-toggle-cur {
+  font-family: var(--font-condensed); font-weight: 600; font-size: var(--text-sm);
+  letter-spacing: 0.04em; color: var(--contrast);
+}
+.ip-explore .cnav-body {
+  position: absolute; top: calc(100% + var(--space-2)); right: 0;
+  min-width: 300px; max-width: 360px;
+  background: var(--base); border: 1px solid var(--rule);
+  box-shadow: 0 18px 32px -18px rgba(0,0,0,0.3);
+  padding: var(--space-2) 0; z-index: 20;
+}
+
+/* ---------- 2. Body shell: introduction text (left) + video (right) ---------- */
+.ip-shell {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(var(--space-8), 5vw, var(--space-12));
+  align-items: start;
+  padding-top: clamp(var(--space-8), 5vw, var(--space-10));
+  padding-bottom: clamp(var(--space-10), 6vw, var(--space-14));
+}
+
+/* ----- Main content: reading-measure text, full-width media blocks ----- */
+.ip-content { min-width: 0; }
+/* Block rhythm — a generous, consistent gap between blocks (≈ the WP block gap),
+   so each pasted block reads as its own unit. */
+.ip-content > * { margin: 0; }
+.ip-content > * + * { margin-top: var(--space-9); }
+.ip-content > h2 { margin-top: var(--space-11); margin-bottom: var(--space-4); }
+/* Text blocks hold a comfortable reading measure; media + embeds run the full
+   width of the content area (the area they're "pasted into"). */
+.ip-content > :is(p, ul, ol, h2, h3) { max-width: 68ch; }
+.ip-content > p { font-size: var(--text-base); line-height: 1.7; color: var(--contrast); }
+
+/* video embed — sits to the right of the intro text in the body shell */
+.ip-intro-media { margin: 0; }
+.ip-video { position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: var(--paper-2); }
+.ip-video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.ip-video-caption { font-size: var(--text-sm); color: var(--contrast-2); margin-top: var(--space-3); text-align: center; }
+
+/* Section page list — used inside the Explore dropdown */
+.ip-nav-list, .ip-nav-sub { list-style: none; margin: 0; padding: 0; }
+.ip-nav-list > li > a {
+  display: block; padding: var(--space-3) var(--space-5);
+  font-size: var(--text-sm); line-height: 1.4; color: var(--contrast-2); text-decoration: none;
+  border-left: 3px solid transparent;
+  transition: color .15s var(--ease), border-color .15s var(--ease);
+}
+.ip-nav-list > li > a:hover { color: var(--uga-red); }
+.ip-nav-list > li > a.is-current { color: var(--uga-red); font-weight: 700; border-left-color: var(--uga-red); }
+/* nested sub-pages (current branch only) */
+.ip-nav-sub a {
+  display: block; padding: var(--space-2) var(--space-5) var(--space-2) var(--space-8);
+  font-size: var(--text-sm); line-height: 1.4; color: var(--contrast-3); text-decoration: none;
+}
+.ip-nav-sub a:hover { color: var(--uga-red); }
+
+/* ---------- 3. Per-page full-width zone (full-width blocks past the intro) ---------- */
+.ip-fullwidth {
+  border-top: 1px solid var(--rule);
+  padding: clamp(var(--space-9), 6vw, var(--space-12)) 0;
+}
+.ip-feed-head {
+  display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-5);
+  flex-wrap: wrap; margin-bottom: var(--space-7);
+}
+.ip-feed-head h2 { font-family: var(--font-serif); font-weight: 400; font-size: var(--heading-4); margin: 0; }
+.ip-feed { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(var(--space-6), 4vw, var(--space-8)); }
+/* Borderless cards: whole card is the link (title carries the stretched ::after);
+   hover/focus zooms the image and reddens the title — no border, no underline. */
+.ip-story { position: relative; display: flex; flex-direction: column; gap: var(--space-2); }
+.ip-story-img { aspect-ratio: var(--ratio-landscape); overflow: hidden; background: var(--paper-2); margin-bottom: var(--space-2); }
+.ip-story-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s var(--ease); }
+.ip-story:hover .ip-story-img img, .ip-story:focus-within .ip-story-img img { transform: scale(1.06); }
+.ip-story-meta { display: flex; align-items: center; gap: var(--space-4); }
+.ip-story-cat { font-family: var(--font-condensed); font-weight: 700; font-size: var(--text-sm); letter-spacing: 0.14em; text-transform: uppercase; color: var(--uga-red); }
+.ip-story-date { font-family: var(--font-condensed); letter-spacing: 0.14em; }
+.ip-story-title { font-family: var(--font-serif); font-weight: 400; font-size: var(--heading-5); line-height: 1.2; margin: 0; transition: color .15s var(--ease); }
+.ip-story-title a { color: var(--contrast); text-decoration: none; }
+.ip-story:hover .ip-story-title, .ip-story:focus-within .ip-story-title { color: var(--uga-red); }
+.ip-story-date { font-size: var(--text-sm); color: var(--contrast-3); }
+
+/* ---------- 4. Section footer band (full width, calm, on a tint) ---------- */
+.ip-band {
+  background: var(--paper); border-top: 1px solid var(--rule);
+  padding: clamp(var(--space-9), 6vw, var(--space-12)) 0;
+}
+.ip-band-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: clamp(var(--space-7), 4vw, var(--space-10));
+  align-items: start;
+}
+.ip-band-title { font-family: var(--font-serif); font-weight: 400; font-size: var(--heading-5); margin: 0 0 var(--space-4); }
+
+.ip-social { display: flex; flex-wrap: wrap; gap: var(--space-3); }
+.ip-social a {
+  width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center;
+  background: var(--base); border: 1px solid var(--rule); color: var(--contrast);
+  transition: background .2s var(--ease), color .2s var(--ease), border-color .2s var(--ease);
+}
+.ip-social a:hover { background: var(--uga-red); border-color: var(--uga-red); color: var(--base); }
+.ip-social svg { width: 20px; height: 20px; fill: currentColor; }
+
+.ip-deptlinks {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: var(--space-2) var(--space-7);
+}
+.ip-deptlinks a {
+  font-size: var(--text-sm); line-height: 1.4; color: var(--contrast); text-decoration: none;
+  display: inline-block; padding: var(--space-1) 0;
+}
+.ip-deptlinks a:hover { color: var(--uga-red); text-decoration: underline; text-underline-offset: 3px; }
+
+/* ---------- Responsive: stack the sidebar below the content ---------- */
+@media (max-width: 900px) {
+  .ip-shell { grid-template-columns: 1fr; gap: var(--space-9); }
+}
+@media (max-width: 760px) {
+  .ip-header-inner { flex-direction: column; align-items: stretch; }
+  .ip-explore-wrap { align-items: stretch; }
+  .ip-explore-up { align-items: flex-start; }
+  .ip-explore, .ip-explore .cnav-toggle { width: 100%; }
+  .ip-explore .cnav-body { left: 0; right: auto; min-width: 0; max-width: none; }
+  .ip-feed { grid-template-columns: 1fr; }
+}

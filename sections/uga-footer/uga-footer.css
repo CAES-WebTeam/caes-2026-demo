@@ -1,0 +1,162 @@
+/* UGA Standard Footer
+   Adapted from the official ugafooter component to fit our token system.
+   Width follows our --container (1240px); horizontal padding uses --gutter. */
+.ugafooter {
+  box-sizing: border-box;
+  padding: 48px 0;
+  border-width: 4px 0 0;
+  border-style: solid;
+  border-color: var(--uga-red);
+  background: var(--ugafooter-bg-img, none) #000000 center center no-repeat;
+  background-size: cover;
+  font-family: var(--font-serif);
+  font-size: var(--text-base);
+  color: #9EA2A2;
+}
+.ugafooter--no-border  { border-width: 0; }
+.ugafooter--border-white { border-color: var(--base); }
+.ugafooter--border-grey  { border-color: #554F47; }
+
+.ugafooter a { color: #9EA2A2; text-decoration: none; transition: color .15s var(--ease); }
+.ugafooter a:hover { color: var(--base); text-decoration: none; }
+
+.ugafooter-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-7);
+}
+.ugafooter-row--primary {
+  margin-bottom: var(--space-7);
+}
+
+/* Logo (left, ~5/12) */
+.ugafooter-logo {
+  display: block;
+  flex: 0 0 100%;
+  max-width: 300px;
+  height: 170px;
+  margin: 0 auto var(--space-6);
+  background: var(--ugafooter-logo-vertical, none) center center / contain no-repeat;
+  /* Hide the visible link text; the logo IS the visual */
+  font: 0 / 0 a;
+  color: transparent;
+  text-shadow: none;
+  border: 0;
+}
+@media (min-width: 768px) {
+  .ugafooter-logo {
+    flex: 0 0 41.66%;
+    max-width: 300px;
+    height: 80px;
+    margin: 0;
+    background-image: var(--ugafooter-logo, none);
+    background-position: left center;
+  }
+}
+
+/* Quick links (right, ~7/12) */
+.ugafooter-links { flex: 1 1 auto; }
+.ugafooter-links ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  text-align: center;
+  line-height: 1.5;
+}
+.ugafooter-links li {
+  flex: 0 0 50%;
+  break-inside: avoid;
+  margin: 0;
+}
+.ugafooter-links a {
+  display: block;
+  padding: 0.25em 1em;
+  font-size: var(--text-sm);
+  font-weight: 400;
+}
+@media (min-width: 768px) {
+  /* .ugafooter-links { flex: 0 0 58.33%; } */
+  .ugafooter-links ul {
+    display: block;
+    text-align: left;
+    column-count: 2;
+    column-gap: 0;
+  }
+  .ugafooter-links li { width: 100%; flex: none; }
+  .ugafooter-links a {
+    border-left: 1px solid #9EA2A2;
+    font-weight: 300;
+  }
+}
+@media (min-width: 992px) {
+  .ugafooter-links ul { column-count: 3; }
+}
+
+/* Secondary row — address + social.
+   At md+, address moves left (order: 1) and social moves right (order: 2). */
+.ugafooter-address {
+  flex: 0 0 100%;
+  text-align: center;
+  font-weight: 300;
+  font-size: var(--text-xs);
+  line-height: 1.6;
+}
+.ugafooter-tel { color: #9EA2A2; }
+
+.ugafooter-social {
+  flex: 0 0 100%;
+  margin-bottom: var(--space-5);
+  color: var(--base);
+  font-weight: 300;
+  font-size: 1.5rem;
+  text-align: center;
+}
+.ugafooter-social-label {
+  display: block;
+  margin-bottom: var(--space-2);
+  font-size: var(--text-sm);
+  letter-spacing: 0.04em;
+  color: #9EA2A2;
+}
+.ugafooter-social ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: inline-flex;
+  gap: var(--space-4);
+  align-items: center;
+}
+.ugafooter-social a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  color: #9EA2A2;
+}
+.ugafooter-social a:hover { color: var(--base); }
+
+@media (min-width: 768px) {
+  .ugafooter-row--secondary {
+    flex-wrap: nowrap;
+  }
+  .ugafooter-address {
+    flex: 0 0 41.66%;
+    text-align: left;
+    order: 1;
+  }
+  .ugafooter-social {
+    flex: 0 0 58.33%;
+    margin-bottom: 0;
+    text-align: left;
+    order: 2;
+  }
+  .ugafooter-social-label {
+    display: inline;
+    margin-right: var(--space-3);
+  }
+}

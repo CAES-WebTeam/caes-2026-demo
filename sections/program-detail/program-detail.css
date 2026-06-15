@@ -1,0 +1,299 @@
+/* ============================================================
+   PROGRAM DETAIL — v3 (Horticulture, real content)
+   Same frame as v2: wide content column on the left, slim sticky
+   rail on the right (section nav + CTAs). Tuned for breathing room —
+   roomier section rhythm, capped prose measures, and multi-column
+   lists so the wide column never reads as a dense block of text.
+   Shares _tokens.css for buttons, headings, .eyebrow, .link-arrow,
+   .card-link, and the native <details> accordion.
+   ============================================================ */
+
+.pd3 { background: var(--base); }
+/* Anchored sections clear the sticky "On this page" bar when jumped to. */
+.pd3 [id] { scroll-margin-top: 76px; }
+
+/* Preview-only chrome: let the block-shell back-link scroll away instead of
+   sticking over the page's own sticky nav. (Loads after _block-shell.css.) */
+.block-meta { position: static; }
+
+/* NOTE: the hero, coursework, paying, connect, and closing sections are
+   composed from extracted patterns — see ../detail-hero, ../phase-cards,
+   ../info-cards, ../connect, ../closing-cta. Their styles live in those files.
+   This file styles only the remaining inline sections (about, how-to-prepare,
+   hands-on, careers) plus the sticky on-page nav. */
+
+/* ---------- Sticky "On this page" bar ---------- */
+.pd3-subnav {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: var(--base);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  box-shadow: 0 2px 12px -8px rgba(0,0,0,0.25);
+}
+.pd3-subnav-inner {
+  max-width: var(--wide-width);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+}
+.pd3-subnav-label {
+  flex-shrink: 0;
+  font-family: var(--font-condensed);
+  font-weight: 600; font-size: var(--text-sm);
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--contrast-3);
+}
+.pd3-subnav ul {
+  flex: 1;
+  display: flex; align-items: center;
+  gap: var(--space-2);
+  list-style: none; margin: 0; padding: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.pd3-subnav ul::-webkit-scrollbar { display: none; }
+.pd3-subnav li { margin: 0; }
+.pd3-subnav ul a {
+  display: inline-block;
+  white-space: nowrap;
+  font-family: var(--font-condensed);
+  font-weight: 500; font-size: var(--text-sm); letter-spacing: 0.03em;
+  text-decoration: none;
+  color: var(--contrast-2);
+  padding: var(--space-5) var(--space-3);
+  border-bottom: 3px solid transparent;
+  transition: color .18s var(--ease), border-color .18s var(--ease);
+}
+.pd3-subnav ul a:hover { color: var(--uga-red); border-bottom-color: var(--uga-red); }
+.pd3-subnav ul a.is-active { color: var(--uga-red); border-bottom-color: var(--uga-red); }
+.pd3-subnav-apply {
+  flex-shrink: 0;
+  min-height: 42px;
+  padding: 10px var(--space-6);
+  font-size: var(--text-sm);
+  letter-spacing: 0.01em;
+}
+/* CollapsibleNav: the link strip (wrapped in .cnav-body) fills the bar between
+   the label and Apply on desktop; on mobile a .cnav-toggle fills it (see the
+   media query, where the strip becomes a dropdown panel). */
+.pd3-subnav .cnav-body { flex: 1; min-width: 0; }
+.pd3-subnav .cnav-toggle { flex: 1; padding: var(--space-4) 0; }
+
+/* ---------- Content: full-width sections, centered inner ---------- */
+.pd3-content { width: 100%; }
+.pd3-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+/* ---------- Content sections — roomy, separated by background ---------- */
+.pd3-section { padding: clamp(var(--space-11), 6.5vw, var(--space-16)) 0; }
+.pd3-section--tint { background: var(--paper); }
+.pd3-intro {
+  font-size: var(--text-lg);
+  color: var(--contrast);
+  line-height: 1.6;
+  margin: 0 0 var(--space-7);
+  max-width: 66ch;
+}
+.pd3-sub {
+  font-family: var(--font-condensed);
+  font-weight: 600;
+  font-size: var(--heading-5);
+  letter-spacing: 0.02em;
+  margin: 0 0 var(--space-5);
+  color: var(--contrast);
+}
+.pd3-sub-spaced { margin-top: clamp(var(--space-9), 5vw, var(--space-11)); }
+
+/* Photo placed below the text it accompanies — contained to the column,
+   landscape band height so it never dominates. */
+.pd3-section-fig { margin: clamp(var(--space-7), 4vw, var(--space-9)) 0 0; overflow: hidden; }
+.pd3-section-fig img {
+  width: 100%;
+  height: clamp(260px, 30vw, 400px);
+  object-fit: cover;
+  display: block;
+}
+.pd3-section-fig figcaption {
+  font-size: var(--text-xs);
+  color: var(--contrast-3);
+  margin-top: var(--space-3);
+  line-height: 1.5;
+}
+
+/* About prose + pullquote */
+.pd3-prose { max-width: 60ch; }
+.pd3-prose p { line-height: 1.7; color: var(--contrast); margin-bottom: var(--space-5); }
+.pd3-pull {
+  margin: var(--space-7) 0 0;
+  padding: var(--space-2) 0 var(--space-2) var(--space-6);
+  border-left: 3px solid var(--uga-red);
+  font-family: var(--font-serif);
+  font-size: var(--heading-4);
+  line-height: 1.3;
+  font-style: italic;
+  color: var(--contrast);
+}
+
+/* Prepare cards */
+.pd3-prep-grid {
+  list-style: none; margin: 0; padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+}
+.pd3-prep-card {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  padding: clamp(var(--space-6), 3vw, var(--space-7));
+  margin: 0;
+  display: flex; flex-direction: column; gap: var(--space-4);
+}
+.pd3-prep-num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: var(--uga-red-tint);
+  color: var(--uga-red);
+  font-family: var(--font-condensed);
+  font-size: 1.25rem;
+}
+.pd3-prep-card p { margin: 0; color: var(--contrast); line-height: 1.6; }
+
+/* Hands-on checklist */
+.pd3-checklist {
+  list-style: none; margin: 0; padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-5) clamp(var(--space-8), 5vw, var(--space-12));
+}
+.pd3-checklist li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-3);
+  align-items: start;
+  margin: 0;
+  color: var(--contrast);
+  line-height: 1.55;
+}
+.pd3-check {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  background: var(--uga-red);
+  color: var(--base);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.pd3-check svg { width: 15px; height: 15px; }
+
+/* Careers — job list */
+.pd3-jobs {
+  list-style: none; margin: 0 0 var(--space-4); padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: var(--space-3) clamp(var(--space-7), 4vw, var(--space-10));
+}
+.pd3-jobs li {
+  display: flex; align-items: baseline; gap: var(--space-3);
+  margin: 0;
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--rule);
+  color: var(--contrast);
+  line-height: 1.45;
+}
+.pd3-job-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--uga-red);
+  flex-shrink: 0;
+  transform: translateY(-2px);
+}
+
+/* Careers — outcome bars */
+.pd3-outcomes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(var(--space-6), 3vw, var(--space-9));
+  margin-bottom: var(--space-6);
+}
+.pd3-outcome { display: flex; flex-direction: column; gap: var(--space-3); }
+.pd3-outcome-num {
+  font-family: var(--font-serif);
+  font-size: var(--heading-1);
+  line-height: 1;
+  color: var(--uga-red);
+}
+.pd3-outcome-bar {
+  display: block;
+  height: 8px;
+  background: var(--paper-2);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.pd3-outcome-bar > span {
+  display: block;
+  height: 100%;
+  background: var(--uga-red);
+  border-radius: 999px;
+}
+.pd3-outcome-label {
+  font-family: var(--font-condensed);
+  font-weight: 500;
+  font-size: var(--text-sm);
+  color: var(--contrast-2);
+}
+.pd3-footnote { font-size: var(--text-sm); color: var(--contrast-3); line-height: 1.6; margin: 0; max-width: 70ch; }
+.pd3-footnote-link { font-size: var(--text-sm); }
+
+/* (Paying, Connect, and Closing styles live in the extracted patterns:
+   ../info-cards, ../connect, ../closing-cta.) */
+
+/* ============================================================
+   RESPONSIVE  (only the inline sections + sticky nav; the composed
+   patterns carry their own responsive rules in their own files)
+   ============================================================ */
+@media (max-width: 900px) {
+  .pd3-prep-grid { grid-template-columns: 1fr; }
+  .pd3-subnav-label { display: none; }
+}
+
+/* On smaller screens the strip collapses to a disclosure: a full-width toggle
+   shows the current section; tapping drops the list as a panel below the bar.
+   The in-bar Apply is dropped — the hero + closing CTAs cover it. */
+@media (max-width: 760px) {
+  .pd3-subnav-apply { display: none; }
+  .pd3-subnav-inner { position: relative; }
+  .pd3-subnav .cnav-body { flex: 0; }
+  .pd3-subnav ul {
+    position: absolute; top: 100%; left: 0; right: 0;
+    flex-direction: column; align-items: stretch; gap: 0;
+    background: var(--base);
+    border-bottom: 1px solid var(--rule);
+    box-shadow: 0 16px 24px -16px rgba(0,0,0,0.3);
+    max-height: 70vh; overflow-y: auto;
+    z-index: 5;
+  }
+  .pd3-subnav ul a {
+    display: block; white-space: normal;
+    padding: var(--space-4) var(--gutter);
+    border-top: 1px solid var(--rule); border-bottom: 0;
+    border-left: 3px solid transparent;
+  }
+  .pd3-subnav li:first-child a { border-top: 0; }
+  .pd3-subnav ul a:hover { border-bottom-color: transparent; }
+  .pd3-subnav ul a.is-active {
+    border-bottom-color: transparent; border-left-color: var(--uga-red);
+    font-weight: 700; background: var(--paper);
+  }
+}
+
+@media (max-width: 640px) {
+  .pd3-checklist,
+  .pd3-outcomes { grid-template-columns: 1fr; }
+}

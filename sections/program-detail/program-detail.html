@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Page — Program Detail (Horticulture)</title>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&family=Archivo+Narrow:wght@500;600;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../_tokens.css" />
+<link rel="stylesheet" href="../_block-shell.css" />
+
+<!-- Page chrome (nav + footers) — same CSS files the standalone blocks use -->
+<link rel="stylesheet" href="../uga-global-bar/uga-global-bar.css" />
+<link rel="stylesheet" href="../top-nav/top-nav.css" />
+<link rel="stylesheet" href="../caes-footer/caes-footer.css" />
+<link rel="stylesheet" href="../uga-footer/uga-footer.css" />
+
+<!-- Extracted section patterns this page composes -->
+<link rel="stylesheet" href="../detail-hero/detail-hero.css" />
+<link rel="stylesheet" href="../phase-cards/phase-cards.css" />
+<link rel="stylesheet" href="../info-cards/info-cards.css" />
+<link rel="stylesheet" href="../faq/faq.css" />
+<link rel="stylesheet" href="../connect/connect.css" />
+<link rel="stylesheet" href="../closing-cta/closing-cta.css" />
+
+<!-- This page (remaining inline sections: about, prepare, hands-on, careers + subnav) -->
+<link rel="stylesheet" href="program-detail.css" />
+</head>
+<body>
+<!--
+<div class="block-meta">
+  <div><strong>Page</strong> program-detail — Horticulture</div>
+  <a href="../index.html">← All sections</a>
+</div>
+-->
+
+<a class="sr-only" href="#main">Skip to main content</a>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<!-- Shared helpers (IMG, LogoMark, Brand) -->
+<script type="text/babel" src="../_shared.jsx"></script>
+
+<!-- Page chrome components -->
+<script type="text/babel" src="../uga-global-bar/uga-global-bar.jsx"></script>
+<script type="text/babel" src="../top-nav/top-nav.jsx"></script>
+<script type="text/babel" src="../caes-footer/caes-footer.jsx"></script>
+<script type="text/babel" src="../uga-footer/uga-footer.jsx"></script>
+
+<!-- Extracted section pattern components -->
+<script type="text/babel" src="../detail-hero/detail-hero.jsx"></script>
+<script type="text/babel" src="../phase-cards/phase-cards.jsx"></script>
+<script type="text/babel" src="../info-cards/info-cards.jsx"></script>
+<script type="text/babel" src="../faq/faq.jsx"></script>
+<script type="text/babel" src="../connect/connect.jsx"></script>
+<script type="text/babel" src="../closing-cta/closing-cta.jsx"></script>
+
+<!-- This page -->
+<script type="text/babel" src="program-detail.jsx"></script>
+<script type="text/babel">
+  function ProgramDetailRoute() {
+    return (
+      <>
+        <header className="site-header" role="banner">
+          <UGAGlobalBar />
+          <TopNav />
+        </header>
+        <ProgramDetailPage />
+        <CaesFooter />
+        <UgaFooter />
+      </>
+    );
+  }
+  ReactDOM.createRoot(document.getElementById("root")).render(<ProgramDetailRoute />);
+</script>
+</body>
+</html>

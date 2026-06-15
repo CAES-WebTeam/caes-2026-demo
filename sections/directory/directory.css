@@ -1,0 +1,176 @@
+/* ============================================================
+   PERSONNEL DIRECTORY — shared styles for both iterations.
+   Reuses programs.css for the search field, filter pills, chips, and
+   filter modal. This file adds the page scaffold, the person card
+   (image-less link card), and the sidebar facet panel.
+   ============================================================ */
+
+.dir { background: var(--base); }
+
+/* ---------- Hero / breadcrumb ---------- */
+.dir-hero { padding: clamp(var(--space-9), 6vw, var(--space-12)) 0 var(--space-7); }
+.dir-breadcrumb {
+  display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2);
+  font-family: var(--font-condensed); font-size: var(--text-sm);
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--contrast-3); margin-bottom: var(--space-5);
+}
+.dir-breadcrumb a { color: inherit; text-decoration: none; }
+.dir-breadcrumb a:hover { color: var(--uga-red); text-decoration: underline; text-underline-offset: 3px; }
+.dir-breadcrumb span[aria-hidden] { opacity: 1; }
+.dir-breadcrumb [aria-current] { color: var(--contrast); }
+.dir-hero h1 { margin: 0 0 var(--space-4); }
+.dir-lead { font-size: var(--text-lg); color: var(--contrast); max-width: 60ch; margin: 0; line-height: 1.55; }
+
+/* ---------- Top controls (iteration 1) ---------- */
+.dir-controls { padding-bottom: var(--space-6); }
+.dir-controls .programs-search { margin-bottom: var(--space-4); }
+.programs-filter-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+/* ---------- Result row ---------- */
+.dir-result-row {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: var(--space-4); flex-wrap: wrap;
+  padding: var(--space-5) 0;
+  border-top: 1px solid var(--rule);
+}
+.dir-count { font-size: var(--text-sm); color: var(--contrast-2); }
+.dir-count strong { color: var(--contrast); }
+
+/* ---------- Person grid + card (image-less link card) ---------- */
+.dir-grid {
+  list-style: none; margin: 0 0 var(--space-12); padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: var(--space-5);
+}
+.dir-grid > li { margin: 0; }
+.dir-card {
+  position: relative;
+  display: flex; flex-direction: column; gap: var(--space-1);
+  height: 100%;
+  background: var(--base);
+  border: 1px solid var(--rule);
+  padding: var(--space-6);
+  color: var(--contrast);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  transition: box-shadow .2s var(--ease);
+}
+/* Only the name is a real link (clean accessible name for SR/keyboard). */
+.dir-name a { color: inherit; text-decoration: none; }
+/* Stretch the name's link over the whole card for mouse users. */
+.dir-name a::after { content: ""; position: absolute; inset: 0; }
+.dir-card::before {
+  content: ""; position: absolute; top: 0; left: 0;
+  width: 100%; height: 3px;
+  background: var(--uga-red);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform .25s var(--ease);
+}
+.dir-card:hover, .dir-card:focus-within { box-shadow: var(--shadow-card-hover); }
+.dir-card:hover::before, .dir-card:focus-within::before { transform: scaleX(1); }
+.dir-avatar { position: relative; width: 64px; height: 64px; border-radius: 50%; overflow: hidden; background: var(--uga-red-tint); margin-bottom: var(--space-3); }
+.dir-initials {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-condensed); font-weight: 600; font-size: 20px;
+  color: var(--uga-red);
+}
+.dir-avatar img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s var(--ease); }
+.dir-card:hover .dir-avatar img, .dir-card:focus-within .dir-avatar img { transform: scale(1.08); }
+.dir-name { font-family: var(--font-serif); font-weight: 400; font-size: var(--heading-5); line-height: 1.15; margin: 0; color: var(--contrast); transition: color .15s var(--ease); }
+.dir-card:hover .dir-name, .dir-card:focus-within .dir-name { color: var(--uga-red); }
+.dir-title { font-weight: 600; font-size: var(--text-sm); color: var(--contrast); margin: 0; line-height: 1.4; }
+.dir-meta { font-size: var(--text-sm); color: var(--contrast-3); margin: 0; line-height: 1.45; }
+
+.dir-empty { padding: var(--space-10) 0; text-align: center; }
+.dir-empty h3 { margin: 0 0 var(--space-3); }
+.dir-empty p { color: var(--contrast-3); margin: 0 0 var(--space-5); }
+
+/* ---------- Pagination ---------- */
+.dir-pager { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); margin: var(--space-8) 0 var(--space-12); }
+.dir-pager-btn, .dir-pager-num {
+  font-family: var(--font-condensed); font-size: var(--text-sm);
+  min-height: 40px; min-width: 40px; padding: 0 var(--space-3);
+  border: 1px solid var(--rule); background: var(--base); color: var(--contrast);
+  cursor: pointer; transition: border-color .15s var(--ease), color .15s var(--ease);
+}
+.dir-pager-btn { padding: 0 var(--space-4); }
+.dir-pager-num.is-current { background: var(--uga-red); color: var(--base); border-color: var(--uga-red); cursor: default; }
+.dir-pager-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+.dir-pager-btn:hover:not(:disabled), .dir-pager-num:hover:not(.is-current) { border-color: var(--uga-red); color: var(--uga-red); }
+
+/* ---------- Sidebar layout (iteration 2) ---------- */
+.dir-shell {
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr);
+  gap: clamp(var(--space-7), 4vw, var(--space-11));
+  align-items: start;
+  padding-bottom: var(--space-12);
+}
+.dir-sidebar-inner { position: sticky; top: var(--space-6); }
+
+/* Mobile-only "Filters" toggle — hidden on desktop, where the rail is always shown. */
+.dir-filter-toggle { display: none; }
+.dir-sidebar .programs-search { margin-bottom: var(--space-5); }
+/* Trim the reused search field so it fits the narrow sidebar. */
+.dir-sidebar .programs-search-icon { width: 18px; height: 18px; margin: 0 var(--space-2) 0 var(--space-3); }
+.dir-sidebar .programs-search input { font-size: var(--text-sm); padding: var(--space-3) var(--space-2); }
+.dir-sidebar-head {
+  display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-3);
+  margin-bottom: var(--space-2);
+}
+.dir-sidebar-head h2 {
+  font-family: var(--font-condensed); font-weight: 700;
+  font-size: var(--text-sm); letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--contrast); margin: 0;
+}
+.dir-clear {
+  font-family: var(--font-condensed); font-size: var(--text-sm); letter-spacing: 0.04em;
+  color: var(--uga-red); background: none; border: 0; cursor: pointer; padding: 0;
+}
+.dir-clear:hover { text-decoration: underline; }
+
+.dir-facet { border-top: 1px solid var(--rule); }
+.dir-facet-btn {
+  display: flex; width: 100%; align-items: center; justify-content: space-between;
+  gap: var(--space-3); padding: var(--space-4) 0;
+  background: none; border: 0; cursor: pointer; text-align: left;
+  font-family: var(--font-condensed); font-weight: 600; font-size: var(--text-sm);
+  letter-spacing: 0.04em; color: var(--contrast);
+}
+.dir-facet-btn:hover { color: var(--uga-red); }
+.dir-facet-icon { color: var(--uga-red); font-size: 1.25rem; line-height: 1; flex-shrink: 0; }
+.dir-facet-count { color: var(--uga-red); font-size: var(--text-sm); margin-left: auto; margin-right: var(--space-3); }
+.dir-facet-empty { font-size: var(--text-sm); color: var(--contrast-3); margin: 0; padding: 0 0 var(--space-4); }
+.dir-facet-body {
+  padding: 0 0 var(--space-4);
+  display: flex; flex-direction: column; gap: var(--space-3);
+  max-height: 260px; overflow-y: auto;
+}
+.dir-check { display: flex; align-items: flex-start; gap: var(--space-3); cursor: pointer; font-size: var(--text-sm); line-height: 1.4; color: var(--contrast-2); }
+.dir-check input { margin: 2px 0 0; width: 16px; height: 16px; accent-color: var(--uga-red); flex-shrink: 0; }
+.dir-check-label { flex: 1; min-width: 0; }
+.dir-check-count { flex: 0 0 auto; color: var(--contrast-3); font-size: var(--text-sm); margin-left: var(--space-2); }
+
+@media (max-width: 860px) {
+  .dir-shell { grid-template-columns: 1fr; gap: var(--space-7); }
+  .dir-sidebar-inner { position: static; }
+  .dir-facet-body { max-height: none; }
+
+  /* Collapse the whole filter rail behind a toggle. */
+  .dir-filter-toggle {
+    display: flex; align-items: center; justify-content: space-between; gap: var(--space-3);
+    width: 100%;
+    padding: var(--space-4) var(--space-5);
+    background: var(--base); border: 1px solid var(--rule);
+    font-family: var(--font-condensed); font-weight: 600; font-size: var(--text-sm);
+    letter-spacing: 0.04em; color: var(--contrast); cursor: pointer;
+  }
+  .dir-filter-toggle:hover { border-color: var(--uga-red); color: var(--uga-red); }
+  .dir-filter-toggle-icon { color: var(--uga-red); font-size: 1.4rem; line-height: 1; }
+  /* Search stays visible; only the facet groups collapse. */
+  .dir-facets { display: none; }
+  .dir-facets.is-open { display: block; margin-top: var(--space-5); }
+}

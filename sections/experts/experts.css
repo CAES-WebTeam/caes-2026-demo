@@ -1,0 +1,57 @@
+/* ============================================================
+   PAGE — Our Experts
+   Expertise-first companion to the directory. Reuses the degree-programs
+   controls/modal chrome (programs.css); this file styles the expert avatar,
+   expertise tags, and the three result layouts (list / profile / spotlight).
+   ============================================================ */
+.experts { background: var(--base); }
+
+/* ----- Shared: avatar + expertise tags ----- */
+.exp-avatar {
+  position: relative; width: 56px; height: 56px; flex-shrink: 0;
+  border-radius: 50%; overflow: hidden; background: var(--uga-red-tint);
+}
+.exp-initials {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-condensed); font-weight: 600; font-size: 18px; color: var(--uga-red);
+}
+.exp-avatar img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s var(--ease); }
+
+.exp-tags { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.exp-tag {
+  font-family: var(--font-condensed); font-size: var(--text-sm); line-height: 1.2;
+  color: var(--contrast-2); background: var(--paper-2);
+  padding: 3px var(--space-2); border-radius: 2px;
+}
+.exp-tag--more { color: var(--contrast-3); background: transparent; padding-left: 0; }
+
+/* =========================================================
+   List rows (dense, scannable; expertise trails)
+   ========================================================= */
+.exp-list { list-style: none; margin: 0; padding: 0; }
+.exp-row {
+  position: relative;
+  display: grid; grid-template-columns: 56px minmax(0, 1.1fr) minmax(0, 1.2fr);
+  gap: var(--space-5); align-items: center;
+  padding: var(--space-5) var(--space-4);
+  border-bottom: 1px solid var(--rule);
+  transition: background .15s var(--ease);
+  margin: 0;
+}
+.exp-row:first-child { border-top: 1px solid var(--rule); }
+.exp-row:hover, .exp-row:focus-within { background: var(--paper); }
+.exp-row:hover .exp-avatar img, .exp-row:focus-within .exp-avatar img { transform: scale(1.08); }
+.exp-row-main { min-width: 0; }
+.exp-row-name { font-family: var(--font-serif); font-weight: 400; font-size: var(--heading-5); line-height: 1.15; margin: 0; color: var(--contrast); transition: color .15s var(--ease); }
+.exp-row-name a { color: inherit; text-decoration: none; }
+.exp-row:hover .exp-row-name, .exp-row:focus-within .exp-row-name { color: var(--uga-red); }
+.exp-row-meta { font-size: var(--text-sm); color: var(--contrast-3); margin: 2px 0 0; line-height: 1.4; }
+.exp-row-tags { justify-content: flex-start; }
+
+/* ----- Responsive ----- */
+@media (max-width: 640px) {
+  .exp-row { grid-template-columns: 48px minmax(0, 1fr); grid-template-areas: "avatar main" "tags tags"; row-gap: var(--space-3); }
+  .exp-row-avatar { grid-area: avatar; }
+  .exp-row-main { grid-area: main; }
+  .exp-row-tags { grid-area: tags; }
+}

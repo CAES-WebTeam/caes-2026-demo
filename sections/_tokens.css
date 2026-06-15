@@ -1,0 +1,631 @@
+/* ============================================================
+   DESIGN TOKENS — single source of truth for the CAES site
+   Imported by every block + the composed homepage.
+   ============================================================ */
+:root {
+  /* ---- UGA Primary palette ----
+     Black & white aren't separate tokens — use --contrast (near-black) and
+     --base (white) from the neutrals below. */
+  --uga-red:   #BA0C2F;          /* Bulldog Red */
+
+  /* ---- UGA Accent palette (use sparingly — max 20% of design) ---- */
+  --uga-glory:        #E4002B;   /* Glory Glory — brighter red accent */
+  --uga-lake-herrick: #00A3AD;   /* teal */
+  --uga-olympic:      #004E60;   /* deep teal */
+  --uga-hedges:       #B4BD00;   /* yellow-green */
+
+  /* ---- UGA Neutrals ---- */
+  --uga-sanford:   #554F47;      /* warm dark gray */
+  --uga-stegeman:  #9EA2A2;      /* medium gray */
+  --uga-creamery:  #D6D2C4;      /* warm cream */
+  --uga-odyssey:   #C8D8EB;      /* cool light blue */
+
+  /* ---- Custom shades (not in UGA palette; design-system tints) ---- */
+  --uga-red-deep: #8E0822;       /* darker red — button hover state */
+  --uga-red-tint: #f5dde2;       /* very light red — backgrounds */
+
+  /* Working neutrals — site palette.
+     --base is pure white; --paper / --paper-2 are warm off-whites used for
+     tinted bands, insets, and thumbnails; --contrast scale + hairline --rule. */
+  --base:    #FFFFFF;   /* primary surface — pure white */
+  --paper:   #F5F5F5;   /* warm off-white — tinted section bands */
+  --paper-2: #EDEDED;   /* deeper warm off-white — insets, thumbs */
+  --contrast: #000000;
+  --contrast-2: #3a3a3a;
+  --contrast-3: #6b6b6b;
+  --rule: #e2dfdf;
+
+  /* Type stack */
+  --font-serif: Georgia, "Times New Roman", serif;
+  --font-sans: "Merriweather", Georgia, serif;
+  --font-condensed: "Oswald", sans-serif;
+
+  /* Text sizes — running text: body, ledes, captions, labels. (1rem ≈ 17px here) */
+  --text-xs:   0.8125rem;                          /* ~14px — captions, labels, fine print */
+  --text-sm:   0.9375rem;                          /* ~16px — small text */
+  --text-base: 1rem;                               /* ~17px — body default */
+  --text-lg:   clamp(1.0625rem, 1.4vw, 1.25rem);   /* ~18–21px — lede / intro copy */
+
+  /* Heading sizes — responsive display type for h1–h6 and section headers.
+     Each fluidly clamps up a major-third (1.25) modular scale. */
+  --heading-6: 0.875rem;                            /* ~15px — eyebrow-scale cap */
+  --heading-5: clamp(1rem, 2vw, 1.563rem);          /* ~17–27px */
+  --heading-4: clamp(1.25rem, 2.6vw, 1.953rem);     /* ~21–33px */
+  --heading-3: clamp(1.563rem, 3.2vw, 2.441rem);    /* ~27–41px */
+  --heading-2: clamp(1.953rem, 4vw, 3.052rem);      /* ~33–52px */
+  --heading-1: clamp(2.441rem, 5vw, 3.815rem);      /* ~41–65px */
+  --heading-display: clamp(3.052rem, 6vw, 4.768rem);/* ~52–81px — hero / closing CTA */
+
+  /* Layout — three-tier widths that map to WP block-theme alignments.
+     Use --content-width for prose & section-heading wrappers (default block alignment),
+     --wide-width for body sections like grids and cards (align="wide"),
+     and no max-width for full-bleed (align="full"). */
+  --content-width: 720px;
+  --wide-width: 1400px;
+  --container: var(--wide-width);      /* legacy alias — prefer --wide-width */
+  --gutter: clamp(20px, 4vw, 56px);
+
+  /* Image aspect ratios */
+  --ratio-landscape: 3/2;
+  --ratio-square: 1/1;
+  --ratio-portrait: 4/5;
+
+  /* Spacing scale — relative units (1rem ≈ 17px here).
+     Use for padding, margin, and gap. Numeric scale in 0.25rem steps,
+     coarsening at the top end. Pick the closest step to your intent. */
+  --space-1:  0.25rem;  /*  ~4px */
+  --space-2:  0.5rem;   /*  ~8px */
+  --space-3:  0.75rem;  /* ~12px */
+  --space-4:  1rem;     /* ~16px — covers 14–18px */
+  --space-5:  1.25rem;  /* ~20px — covers 20–22px */
+  --space-6:  1.5rem;   /* ~24px — covers 24–26px */
+  --space-7:  1.75rem;  /* ~28px */
+  --space-8:  2rem;     /* ~32px — covers 32–36px */
+  --space-9:  2.5rem;   /* ~40px */
+  --space-10: 3rem;     /* ~48px */
+  --space-11: 3.5rem;   /* ~56px */
+  --space-12: 4rem;     /* ~64–72px */
+  --space-14: 5rem;     /* ~80px */
+  --space-16: 8rem;     /* ~128px */
+
+  /* Motion */
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  /* Let size keyword (auto/0) transitions interpolate — powers the accordion
+     and <details> open/close animations. Ignored where unsupported. */
+  interpolate-size: allow-keywords;
+
+  /* Elevation — card depth. Cards rest at --shadow-card and deepen to
+     --shadow-card-hover on hover/focus (no lift). */
+  --shadow-card:       rgba(50, 50, 93, 0.12) 0px 18px 40px -18px, rgba(0, 0, 0, 0.16) 0px 10px 24px -16px;
+  --shadow-card-hover: rgba(50, 50, 93, 0.2) 0px 26px 52px -18px, rgba(0, 0, 0, 0.24) 0px 14px 30px -16px;
+
+  /* Texture (used on body + selected sections) */
+  --dot-bg: radial-gradient(circle at 1px 1px, rgba(0,0,0,0.06) 1px, transparent 0);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0; padding: 0;
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--contrast);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--paper);
+  background-image: var(--dot-bg);
+  background-size: 18px 18px;
+}
+
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; }
+button { font-family: inherit; cursor: pointer; border: 0; background: none; color: inherit; }
+
+/* ----- Standard headings -----
+   Sane defaults for h1–h6. h1 stays serif for display weight; h2–h6 use the
+   condensed sans. For section openers use the Section header pattern below
+   (.section-kicker heading + .section-display + .section-lede), not a bare h2. */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 400;
+  line-height: 1.2;
+  margin: 0;
+  color: var(--contrast);
+  text-wrap: balance;
+}
+h1 {
+  font-family: var(--font-serif);
+  font-size: var(--heading-1);
+  letter-spacing: -0.01em;
+  margin-bottom: var(--space-7);
+}
+h2, h3, h4, h5, h6 {
+  font-family: var(--font-condensed);
+  font-weight: 500;
+}
+h2 {
+  font-size: var(--heading-2);
+  letter-spacing: 0.01em;
+  margin-bottom: var(--space-6);
+}
+h3 { font-size: var(--heading-3); margin-bottom: var(--space-5); }
+h4 { font-size: var(--heading-4); margin-bottom: var(--space-4); }
+h5 { font-size: var(--heading-5); margin-bottom: var(--space-4); }
+h6 {
+  font-size: var(--heading-6);
+  font-weight: 600;
+  margin-bottom: var(--space-3);
+}
+
+:focus-visible {
+  outline: 3px solid var(--uga-olympic);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+  /* Inherit the surrounding text color so visually-hidden content never forces
+     a failing pair (e.g. the global h2 black landing on a dark footer). The
+     clip hides it regardless; this just keeps contrast checkers happy. */
+  color: inherit;
+}
+
+/* ----- CollapsibleNav (shared) — structure only; each nav skins .cnav-toggle.
+   See window.CollapsibleNav in _shared.jsx. */
+.cnav-toggle {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--space-3);
+  width: 100%; text-align: left;
+  background: none; border: 0; cursor: pointer; font-family: inherit; color: inherit;
+}
+.cnav-toggle-cap {
+  display: block; font-family: var(--font-condensed); font-weight: 700; font-size: 11px;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--contrast-3);
+}
+.cnav-toggle-cur { font-family: var(--font-condensed); font-weight: 600; font-size: var(--text-base); color: var(--uga-red); }
+.cnav-chev { color: var(--uga-red); flex-shrink: 0; transition: transform .2s var(--ease); }
+.cnav-toggle[aria-expanded="true"] .cnav-chev { transform: rotate(180deg); }
+
+/* ----- Background utility -----
+   Warm off-white base + low-opacity dot texture. Apply to any section that
+   should sit on the textured palette instead of solid paper. */
+.bg-dotted {
+  background-color: var(--paper);
+  background-image: var(--dot-bg);
+  background-size: 18px 18px;
+}
+
+/* ----- Faded header photo -----
+   A decorative image that rides the right edge of a page header and dissolves
+   into the band on its left, so the header copy stays legible over it.
+   Background-agnostic: the mask fades the image to transparent, revealing
+   whatever band sits behind it (dark hero, light interior header, …).
+   Usage:
+     • Host header gets `has-header-photo` (positioning + clipping context).
+     • First child is `<div class="header-photo" aria-hidden="true"><img …></div>`;
+       remaining children are lifted above it automatically.
+     • Tune per background on the host with the --header-photo-* vars below —
+       a paler band needs a longer fade so the image's edge doesn't show. */
+.has-header-photo { position: relative; overflow: hidden; }
+.has-header-photo > :not(.header-photo) { position: relative; z-index: 1; }
+.header-photo {
+  position: absolute; top: 0; right: 0; bottom: 0;
+  width: var(--header-photo-w, 46%); max-width: var(--header-photo-max, 680px);
+  z-index: 0; pointer-events: none;
+}
+.header-photo img {
+  width: 100%; height: 100%; object-fit: cover;
+  /* Fade to transparent on the LEFT edge only; top/bottom are hard cuts. */
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 var(--header-photo-fade, 40%));
+          mask-image: linear-gradient(to right, transparent 0%, #000 var(--header-photo-fade, 40%));
+}
+@media (max-width: 900px) { .header-photo { width: var(--header-photo-w-md, 40%); } }
+@media (max-width: 680px) { .header-photo { display: none; } }
+
+/* ----- Card link (accessible "stretched link") -----
+   Wrap <a class="card-link"> around ONLY the card's title. Give the card
+   container `position: relative`. The link's ::after expands to cover the whole
+   card, so the entire card is clickable while a screen reader announces just the
+   title (not a wall of text). Requirements:
+     • The card container is the nearest positioned ancestor — don't set
+       position: relative on intermediate wrappers between title and card.
+     • Style hover/focus on the card container, using :hover and :focus-within.
+     • Any genuinely separate interactive element inside the card (a second
+       link, a button) must set position: relative; z-index: 2 to sit above
+       the overlay; plain decorative spans can stay underneath. */
+.card-link { text-decoration: none; color: inherit; }
+.card-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+/* ----- Shared utilities -----
+   .container-content → reading width (prose, section heading wrappers)
+   .container         → wide width (default for body sections — grids, cards)
+   .wide-width    → extra-wide chrome (nav only); avoid for body content. */
+.container-content { width: 100%; max-width: var(--content-width); margin: 0 auto; padding: 0 var(--gutter); }
+.container         { width: 100%; max-width: var(--wide-width);    margin: 0 auto; padding: 0 var(--gutter); }
+.wide-width    { width: 100%; max-width: var(--wide-width); margin: 0 auto; padding: 0 var(--gutter); }
+
+/* Section label — applied to an <h2> at the top of each section. */
+.eyebrow {
+  font-family: var(--font-condensed);
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: var(--text-sm);
+  line-height: 1.4;
+  color: var(--contrast);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin: 0;
+}
+.eyebrow::before {
+  content: "";
+  width: 4px; height: 18px;
+  background: var(--uga-red);
+}
+
+/* Editorial display tagline — applied to a <p> beneath the section's h2.eyebrow.
+   <em> here gets the red italic emphasis treatment by design. */
+.section-lead {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: var(--heading-2);
+  letter-spacing: -0.01em;
+  line-height: 1.05;
+  text-wrap: balance;
+  margin: 0;
+  color: var(--contrast);
+}
+.section-lead em {
+  font-style: italic;
+  color: var(--uga-red);
+  font-weight: 400;
+}
+
+/* ----- Section header (descriptive heading + editorial lede) -----
+   The accessible section-opener pattern. The SHORT, DESCRIPTIVE label is the
+   real heading — .section-kicker on the section's <h2>. The editorial flourish
+   follows as a <p class="section-display">, and any intro copy as
+   <p class="section-lede">:
+
+     <h2 class="section-kicker">About this major</h2>
+     <p class="section-display">Horticulture is everywhere.</p>
+     <p class="section-lede">Sustainably growing fruits, vegetables…</p>
+
+   This keeps the heading outline meaningful — the kicker names what the section
+   IS — instead of the older approach, which stranded a label <span class="eyebrow">
+   before an editorial display <h2> (the label was lost to heading navigation and
+   read as orphan text). The eyebrow span survives only for page heroes, where the
+   <h1> is already the descriptive title. */
+.section-kicker {
+  font-family: var(--font-condensed);
+  font-weight: 600;
+  font-size: var(--text-base);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height: 1.3;
+  color: var(--uga-red);
+  margin: 0 0 var(--space-4);
+}
+.section-display {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: var(--heading-3);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+  color: var(--contrast);
+  margin: 0 0 var(--space-6);
+}
+.section-display em { font-style: italic; color: var(--uga-red); }
+.section-lede {
+  font-size: var(--text-lg);
+  line-height: 1.6;
+  color: var(--contrast);
+  margin: 0 0 var(--space-7);
+  max-width: 66ch;
+}
+
+/* Legacy hero display — used by the page <h1>. */
+.h-display {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.05;
+  text-wrap: balance;
+}
+
+.red-rule {
+  width: 56px; height: 2px;
+  background: var(--uga-red);
+  border: 0;
+  margin: var(--space-4) 0 var(--space-5);
+}
+
+/* ----- Buttons (red-outline pill) ----- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: var(--text-sm);
+  padding: 13px var(--space-6);
+  border-radius: 999px;
+  text-decoration: none;
+  transition: background .2s var(--ease), color .2s var(--ease), border-color .2s var(--ease);
+  min-height: 44px;
+  border: 1.5px solid var(--uga-red);
+  color: var(--uga-red);
+  background: transparent;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.btn:hover { background: var(--uga-red); color: var(--base); }
+.btn-filled { background: var(--uga-red); color: var(--base); }
+.btn-filled:hover { background: var(--uga-red-deep); border-color: var(--uga-red-deep); }
+.btn-white { background: var(--base); color: var(--uga-red); border-color: var(--base); }
+.btn-white:hover { background: transparent; color: var(--base); border-color: var(--base); }
+.btn-outline-white { background: transparent; color: var(--base); border-color: var(--base); }
+.btn-outline-white:hover { background: var(--base); color: var(--uga-red); }
+
+.link-arrow {
+  display: inline-flex; align-items: center; gap: 6px;
+  text-decoration: none;
+  color: var(--uga-red);
+  font-weight: 600;
+  font-size: var(--text-sm);
+}
+.link-arrow:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+/* Brand block — wraps the official CAES lockup SVG */
+.brand {
+  display: inline-flex; align-items: center;
+  text-decoration: none; color: inherit;
+  flex-shrink: 0;
+}
+.brand img { display: block; }
+/* In the hero card, the lockup sits at a slightly larger scale */
+.hero-card-top .brand img { height: 64px; }
+
+/* ============================================================
+   WP CORE TEXT BLOCKS — design-system styling for editor blocks
+   ============================================================ */
+
+/* Paragraph — uses body defaults; provide bottom rhythm */
+p { margin: 0 0 var(--space-5); }
+p:last-child { margin-bottom: 0; }
+
+/* Inline code */
+:not(pre) > code {
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.9em;
+  background: var(--paper-2);
+  padding: 0.1em 0.35em;
+  border-radius: 3px;
+  color: var(--contrast);
+}
+
+/* Preformatted (Preformatted block) */
+pre {
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  font-size: var(--text-sm);
+  line-height: 1.55;
+  background: var(--paper-2);
+  border-left: 3px solid var(--uga-red);
+  padding: var(--space-5) var(--space-6);
+  margin: 0 0 var(--space-6);
+  overflow-x: auto;
+  white-space: pre-wrap;
+  color: var(--contrast);
+}
+pre code { background: transparent; padding: 0; border-radius: 0; font-size: inherit; }
+
+/* Verse block — preserves whitespace, serif italic */
+.wp-block-verse,
+pre.wp-block-verse {
+  font-family: var(--font-serif);
+  font-size: var(--text-lg);
+  line-height: 1.5;
+  font-style: italic;
+  background: transparent;
+  border: 0;
+  border-left: 3px solid var(--uga-red);
+  padding: var(--space-3) var(--space-6);
+  white-space: pre-wrap;
+  color: var(--contrast);
+}
+
+/* Lists (List block + List Item child) */
+ul, ol {
+  margin: 0 0 var(--space-5);
+  padding-left: var(--space-7);
+  line-height: 1.6;
+}
+li { margin-bottom: var(--space-2); }
+li > ul, li > ol { margin-top: var(--space-2); margin-bottom: 0; }
+/* li:last-child { margin-bottom: 0; } */
+
+/* Details / Summary (Details block — disclosure) */
+details {
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  padding: var(--space-4) 0;
+  margin: 0 0 var(--space-5);
+}
+details + details { border-top: 0; margin-top: calc(-1 * var(--space-5)); }
+details > summary {
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  font-family: var(--font-condensed);
+  font-weight: 500;
+  font-size: var(--text-lg);
+  letter-spacing: 0.02em;
+  color: var(--contrast);
+}
+details > summary::-webkit-details-marker { display: none; }
+details > summary::after {
+  content: "+";
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--uga-red);
+  flex-shrink: 0;
+}
+details[open] > summary::after { content: "−"; }
+details > *:not(summary) { margin-top: var(--space-3); }
+/* Open/close animation — progressive enhancement (needs ::details-content +
+   interpolate-size). Browsers without support just snap open as before. */
+@media (prefers-reduced-motion: no-preference) {
+  details::details-content {
+    block-size: 0;
+    overflow: clip;
+    transition: block-size .3s var(--ease), content-visibility .3s allow-discrete;
+  }
+  details[open]::details-content { block-size: auto; }
+}
+
+/* Table block */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 0 var(--space-6);
+  font-size: var(--text-sm);
+  line-height: 1.45;
+}
+caption {
+  font-family: var(--font-condensed);
+  font-size: var(--text-xs);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--contrast-3);
+  text-align: left;
+  padding-bottom: var(--space-2);
+}
+thead { border-bottom: 2px solid var(--contrast); }
+tbody tr { border-bottom: 1px solid var(--rule); }
+tbody tr:last-child { border-bottom: 0; }
+th, td {
+  padding: var(--space-3) var(--space-4);
+  text-align: left;
+  vertical-align: top;
+}
+th {
+  font-family: var(--font-condensed);
+  font-weight: 600;
+  font-size: var(--text-sm);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--contrast);
+}
+.wp-block-table.is-style-stripes tbody tr:nth-child(odd) { background: var(--paper-2); }
+
+/* Quote block */
+blockquote,
+.wp-block-quote {
+  margin: 0 0 var(--space-7);
+  padding: var(--space-2) 0 var(--space-2) var(--space-6);
+  border-left: 3px solid var(--uga-red);
+  font-family: var(--font-serif);
+  font-size: var(--text-lg);
+  line-height: 1.5;
+  font-style: italic;
+  color: var(--contrast);
+}
+blockquote p { margin-bottom: var(--space-3); font-style: italic; }
+blockquote cite,
+.wp-block-quote__citation,
+.wp-block-quote cite {
+  display: block;
+  margin-top: var(--space-3);
+  font-family: var(--font-condensed);
+  font-size: var(--text-xs);
+  font-style: normal;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--contrast-3);
+}
+
+/* Pullquote block — bigger, centered, top/bottom rules */
+.wp-block-pullquote {
+  margin: var(--space-10) 0;
+  padding: var(--space-9) var(--space-7);
+  border-top: 2px solid var(--contrast);
+  border-bottom: 2px solid var(--contrast);
+  border-left: 0;
+  text-align: center;
+  font-family: var(--font-serif);
+  font-size: var(--heading-3);
+  line-height: 1.2;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--contrast);
+  background: transparent;
+}
+.wp-block-pullquote p { margin: 0; font-style: italic; font-size: inherit; }
+.wp-block-pullquote cite,
+.wp-block-pullquote__citation {
+  display: block;
+  margin-top: var(--space-5);
+  font-family: var(--font-condensed);
+  font-size: var(--text-xs);
+  font-style: normal;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--contrast-3);
+}
+
+/* Footnotes block */
+.wp-block-footnotes {
+  margin-top: var(--space-12);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--rule);
+  font-size: var(--text-xs);
+  color: var(--contrast-2);
+  list-style: decimal;
+  padding-left: var(--space-6);
+}
+.wp-block-footnotes li { margin-bottom: var(--space-2); }
+.wp-block-footnotes li:target { background: var(--uga-red-tint); padding: 2px 6px; }
+
+/* Media & Text block */
+.wp-block-media-text {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(var(--space-7), 4vw, var(--space-10));
+  align-items: center;
+  margin: var(--space-8) 0;
+}
+.wp-block-media-text.has-media-on-the-right { grid-template-areas: "content media"; }
+.wp-block-media-text.has-media-on-the-right .wp-block-media-text__media { grid-area: media; }
+.wp-block-media-text.has-media-on-the-right .wp-block-media-text__content { grid-area: content; }
+.wp-block-media-text__media { margin: 0; }
+.wp-block-media-text__media img,
+.wp-block-media-text__media video {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.wp-block-media-text__content > *:last-child { margin-bottom: 0; }
+@media (max-width: 700px) {
+  .wp-block-media-text,
+  .wp-block-media-text.has-media-on-the-right {
+    grid-template-columns: 1fr;
+    grid-template-areas: "media" "content";
+  }
+}

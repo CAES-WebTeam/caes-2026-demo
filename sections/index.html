@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>CAES Block Library</title>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&family=Archivo+Narrow:wght@500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="_tokens.css" />
+<style>
+  body { padding: 48px 0 80px; }
+  .lib-hero { padding: 0 var(--gutter) 48px; max-width: 1100px; margin: 0 auto; }
+  .lib-hero .eyebrow { margin-bottom: 14px; }
+  .lib-hero h1 {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: clamp(40px, 5vw, 64px);
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+    margin: 0 0 14px;
+    text-wrap: balance;
+  }
+  .lib-hero p { color: var(--contrast-2); max-width: 64ch; margin: 0; }
+  .lib-grid {
+    max-width: 1100px;
+    margin: 32px auto 0;
+    padding: 0 var(--gutter);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+  .lib-card {
+    background: var(--base);
+    border: 1px solid var(--rule);
+    text-decoration: none;
+    color: var(--contrast);
+    display: flex; flex-direction: column;
+    transition: box-shadow .2s var(--ease);
+    position: relative;
+  }
+  .lib-card:hover { box-shadow: var(--shadow-card-hover); }
+  .lib-thumb {
+    width: 100%; aspect-ratio: 4/3;
+    background: var(--paper-2);
+    overflow: hidden;
+    position: relative;
+  }
+  .lib-thumb iframe {
+    width: 250%; height: 250%;
+    border: 0; pointer-events: none;
+    transform: scale(0.4);
+    transform-origin: top left;
+    background: var(--paper);
+  }
+  .lib-card-meta { padding: 16px 18px 18px; border-top: 1px solid var(--rule); }
+  .lib-card-name {
+    font-family: var(--font-condensed);
+    font-weight: 700; font-size: 14px;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--uga-red);
+    margin-bottom: 6px;
+  }
+  .lib-card-title {
+    font-family: var(--font-serif);
+    font-weight: 400; font-size: 20px;
+    line-height: 1.2; margin: 0;
+  }
+  .lib-card-desc { font-size: 14px; color: var(--contrast-3); margin-top: 8px; line-height: 1.5; }
+  .lib-section {
+    max-width: 1100px;
+    margin: 56px auto 16px;
+    padding: 0 var(--gutter);
+    display: flex; align-items: baseline; justify-content: space-between;
+  }
+  .lib-section h2 {
+    font-family: var(--font-condensed);
+    font-weight: 700; letter-spacing: 0.14em;
+    text-transform: uppercase; font-size: 14px;
+    margin: 0;
+  }
+  .lib-section .count { color: var(--contrast-3); font-size: 13px; }
+  .lib-compose-cta {
+    max-width: 1100px; margin: 56px auto 0;
+    padding: 24px var(--gutter);
+    background: var(--uga-red); color: var(--base);
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 24px;
+  }
+  .lib-compose-cta h3 {
+    font-family: var(--font-serif); font-weight: 400;
+    font-size: 24px; margin: 0; line-height: 1.2;
+  }
+  .lib-compose-cta a {
+    background: var(--base); color: var(--uga-red);
+    padding: 12px 24px; border-radius: 999px;
+    text-decoration: none; font-weight: 600;
+  }
+</style>
+</head>
+<body>
+<div class="lib-hero">
+  <h1>CAES 2026 Redesign: Design Demo</h1>
+  <p>Keep in mind all ideas aren't set in stone and page contents are filler! A design system with common elements and components is linked at the bottom of this page.</p>
+</div>
+
+<div class="lib-section"><h2>Pages <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--contrast-3);">— templates</span></h2><span class="count">8 pages</span>
+</div>
+<div class="lib-grid">
+  <a class="lib-card" href="../index.html">
+    <div class="lib-thumb"><iframe src="../index.html" title="CAES Homepage preview"></iframe></div>
+    <div class="lib-card-meta">
+      <div class="lib-card-name">homepage</div>
+      <h3 class="lib-card-title">CAES Homepage</h3>
+      <p class="lib-card-desc">The composed homepage — all sections stitched together in order.</p>
+    </div>
+  </a>
+  <a class="lib-card" href="../academics.html">
+    <div class="lib-thumb"><iframe src="../academics.html" title="CAES Academics landing preview"></iframe></div>
+    <div class="lib-card-meta">
+      <div class="lib-card-name">academics</div>
+      <h3 class="lib-card-title">Academics landing</h3>
+      <p class="lib-card-desc">A top-level section landing — a light page header instead of a full hero, then two parameterized tabbed sections for the menu's two content areas (Explore Academics and Student Life), capped with a closing CTA.</p>
+    </div>
+  </a>
+  <a class="lib-card" href="programs/programs.html">
+    <div class="lib-thumb"><iframe src="programs/programs.html" title="Degrees & Programs preview"></iframe></div>
+    <div class="lib-card-meta">
+      <div class="lib-card-name">programs</div>
+      <h3 class="lib-card-title">Degrees &amp; Programs directory</h3>
+      <p class="lib-card-desc">Full page — searchable degree list with modal-based filters for Program Type and Department.</p>
+    </div>
+  </a>
+  <a class="lib-card" href="program-detail/program-detail.html">
+    <div class="lib-thumb"><iframe src="program-detail/program-detail.html" title="Program Detail preview"></iframe></div>
+    <div class="lib-card-meta">
+      <div class="lib-card-name">program-detail</div>
+      <h3 class="lib-card-title">Program Detail page</h3>
+      <p class="lib-card-desc">Single degree landing page (Horticulture) — black title area with faded photo, sticky scroll-spy nav, alternating section bands, careers + outcome bars, paying-for-college, and advisor contacts.</p>
+    </div>
+  </a>
+  <a class="lib-card" href="directory/directory.html">
+    <div class="lib-thumb"><iframe src="directory/directory.html" title="Our People directory preview"></iframe></div>
+    <div class="lib-card-meta">
+      <div class="lib-card-name">directory</div>
+      <h3 class="lib-card-title">Our People — directory</h3>
+      <p class="lib-card-desc">Faceted people directory (50 from people.csv) — sidebar filters (Employee Type, Department, Program Area, Campus) with search, collapsible groups, and pagination. Cards fall back to an initials monogram when there's no photo.</p>
+    </div>
+  </a>
+  <a class="lib-card" href="experts/experts.html">
+    <div class="lib-thumb"><iframe src="experts/experts.html" title="Our Experts preview"></iframe></div>
+    <div class="lib-card-meta">
+      <div class="lib-card-name">experts</div>
+      <h3 class="lib-card-title">Our Experts</h3>
+      <p class="lib-card-desc">Expertise-first companion to the directory (same people, same profile links). Top filters (Expertise / Department / Campus) open in modals — the degree-programs pattern — with search across expertise, name, and title. Results are a scannable list of expert rows with their expertise areas trailing.</p>
+    </div>
+  </a>
+  <a class="lib-card" href="interior-page/interior-page.html">
+    <div class="lib-thumb"><iframe src="interior-page/interior-page.html" title="Interior page preview"></iframe></div>
+    <div class="lib-card-meta">
+      <div class="lib-card-name">interior-page</div>
+      <h3 class="lib-card-title">Interior page</h3>
+      <p class="lib-card-desc">An interior page with no section rail (the main nav covers where it sits). Header → intro text + video → full-width on-page zone (news feed) → section footer. Shown as the Food Science &amp; Technology research page.</p>
+    </div>
+  </a>
+  <a class="lib-card" href="interior-page-sidebar/interior-page-sidebar.html">
+    <div class="lib-thumb"><iframe src="interior-page-sidebar/interior-page-sidebar.html" title="Interior page with sidebar preview"></iframe></div>
+    <div class="lib-card-meta">
+      <div class="lib-card-name">interior-page-sidebar</div>
+      <h3 class="lib-card-title">Interior page with sidebar</h3>
+      <p class="lib-card-desc">The same interior page, plus a right rail of sibling pages. The rail shows only the direct parent + its children — breadcrumbs handle climbing up. Keeps the full-width on-page zone and section footer too. Generic, self-documenting mockup.</p>
+    </div>
+  </a>
+</div>
+
+<div class="lib-section"><h2>Patterns <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--contrast-3);">— full-width page sections</span></h2><span class="count">16 sections</span></div>
+<div class="lib-grid">
+  <a class="lib-card" href="uga-global-bar/uga-global-bar.html">
+    <div class="lib-thumb"><iframe src="uga-global-bar/uga-global-bar.html" title="UGA global bar preview"></iframe></div>
+    <div class="lib-card-meta">
+      <div class="lib-card-name">uga-global-bar</div>
+      <h3 class="lib-card-title">UGA Global Bar</h3>
+      <p class="lib-card-desc">Black bar with UGA wordmark and quick links — sits above CAES masthead site-wide.</p>
+    </div>
+  </a>
+  <a class="lib-card" href="top-nav/top-nav.html">
+    <div class="lib-thumb"><iframe src="top-nav/top-nav.html" title="Top nav preview"></iframe></div>
+    <div class="lib-card-meta">
+      <div class="lib-card-name">top-nav</div>
+      <h3 class="lib-card-title">Top Nav (CAES masthead)</h3>
+      <p class="lib-card-desc">White masthead with red top rule, CAES lockup, primary nav with carets, and a black square search button.</p>
+    </div>
+  </a>
+  <a class="lib-card" href="hero/hero.html">
+    <div class="lib-thumb"><iframe src="hero/hero.html" title="Hero preview"></iframe></div>
+    <div class="lib-card-meta">
+      <div class="lib-card-name">hero</div>
+      <h3 class="lib-card-title">Floating card hero</h3>
+      <p class="lib-card-desc">Off-white card floats over a full-bleed photo. Top-right red pill nav.</p>
+    </div>
+  </a>
+  <a class="lib-card" href="announcement/announcement.html">
+    <div class="lib-thumb"><iframe src="announcement/announcement.html" title="Announcement preview"></iframe></div>
+    <div class="lib-card-meta">
+      <div class="lib-card-name">announcement</div>
+      <h3 class="lib-card-title">Dismissible announcement</h3>
+      <p class="lib-card-desc">Red bar for site-wide notices — applications open, weather closures, etc.</p>
+    </div>
+  </a>
+  <a class="lib-card" href="impact-mosaic/impact-mosaic.html">
+    <div class="lib-thumb"><iframe src="impact-mosaic/impact-mosaic.html" title="Impact mosaic preview"></iframe></div>
+    <div class="lib-card-meta">
+      <div class="lib-card-name">impact-mosaic</div>
+      <h3 class="lib-card-title">Impact mosaic — stats + photos</h3>
+      <p class="lib-card-desc">Asymmetric 4×2 grid mixing photos and stat tiles. Closes with a capstone stat + topic chips.</p>
+    </div>
+  </a>
+  <a class="lib-card" href="student-life/student-life.html">
+    <div class="lib-thumb"><iframe src="student-life/student-life.html" title="Student Life preview"></iframe></div>
+    <div class="lib-card-meta">
+      <div class="lib-card-name">student-life</div>
+      <h3 class="lib-card-title">Student Life accordion</h3>
+      <p class="lib-card-desc">Two-column: tabbed list left, sticky feature image right.</p>
+    </div>
+  </a>
+  <a class="lib-card" href="news/news.html">
+    <div class="lib-thumb"><iframe src="news/news.html" title="News preview"></iframe></div>
+    <div class="lib-card-meta">
+      <div class="lib-card-name">news</div>
+      <h3 class="lib-card-title">Latest News</h3>
+      <p class="lib-card-desc">Asymmetric: one feature story, three stacked rows.</p>
+    </div>
+  </a>
+  <a class="lib-card" href="read-all-about/read-all-about.html">
+    <div class="lib-thumb"><iframe src="read-all-about/read-all-about.html" title="Read All About preview"></iframe></div>
+    <div class="lib-card-meta">
+      <div class="lib-card-name">read-all-about</div>
+      <h3 class="lib-card-title">Read All About CAES</h3>
+      <p class="lib-card-desc">Full-bleed red strip with oversized italic display lockup. Magazine push.</p>
+    </div>
+  </a>
+  <a class="lib-card" href="caes-footer/caes-footer.html">
+    <div class="lib-thumb"><iframe src="caes-footer/caes-footer.html" title="CAES Footer preview"></iframe></div>
+    <div class="lib-card-meta">
+      <div class="lib-card-name">caes-footer</div>
+      <h3 class="lib-card-title">CAES Footer</h3>
+      <p class="lib-card-desc">Black CAES-specific footer — lockup, social, 6 link cols. Sits directly above the UGA standard footer.</p>
+    </div>
+  </a>
+  <a class="lib-card" href="uga-footer/uga-footer.html">
+    <div class="lib-thumb"><iframe src="uga-footer/uga-footer.html" title="UGA Footer preview"></iframe></div>
+    <div class="lib-card-meta">
+      <div class="lib-card-name">uga-footer</div>
+      <h3 class="lib-card-title">UGA Standard Footer</h3>
+      <p class="lib-card-desc">UGA's site-wide footer — arch background, 4px red top rule, UGA logo + links + #UGA on social + address. Sits beneath the CAES footer.</p>
+    </div>
+  </a>
+  <a class="lib-card" href="detail-hero/detail-hero.html">
+    <div class="lib-thumb"><iframe src="detail-hero/detail-hero.html" title="Detail hero preview"></iframe></div>
+    <div class="lib-card-meta">
+      <div class="lib-card-name">detail-hero</div>
+      <h3 class="lib-card-title">Detail hero — dark, with facts</h3>
+      <p class="lib-card-desc">Page-top metadata header: breadcrumb, title, department, facts row, CTAs, and a photo faded in on the right. For any detail/landing page.</p>
+    </div>
+  </a>
+  <a class="lib-card" href="phase-cards/phase-cards.html">
+    <div class="lib-thumb"><iframe src="phase-cards/phase-cards.html" title="Phase cards preview"></iframe></div>
+    <div class="lib-card-meta">
+      <div class="lib-card-name">phase-cards</div>
+      <h3 class="lib-card-title">Phase / timeline cards</h3>
+      <p class="lib-card-desc">Labeled card pair (e.g. Years 1–2 / 3–4) for staged or phased content.</p>
+    </div>
+  </a>
+  <a class="lib-card" href="info-cards/info-cards.html">
+    <div class="lib-thumb"><iframe src="info-cards/info-cards.html" title="Two-up info cards preview"></iframe></div>
+    <div class="lib-card-meta">
+      <div class="lib-card-name">info-cards</div>
+      <h3 class="lib-card-title">Two-up info cards</h3>
+      <p class="lib-card-desc">Side-by-side titled cards, each with copy and a link — generic content pairing.</p>
+    </div>
+  </a>
+  <a class="lib-card" href="faq/faq.html">
+    <div class="lib-thumb"><iframe src="faq/faq.html" title="FAQ preview"></iframe></div>
+    <div class="lib-card-meta">
+      <div class="lib-card-name">faq</div>
+      <h3 class="lib-card-title">FAQ accordion</h3>
+      <p class="lib-card-desc">A section of native &lt;details&gt; disclosures (one open at a time is optional). Reusable for programs, admissions, events.</p>
+    </div>
+  </a>
+  <a class="lib-card" href="connect/connect.html">
+    <div class="lib-thumb"><iframe src="connect/connect.html" title="Connect block preview"></iframe></div>
+    <div class="lib-card-meta">
+      <div class="lib-card-name">connect</div>
+      <h3 class="lib-card-title">Connect / get in touch</h3>
+      <p class="lib-card-desc">Red department-promo card plus profile cards (circular avatar, name, role, contact links).</p>
+    </div>
+  </a>
+  <a class="lib-card" href="closing-cta/closing-cta.html">
+    <div class="lib-thumb"><iframe src="closing-cta/closing-cta.html" title="Closing CTA band preview"></iframe></div>
+    <div class="lib-card-meta">
+      <div class="lib-card-name">closing-cta</div>
+      <h3 class="lib-card-title">Closing CTA band</h3>
+      <p class="lib-card-desc">Full-width colored band — headline, red rule, copy, and a dual CTA pair. A site-wide page closer.</p>
+    </div>
+  </a>
+</div>
+<div class="lib-section"><h2>Design System</h2><span class="count">Foundations · Elements · Modules</span></div>
+<div class="lib-grid">
+  <a class="lib-card" href="design-system.html">
+    <div class="lib-thumb"><iframe src="design-system.html" title="CAES Design System reference preview"></iframe></div>
+    <div class="lib-card-meta">
+      <div class="lib-card-name">design-system</div>
+      <h3 class="lib-card-title">CAES Design System</h3>
+      <p class="lib-card-desc">The single reference, tiered by composition scope — Foundations (tokens), Elements (styled core blocks), and Modules (composed components). Each entry notes its WordPress mapping. Patterns and Pages are catalogued below.</p>
+    </div>
+  </a>
+</div>
+</body>
+</html>

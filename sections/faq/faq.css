@@ -1,0 +1,14 @@
+/* ============================================================
+   PATTERN — FAQ
+   A section of native <details> disclosures (styled in _tokens.css).
+   Reusable anywhere progressive Q&A helps — programs, admissions, events.
+   ============================================================ */
+.faq { padding: clamp(var(--space-11), 6.5vw, var(--space-16)) 0; }
+.faq--tint { background: var(--paper); }
+.faq .container { max-width: 1080px; }
+
+/* The accordion rides the design-system <details> styling; just cap the
+   reading width and tidy the first row's top rule. */
+.faq-list { max-width: 820px; }
+.faq-list details:first-child { border-top: 0; padding-top: 0; }
+.faq-list details > p { color: var(--contrast); margin-bottom: 0; max-width: 66ch; }

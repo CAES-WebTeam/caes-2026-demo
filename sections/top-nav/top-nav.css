@@ -1,0 +1,294 @@
+/* ============ Top Nav (CAES masthead) ============
+   White bar under the UGA global bar. Red rule on top, CAES lockup left,
+   primary nav with carets, mega-flyout panels, mobile drawer. */
+.top-nav {
+  background: var(--base);
+  border-top: 4px solid var(--uga-red);
+  border-bottom: 1px solid var(--rule);
+  box-shadow: 0 2px 10px -6px rgba(0, 0, 0, 0.18);
+  position: relative;          /* positioning context for the flyout panel */
+  z-index: 60;
+}
+.top-nav-inner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  padding-top: var(--space-4);
+  padding-bottom: var(--space-4);
+}
+.top-nav .brand img { height: 56px; }
+
+.tn-nav { margin-left: auto; }
+.tn-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--space-9);
+}
+.tn-item { position: relative; margin-bottom: 0; } /* positioning context for the anchored .tn-dropdown */
+.tn-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-condensed);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-size: var(--text-sm);
+  color: var(--contrast);
+  text-decoration: none;
+  background: none;
+  border: 0;
+  padding: var(--space-2) 0;
+  cursor: pointer;
+  transition: color .2s var(--ease);
+}
+.tn-link:hover,
+.tn-link:focus-visible,
+.tn-item.is-open .tn-link { color: var(--uga-red); }
+.tn-link:hover,
+.tn-link:focus-visible { text-decoration: underline; text-underline-offset: 4px; }
+.tn-caret {
+  width: 10px; height: 10px;
+  opacity: 0.85;
+  flex-shrink: 0;
+  transition: transform .2s var(--ease);
+}
+
+.tn-search {
+  width: 56px;
+  height: 56px;
+  background: var(--contrast);
+  color: var(--base);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background .2s var(--ease);
+}
+.tn-search:hover { background: var(--uga-red); }
+.tn-search svg { width: 20px; height: 20px; }
+
+/* ----- Hamburger (mobile only) ----- */
+.tn-hamburger {
+  display: none;
+  width: 56px; height: 56px;
+  background: var(--contrast);
+  color: var(--base);
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background .2s var(--ease);
+}
+.tn-hamburger:hover { background: var(--uga-red); }
+.tn-hamburger svg { width: 20px; height: 20px; }
+
+/* ----- Anchored dropdown (small menus: 1–2 columns) -----
+   Sized to content, positioned beneath its trigger. The last two
+   triggers right-anchor so the dropdown extends leftward and doesn't
+   overflow the viewport. */
+.tn-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: var(--base);
+  border: 1px solid var(--rule);
+  box-shadow: 0 24px 40px -24px rgba(0,0,0,0.25);
+  padding: var(--space-6) var(--space-7);
+  display: flex;
+  gap: 0;
+  width: max-content;
+  max-width: 90vw;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: opacity .18s var(--ease), transform .18s var(--ease), visibility 0s linear .18s;
+  z-index: 70;
+}
+.tn-dropdown.is-open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition: opacity .18s var(--ease), transform .18s var(--ease), visibility 0s linear 0s;
+}
+.tn-dropdown .tn-col { width: 200px; min-width: 0; padding-inline: var(--space-6); }
+.tn-dropdown .tn-col:first-child { padding-inline-start: 0; }
+.tn-dropdown .tn-col:last-child { padding-inline-end: 0; }
+.tn-dropdown .tn-col + .tn-col { border-inline-start: 1px solid var(--rule); }
+.tn-item:nth-last-child(-n+2) .tn-dropdown {
+  left: auto;
+  right: 0;
+}
+
+/* ----- Desktop mega-menu panel (large menus: 3+ columns) ----- */
+.tn-panel {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  max-width: var(--wide-width);
+  margin-inline: auto;
+  background: var(--base);
+  border: 1px solid var(--rule);
+  box-shadow: 0 24px 40px -24px rgba(0,0,0,0.25);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: opacity .18s var(--ease), transform .18s var(--ease), visibility 0s linear .18s;
+  z-index: 70;
+}
+.tn-panel.is-open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition: opacity .18s var(--ease), transform .18s var(--ease), visibility 0s linear 0s;
+}
+.tn-panel-inner {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: var(--space-7) 0;
+  padding-top: var(--space-9);
+  padding-bottom: var(--space-9);
+}
+.tn-panel-inner .tn-col { padding-inline: var(--space-6); }
+.tn-panel-inner .tn-col:first-child { padding-inline-start: 0; }
+.tn-panel-inner .tn-col:last-child { padding-inline-end: 0; }
+.tn-panel-inner .tn-col + .tn-col { border-inline-start: 1px solid var(--rule); }
+/* Column heading — a plain group label (not a link); the sub-list below holds
+   the actual destinations. */
+.tn-col-head {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: var(--text-sm);
+  color: var(--contrast);
+  margin: 0 0 var(--space-3);
+  line-height: 1.3;
+}
+.tn-col-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.tn-col-link {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  color: var(--contrast-2);
+  text-decoration: none;
+  line-height: 1.4;
+  transition: color .15s var(--ease);
+}
+.tn-col-link:hover,
+.tn-col-link:focus-visible { color: var(--uga-red); text-decoration: underline; text-underline-offset: 3px; }
+
+/* ----- Responsive: hide desktop nav, show hamburger ----- */
+@media (max-width: 980px) {
+  .tn-nav { display: none; }
+  .tn-panel { display: none; }
+  .tn-hamburger { display: inline-flex; margin-left: auto; }
+  .top-nav-inner { gap: var(--space-4); }
+}
+
+/* ----- Mobile drawer ----- */
+.tn-drawer {
+  position: fixed;
+  inset: 0;
+  background: var(--base);
+  z-index: 200;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  top: 38px;
+}
+.tn-drawer-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4) var(--gutter);
+  border-bottom: 1px solid var(--rule);
+  flex-shrink: 0;
+}
+.tn-drawer-close {
+  width: 56px; height: 56px;
+  background: var(--contrast);
+  color: var(--base);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  cursor: pointer;
+  transition: background .2s var(--ease);
+}
+.tn-drawer-close:hover { background: var(--uga-red); }
+.tn-drawer-close svg { width: 18px; height: 18px; }
+
+.tn-drawer-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex: 1;
+}
+.tn-drawer-item { border-bottom: 1px solid var(--rule); }
+.tn-drawer-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: var(--space-5) var(--gutter);
+  background: none;
+  border: 0;
+  font-family: var(--font-condensed);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-size: var(--text-sm);
+  color: var(--contrast);
+  cursor: pointer;
+  text-align: left;
+  transition: color .2s var(--ease);
+}
+.tn-drawer-item.is-expanded .tn-drawer-link { color: var(--uga-red); }
+.tn-drawer-item.is-expanded .tn-drawer-link .tn-caret { transform: rotate(180deg); }
+
+.tn-drawer-sub {
+  display: none;
+  padding: 0 var(--gutter) var(--space-5);
+  background: var(--paper);
+}
+.tn-drawer-item.is-expanded .tn-drawer-sub { display: block; }
+
+.tn-drawer-col + .tn-drawer-col { margin-top: var(--space-5); }
+.tn-drawer-col-head {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: var(--text-sm);
+  color: var(--contrast);
+  margin: var(--space-4) 0 var(--space-3);
+}
+.tn-drawer-col-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+.tn-drawer-col-link {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  color: var(--contrast-2);
+  text-decoration: none;
+  line-height: 1.4;
+  display: block;
+  padding: var(--space-2) 0;
+  transition: color .15s var(--ease);
+}
+.tn-drawer-col-link:hover,
+.tn-drawer-col-link:focus-visible { color: var(--uga-red); text-decoration: underline; text-underline-offset: 3px; }

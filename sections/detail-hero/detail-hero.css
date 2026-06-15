@@ -1,0 +1,53 @@
+/* ============================================================
+   PATTERN — Detail hero
+   Dark page-top metadata header with a photo faded in on the right.
+   Reusable for any detail/landing page (degree, department, person).
+   The photo uses the shared `.header-photo` treatment (see _tokens.css);
+   this file only sets the band color and tunes the fade for a dark band.
+   ============================================================ */
+.dh {
+  background: var(--contrast); color: var(--base);
+  /* Faded-photo tuning — dark band, so it can fade early over a wide image. */
+  --header-photo-w: 50%; --header-photo-w-md: 42%; --header-photo-max: 720px;
+  --header-photo-fade: 30%;
+}
+.dh-inner {
+  max-width: var(--wide-width); margin: 0 auto;
+  padding: clamp(var(--space-10), 6vw, var(--space-14)) var(--gutter);
+  min-height: clamp(380px, 40vw, 520px);
+  display: flex; align-items: center;
+}
+.dh-copy { max-width: 560px; }
+.dh-copy .eyebrow { color: var(--base); margin-bottom: var(--space-3); }
+.dh :focus-visible { outline-color: var(--base); }
+
+.dh-breadcrumb {
+  display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2);
+  font-family: var(--font-condensed); font-size: var(--text-sm);
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: rgba(255,255,255,0.7); margin-bottom: var(--space-5);
+}
+.dh-breadcrumb a { color: inherit; text-decoration: none; }
+.dh-breadcrumb a:hover { color: var(--base); text-decoration: underline; text-underline-offset: 3px; }
+.dh-breadcrumb span[aria-hidden] { opacity: 1; }
+.dh-breadcrumb [aria-current] { color: var(--base); }
+
+.dh-title { font-family: var(--font-serif); font-weight: 400; font-size: var(--heading-1); line-height: 1.03; letter-spacing: -0.015em; margin: 0 0 var(--space-2); color: var(--base); }
+.dh-dept { font-size: var(--text-sm); color: rgba(255,255,255,0.7); margin: 0 0 var(--space-5); }
+.dh-lead { font-family: var(--font-serif); font-size: var(--text-lg); line-height: 1.55; color: rgba(255,255,255,0.92); margin: 0 0 var(--space-7); max-width: 56ch; }
+
+.dh-facts {
+  display: flex; flex-wrap: wrap;
+  gap: var(--space-5) clamp(var(--space-7), 4vw, var(--space-10));
+  margin: 0; padding: var(--space-5) 0;
+  border-top: 1px solid rgba(255,255,255,0.2);
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+.dh-fact { display: flex; flex-direction: column; gap: 3px; }
+.dh-fact dt { font-family: var(--font-condensed); font-size: var(--text-sm); letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.6); }
+.dh-fact dd { margin: 0; font-family: var(--font-serif); font-size: var(--heading-5); line-height: 1.1; color: var(--base); }
+
+.dh-ctas { display: flex; flex-wrap: wrap; gap: var(--space-4); margin-top: var(--space-7); }
+
+@media (max-width: 900px) { .dh-copy { max-width: 520px; } }
+@media (max-width: 680px) { .dh-copy { max-width: none; } .dh-inner { min-height: 0; } }

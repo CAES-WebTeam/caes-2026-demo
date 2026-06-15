@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>CAES — Academics</title>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&family=Archivo+Narrow:wght@500;600;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="sections/_tokens.css" />
+
+<!-- Per-block CSS -->
+<link rel="stylesheet" href="sections/uga-global-bar/uga-global-bar.css" />
+<link rel="stylesheet" href="sections/top-nav/top-nav.css" />
+<link rel="stylesheet" href="sections/interior-page/interior-page.css" />
+<link rel="stylesheet" href="sections/student-life/student-life.css" />
+<link rel="stylesheet" href="sections/closing-cta/closing-cta.css" />
+<link rel="stylesheet" href="sections/caes-footer/caes-footer.css" />
+<link rel="stylesheet" href="sections/uga-footer/uga-footer.css" />
+</head>
+<body>
+
+<a class="sr-only" href="#main">Skip to main content</a>
+<div id="root"></div>
+
+<!-- React -->
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<!-- Shared helpers (IMG, LogoMark, Brand) -->
+<script type="text/babel" src="sections/_shared.jsx"></script>
+
+<!-- Block components -->
+<script type="text/babel" src="sections/uga-global-bar/uga-global-bar.jsx"></script>
+<script type="text/babel" src="sections/top-nav/top-nav.jsx"></script>
+<script type="text/babel" src="sections/student-life/student-life.jsx"></script>
+<script type="text/babel" src="sections/closing-cta/closing-cta.jsx"></script>
+<script type="text/babel" src="sections/caes-footer/caes-footer.jsx"></script>
+<script type="text/babel" src="sections/uga-footer/uga-footer.jsx"></script>
+
+<!-- Compose -->
+<script type="text/babel">
+  // The two content areas surfaced in the "Academics" main-nav menu.
+  const ACADEMICS = [
+    { key: "degrees", title: "Degrees & Programs", img: window.IMG.classroom, body: "More than 25 undergraduate majors and minors, plus master's, doctoral, and online programs across the agricultural and environmental sciences. Find the path that fits where you want to go." },
+    { key: "learning", title: "Experiential Learning", img: window.IMG.research, body: "Research alongside faculty from your first year, internships with industry and government, and service-learning that turns coursework into real-world experience." },
+    { key: "abroad", title: "Study Abroad", img: window.IMG.field, body: "Study and conduct research around the world — from short faculty-led trips to full semesters abroad — and bring a global perspective back to Georgia." },
+    { key: "funding", title: "Scholarships & Funding", img: window.IMG.greenhouse, body: "More than $700,000 in scholarships awarded every year, plus graduate assistantships and need-based aid that make a CAES education attainable." },
+    { key: "admissions", title: "Admissions", img: window.IMG.campus, body: "First-year, transfer, and graduate pathways — our admissions team walks you through every step, from application to scholarship review to enrollment." },
+  ];
+  const STUDENT_LIFE = [
+    { key: "experience", title: "The CAES Experience", img: window.IMG.classroom, body: "Small classes and hands-on labs inside a top public research university — a tight-knit college community with the resources of UGA behind it." },
+    { key: "prospective", title: "Prospective Students", img: window.IMG.campus, body: "Plan a visit, sit in on a class, tour the student farms, and meet current students to see what life in CAES is really like." },
+    { key: "clubs", title: "Clubs & Organizations", img: window.IMG.field, body: "Dozens of student clubs and organizations — from the Horticulture Club to Collegiate FFA — to build friendships, leadership, and hands-on skills." },
+    { key: "transfer", title: "Transfer to CAES", img: window.IMG.greenhouse, body: "Clear transfer pathways and dedicated advising help you bring your credits — and your momentum — with you." },
+    { key: "careers", title: "Career Resources", img: window.IMG.research, body: "Career advising, employer connections, and a network of alumni across agriculture, science, business, and government." },
+  ];
+
+  function AcademicsPage() {
+    return (
+      <>
+        <header className="site-header" role="banner">
+          <UGAGlobalBar />
+          <TopNav />
+        </header>
+        <main id="main" className="ip">
+          <header className="ip-header ip-header--media has-header-photo">
+            <div className="header-photo" aria-hidden="true"><img src={window.IMG.research} alt="" /></div>
+            <div className="container">
+              <nav className="ip-breadcrumb" aria-label="Breadcrumb">
+                <a href="#">Home</a>
+                <span aria-hidden="true">/</span>
+                <span aria-current="page">Academics</span>
+              </nav>
+              <h1>Academics</h1>
+              <p className="ip-intro">More than 25 majors and minors, hands-on research from your first year, and study abroad around the world — shaped by faculty who turn curiosity into careers.</p>
+            </div>
+          </header>
+
+          <StudentLife
+            id="academics"
+            heading="Explore Academics"
+            lede="Degrees and programs, experiential learning, study abroad, funding, and admissions — everything that shapes your path through CAES."
+            items={ACADEMICS}
+          />
+          <StudentLife
+            id="student-life"
+            heading="Student Life"
+            lede="Beyond the classroom: community, clubs, support, and the people who make CAES feel like home."
+            items={STUDENT_LIFE}
+            tint
+          />
+          <ClosingCTA />
+        </main>
+        <CaesFooter />
+        <UgaFooter />
+      </>
+    );
+  }
+  ReactDOM.createRoot(document.getElementById("root")).render(<AcademicsPage />);
+</script>
+</body>
+</html>
