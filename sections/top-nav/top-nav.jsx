@@ -12,28 +12,28 @@ window.TopNav = function TopNav() {
 
   const NAV = [
     { label: "About", panels: [
-      { heading: "About CAES",   links: ["History", "Campuses", "Our People", "Administration & Leadership", "Administrative Offices & Support Units", "Jobs at CAES"] },
-      { heading: "Departments",  links: ["Agricultural and Applied Economics", "Agricultural Leadership, Education and Communication", "Animal and Dairy Science", "Crop and Soil Sciences", "Entomology", "Food Science and Technology", "Horticulture", "Plant pathology", "Poultry science"] },
-      { heading: "News",         links: ["News and stories", "Expert resources", "Almanac magazine", "Cultivating Curiosity podcast"] },
-      { heading: "Events",       links: ["D.W. Brooks Lecture and Awards", "Georgia Ag Forecast", "Ag Dawg Kickoff", "UGA CAES Alumni Association Awards", "Flavor of Georgia", "See full events calendar"] },
+      { heading: "About CAES",   links: ["History", "Campuses", "Our People", "Administration and Leadership", "Administrative Offices and Support Units", "Jobs at CAES"] },
+      { heading: "Departments",  links: ["Agricultural and Applied Economics", "Agricultural Leadership, Education and Communication", "Animal and Dairy Science", "Crop and Soil Sciences", "Entomology", "Food Science and Technology", "Horticulture", "Plant Pathology", "Poultry Science"] },
+      { heading: "News",         links: ["News and Stories", "Expert Resources", "Almanac Magazine", "Cultivating Curiosity Podcast"] },
+      { heading: "Events",       links: ["D.W. Brooks Lecture and Awards", "Georgia Ag Forecast", "Ag Dawg Kickoff", "UGA CAES Alumni Association Awards", "Flavor of Georgia", "See Full Events Calendar"] },
     ]},
     { label: "Academics", panels: [
-      { heading: "Academics",    links: ["Degrees and programs", "Experiential learning", "Study abroad", "Scholarships and funding", "Admissions"] },
-      { heading: "Student life", links: ["CAES experience", "Prospective students", "Clubs and student organizations", "Transfer to CAES", "Career resources"] },
+      { heading: "Academics",    links: ["Degrees and Programs", "Experiential Learning", "Study Abroad", "Scholarships and Funding", "Admissions"] },
+      { heading: "Student Life", links: ["CAES Experience", "Prospective Students", "Clubs and Student Organizations", "Transfer to CAES", "Career Resources"] },
     ]},
     { label: "Research", panels: [
-      { heading: "Our Experts",     links: [] },
-      { heading: "Research Areas",  links: ["Agricultural and applied economics", "Agricultural leadership, education and communication", "Animal and dairy science", "Crop and soil sciences", "Entomology", "Food science and technology", "Horticulture", "Plant pathology", "Poultry science"] },
-      { heading: "Where We Work",   links: ["Research and Education Centers", "Centers, institutes and labs", "Plant growth facilities", "Global initiatives"] },
-      { heading: "Our Impact",      links: ["Land-grant impacts", "Research impact"] },
+      { heading: "Search by Expertise",     links: ["CAES Leadership", "CAES Faculty and Staff", "UGA Extension Faculty and Staff", "All Faculty and Staff"] },
+      { heading: "Research Areas",  links: ["Agricultural and Applied Economics", "Agricultural Leadership, Education and Communication", "Animal and Dairy Science", "Crop and Soil Sciences", "Entomology", "Food Science and Technology", "Horticulture", "Plant Pathology", "Poultry Science"] },
+      { heading: "Where We Work",   links: ["Research and Education Centers", "Centers, Institutes and Labs", "Plant Growth Facilities", "Global Initiatives"] },
+      { heading: "Our Impact",      links: ["Land-Grant Impacts", "Research Impact"] },
       { heading: "Partner With Us", links: ["Industry Partnerships", "Innovation Gateway", "Innovation District"] },
     ]},
     { label: "Extension", panels: [
-      { heading: "Extension", links: ["UGA Extension", "Georgia 4-H", "Expert resources", "Extension experts", "Find your county agent", "Commodity teams"] },
+      { heading: "Extension", links: ["UGA Extension", "Georgia 4-H", "Expert Resources", "Extension Experts", "Find Your County Agent", "Commodity Teams"] },
     ]},
     { label: "Alumni", panels: [
       { heading: "Get Connected", links: ["Update Your Information", "Alumni Newsletter", "Departmental Newsletters"] },
-      { heading: "Get Involved",  links: ["Join the CAES Alumni Association", "Become a mentor", "Hire an Ag Dawg", "Attend an event"] },
+      { heading: "Get Involved",  links: ["Join the CAES Alumni Association", "Become a Mentor", "Hire an Ag Dawg", "Attend an Event"] },
       { heading: "Awards",        links: ["CAES Alumni Awards", "Georgia Agricultural Hall of Fame"] },
       { heading: "Giving",        links: ["CAES Student Emergency Fund", "Support a CAES Fund", "Buy a Brick"] },
     ]},

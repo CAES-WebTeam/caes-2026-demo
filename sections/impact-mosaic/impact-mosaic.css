@@ -130,9 +130,23 @@
 
 @media (max-width: 980px) {
   .mosaic { grid-template-columns: 1fr; }
-  /* stat on top, photo below, in every stacked column */
+  /* each column becomes a row: stat + photo side by side, each half-width.
+     The stat drives the row height — a square at this width, but free to grow
+     taller if its padded content needs it. The photo has no aspect-ratio of its
+     own (that fed back into the width and overflowed off-screen); instead it
+     stretches to the stat's height, so the two stay flush with no gap below. */
+  .mosaic-col { flex-direction: row; align-items: stretch; }
+  .mosaic-col > * { flex: 1 1 0; min-width: 0; }
+  .mosaic-stat { aspect-ratio: var(--ratio-square); }
+  .mosaic-photo { aspect-ratio: auto; }
+  /* stat on the left, photo on the right, in every column */
   .mosaic-col > .mosaic-stat { order: 1; }
   .mosaic-col > .mosaic-photo { order: 2; }
-  /* stats hug their content; no borders (photos surround them) */
-  .mosaic-stat { aspect-ratio: auto; border: 0; }
+  /* stat sits on the left: keep top/left/bottom, drop the right edge where it meets the photo */
+  .mosaic-col > .mosaic-stat { border: 1px solid var(--rule); border-right: 0; }
+  /* scale the stat text down so it fits the half-width square */
+  .mosaic-stat { padding: clamp(var(--space-3), 4vw, var(--space-5)); }
+  .mosaic-stat .num { font-size: var(--heading-4); }
+  .mosaic-stat .lbl { font-size: var(--text-xs); }
+  .mosaic-cta { margin-top: var(--space-3); font-size: var(--text-xs); }
 }

@@ -9,21 +9,25 @@
    would otherwise reach it). Decorative only — aria-hidden + pointer-events:none.
    ============================================================ */
 
-/* The sprig is positioned against <main>; clip the page so its off-screen
-   slide-out never spawns a horizontal scrollbar. */
-#main { position: relative; }
-body { overflow-x: clip; }
+/* The sprig is positioned against <main>; clip <main> on the x-axis so the
+   sprig's off-screen slide-out never spawns a horizontal scrollbar or gap.
+   The clip lives on #main (the sprig's containing block) rather than <body>:
+   overflow set on <body> gets propagated to the viewport, which leaves the
+   body itself effectively `visible` and fails to clip — clipping the actual
+   containing block is reliable. overflow-y stays visible so the sprig can still
+   hang down into the stats section. */
+#main { position: relative; overflow-x: clip; }
 
 .berry-decor {
   position: absolute;
-  top: clamp(220px, 20vw, 320px);      /* lower hero */
+  top: clamp(220px, 20vw, 390px);      /* lower hero */
   right: 0;                            /* flush to the right screen edge */
   /* Box is narrower than the artwork: the right ~half is cropped off by the
      background clip. Tall enough to span the lower hero into the stats section. */
-  width: clamp(300px, 27.5vw, 440px);
+  width: clamp(300px, 27.5vw, 540px);
   height: clamp(560px, 53vw, 850px);
   z-index: 4;                          /* above the hero photo (1), below the hero card (5) */
-  background: url("../../uploads/blueberry-decoration.png") no-repeat left top;
+  background: url("../../uploads/peach-decoration.png") no-repeat left top;
   background-size: auto 100%;          /* fill the height; the extra width spills off the right */
   pointer-events: none;                /* never intercept clicks */
   transform: translateX(0);
@@ -32,7 +36,10 @@ body { overflow-x: clip; }
 }
 
 /* Narrower than the wide content width: the centered hero card / stats grid
-   would collide with the sprig, so slide it out of existence to the right. */
+   would collide with the sprig, so slide it off to the right and fade it out.
+   It stays in the layout (no display:none) so the transform/opacity transition
+   animates gracefully when the window crosses this breakpoint; #main's
+   overflow-x: clip swallows the off-screen box so it never creates a gap. */
 @media (max-width: 1400px) {
   .berry-decor {
     transform: translateX(110%);

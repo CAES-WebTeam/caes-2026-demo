@@ -1,7 +1,7 @@
 /* global React */
 const { useState: useStateEX, useEffect: useEffectEX, useMemo: useMemoEX, useRef: useRefEX } = React;
 
-// ============ Our Experts ============
+// ============ Search by Expertise ============
 // An expertise-first companion to the Our People directory. Same people, same
 // profile links — but the page is organized around *areas of expertise* rather
 // than names. Top filters (Expertise / Department / Campus) open in modals, the
@@ -58,9 +58,9 @@ window.ExpertsPage = function ExpertsPage() {
             <span aria-hidden="true">/</span>
             <a href="#">About</a>
             <span aria-hidden="true">/</span>
-            <span aria-current="page">Our Experts</span>
+            <span aria-current="page">Search by Expertise</span>
           </nav>
-          <h1>Our Experts</h1>
+          <h1>Search by Expertise</h1>
           <p className="programs-lead">
             Find a CAES expert by what they study. Search an area of expertise — or a name or
             title — then narrow by department or campus. Every result links to the person's full

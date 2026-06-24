@@ -195,6 +195,13 @@
   .tn-panel { display: none; }
   .tn-hamburger { display: inline-flex; margin-left: auto; }
   .top-nav-inner { gap: var(--space-4); }
+  /* Shrink the wide CAES lockup so it clears the hamburger + search on narrow
+     screens. !important overrides the inline height set by <LogoMark>; max-width
+     keeps it inside the bar on the very smallest phones. */
+  .top-nav .brand img { height: 40px !important; max-width: 100%; }
+}
+@media (max-width: 420px) {
+  .top-nav .brand img { height: 34px !important; }
 }
 
 /* ----- Mobile drawer ----- */

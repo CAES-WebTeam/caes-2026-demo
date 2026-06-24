@@ -7,7 +7,7 @@ window.ConnectBlock = function ConnectBlock(props) {
   const ADVISOR = {
     name: "Debbie Hargrave",
     role: "Academic Advisor",
-    office: "Office of the Associate Dean for Academic & Faculty Affairs",
+    office: "Office of the Associate Dean for Academic and Faculty Affairs",
     email: "dbh88132@uga.edu",
     phone: "706-542-1205",
     address: "3117 Miller Plant Science · 120 Carlton St., Athens, GA 30602",
@@ -16,7 +16,7 @@ window.ConnectBlock = function ConnectBlock(props) {
     <section className={`connect${tint ? " connect--tint" : ""}`} id={id}>
       <div className="container">
         <h2 className="section-kicker">Connect</h2>
-        <p className="section-display">Learn more &amp; get in touch.</p>
+        <p className="section-display">Learn more and get in touch.</p>
 
         <div className="connect-learn">
           <a href="#" className="connect-dept-card">

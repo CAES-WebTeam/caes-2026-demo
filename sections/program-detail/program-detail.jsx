@@ -54,11 +54,11 @@ window.ProgramDetailPage = function ProgramDetailPage() {
   ];
 
   const JOBS = [
-    "Botanical Garden, Arboretum & Community Garden Curator",
-    "Plant, Seed, Chemical & Equipment Sales Representative",
+    "Botanical Garden, Arboretum and Community Garden Curator",
+    "Plant, Seed, Chemical and Equipment Sales Representative",
     "Urban, Vertical, or Hydroponic Farm Manager/Operator",
-    "Greenhouse, Nursery & Farm Manager/Operator",
-    "Cooperative Extension & Government Specialist",
+    "Greenhouse, Nursery and Farm Manager/Operator",
+    "Cooperative Extension and Government Specialist",
     "Fruit or Vegetable Farm Manager/Operator",
     "Native Plant Restoration Specialist",
     "Landscape Designer/Contractor",

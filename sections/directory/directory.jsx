@@ -3,7 +3,7 @@ const { useState: useStateDir, useEffect: useEffectDir, useMemo: useMemoDir } = 
 
 // ============ Our People — directory (filters in sidebar, paginated) ============
 // Faceted left rail: collapsible checkbox groups + search. R&E Centers and
-// Labs & Programs appear as collapsed groups with no options drawn.
+// Labs and Programs appear as collapsed groups with no options drawn.
 const DIR_PAGE_SIZE = 12;
 
 window.DirectoryPage = function DirectoryPage() {

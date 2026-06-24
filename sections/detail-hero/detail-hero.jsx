@@ -17,7 +17,7 @@ window.DetailHero = function DetailHero() {
           <nav className="dh-breadcrumb" aria-label="Breadcrumb">
             <a href="#">Academics</a>
             <span aria-hidden="true">/</span>
-            <a href="#">Degrees &amp; Programs</a>
+            <a href="#">Degrees and Programs</a>
             <span aria-hidden="true">/</span>
             <span aria-current="page">Horticulture</span>
           </nav>

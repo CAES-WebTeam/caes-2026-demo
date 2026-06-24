@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>CAES — Design System</title>
-<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&family=Archivo+Narrow:wght@500;600;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="_tokens.css" />
 <!-- Real component CSS, reused by the Module demos -->
 <link rel="stylesheet" href="programs/programs.css" />
@@ -323,22 +323,22 @@
         <li><a href="#scale">Spacing scale</a></li>
         <li><a href="#color">Color tokens</a></li>
         <li><a href="#focus">Focus rings</a></li>
-        <li><a href="#landmarks">Landmarks &amp; sectioning</a></li>
+        <li><a href="#landmarks">Landmarks and sectioning</a></li>
         <li><a href="#bands">Section bands</a></li>
       </ul>
     </div>
     <div>
       <p class="ref-nav-group">Elements</p>
       <ul>
-        <li><a href="#text">Text &amp; inline</a></li>
+        <li><a href="#text">Text and inline</a></li>
         <li><a href="#image">Image</a></li>
         <li><a href="#links">Links</a></li>
         <li><a href="#buttons">Buttons</a></li>
         <li><a href="#forms">Form fields</a></li>
-        <li><a href="#lists">Lists &amp; details</a></li>
+        <li><a href="#lists">Lists and details</a></li>
         <li><a href="#liststyles">List styles</a></li>
         <li><a href="#table">Tables</a></li>
-        <li><a href="#labels">Labels &amp; tags</a></li>
+        <li><a href="#labels">Labels and tags</a></li>
         <li><a href="#quotes">Quotes</a></li>
         <li><a href="#stats">Stats</a></li>
         <li><a href="#footnotes">Footnotes</a></li>
@@ -347,7 +347,7 @@
     <div>
       <p class="ref-nav-group">Modules</p>
       <ul>
-        <li><a href="#media-text">Media &amp; Text</a></li>
+        <li><a href="#media-text">Media and Text</a></li>
         <li><a href="#cards">Cards</a></li>
         <li><a href="#accordion">Accordion</a></li>
         <li><a href="#carousel">Carousel</a></li>
@@ -463,7 +463,7 @@
 
   <section class="ref-cat" id="landmarks">
     <p class="ref-cat-name">Foundations · Accessibility</p>
-    <h2 class="ref-cat-title">Landmarks &amp; sectioning</h2>
+    <h2 class="ref-cat-title">Landmarks and sectioning</h2>
     <div class="ref-block">
       <div class="ref-block-meta"><p class="ref-block-name">The rule</p><code class="ref-block-tag">landmarks = page wayfinding · headings = content outline</code></div>
       <p class="ref-block-desc">Landmarks are a table of contents for the <strong>whole page</strong> — a screen-reader user jumps between them via the rotor. Their entire value is being <strong>short and high-signal</strong>, so keep them few and uniquely named. The ARIA spec is explicit: don't create so many regions that the significant ones get lost. When everything is a landmark, nothing is.</p>
@@ -536,7 +536,7 @@
 
   <section class="ref-cat" id="text">
     <p class="ref-cat-name">Element</p>
-    <h2 class="ref-cat-title">Text &amp; inline</h2>
+    <h2 class="ref-cat-title">Text and inline</h2>
     <div class="ref-block">
       <div class="ref-block-meta"><p class="ref-block-name">Paragraph</p><code class="ref-block-tag">core/paragraph</code></div>
       <p class="ref-block-desc">Default body type — Merriweather at 17px / 1.6.</p>
@@ -595,7 +595,7 @@ the work is the harvest; the harvest is the work.</pre>
     <p class="ref-cat-name">Element</p>
     <h2 class="ref-cat-title">Links</h2>
     <div class="ref-block">
-      <div class="ref-block-meta"><p class="ref-block-name">Inline &amp; arrow link</p><code class="ref-block-tag">a · .link-arrow</code></div>
+      <div class="ref-block-meta"><p class="ref-block-name">Inline and arrow link</p><code class="ref-block-tag">a · .link-arrow</code></div>
       <p class="ref-block-desc">Inline links inherit color and underline on hover. <code>.link-arrow</code> is the red, condensed-weight call-to-action used in card footers and section rails. <strong>Exception — links inside a card:</strong> when the whole card (or its title) is the link, the card's own hover cues (shadow, image zoom, title color shift, arrow) carry the affordance, so the card title does <em>not</em> add a hover underline.</p>
       <div class="ref-demo">
         <p>Read more about our <a href="#">research initiatives across Georgia</a>.</p>
@@ -648,12 +648,12 @@ the work is the harvest; the harvest is the work.</pre>
 
   <section class="ref-cat" id="lists">
     <p class="ref-cat-name">Element</p>
-    <h2 class="ref-cat-title">Lists &amp; details</h2>
+    <h2 class="ref-cat-title">Lists and details</h2>
     <div class="ref-block">
       <div class="ref-block-meta"><p class="ref-block-name">List</p><code class="ref-block-tag">core/list + core/list-item</code></div>
       <p class="ref-block-desc">Ordered or unordered; supports nesting.</p>
       <div class="ref-demo">
-        <ul><li>Plant &amp; Horticulture<ul><li>Crops &amp; Soil</li><li>Pollinator Ecology</li></ul></li><li>Animal &amp; Dairy</li><li>Food Science &amp; Technology</li></ul>
+        <ul><li>Plant and Horticulture<ul><li>Crops and Soil</li><li>Pollinator Ecology</li></ul></li><li>Animal and Dairy</li><li>Food Science and Technology</li></ul>
         <ol><li>Apply by August 1</li><li>Submit transcripts and recommendations</li><li>Schedule a campus visit</li></ol>
       </div>
     </div>
@@ -687,7 +687,7 @@ the work is the harvest; the harvest is the work.</pre>
       <p class="ref-block-desc">Space-efficient list for many short items: red dot markers, hairline rule per row, auto-filling into as many columns as the width allows.</p>
       <div class="ref-demo">
         <ul class="demo-jobs">
-          <li><span class="demo-job-dot"></span>Greenhouse, Nursery &amp; Farm Manager</li>
+          <li><span class="demo-job-dot"></span>Greenhouse, Nursery and Farm Manager</li>
           <li><span class="demo-job-dot"></span>Landscape Designer / Contractor</li>
           <li><span class="demo-job-dot"></span>Plant Breeder</li>
           <li><span class="demo-job-dot"></span>Cooperative Extension Specialist</li>
@@ -720,9 +720,9 @@ the work is the harvest; the harvest is the work.</pre>
           <caption>FY24 sponsored awards by department</caption>
           <thead><tr><th>Department</th><th>Awards</th><th>Total</th></tr></thead>
           <tbody>
-            <tr><td>Plant &amp; Soil Sciences</td><td>34</td><td>$24.1M</td></tr>
-            <tr><td>Animal &amp; Dairy Science</td><td>28</td><td>$18.7M</td></tr>
-            <tr><td>Food Science &amp; Technology</td><td>19</td><td>$12.3M</td></tr>
+            <tr><td>Plant and Soil Sciences</td><td>34</td><td>$24.1M</td></tr>
+            <tr><td>Animal and Dairy Science</td><td>28</td><td>$18.7M</td></tr>
+            <tr><td>Food Science and Technology</td><td>19</td><td>$12.3M</td></tr>
           </tbody>
         </table>
       </div>
@@ -731,10 +731,10 @@ the work is the harvest; the harvest is the work.</pre>
 
   <section class="ref-cat" id="labels">
     <p class="ref-cat-name">Element</p>
-    <h2 class="ref-cat-title">Labels, tags &amp; facts</h2>
+    <h2 class="ref-cat-title">Labels, tags and facts</h2>
     <div class="ref-block">
       <div class="ref-block-meta"><p class="ref-block-name">Pill / tag</p><code class="ref-block-tag">.tag (inline) · soft variant</code></div>
-      <p class="ref-block-desc">Small condensed-caps label on a light-red field — categorizes cards (audience, phase, topic, status). The <strong>soft variant</strong> (neutral chip, sentence case) is quieter for dense metadata lists where many tags sit together — e.g. areas of expertise on the Our Experts cards.</p>
+      <p class="ref-block-desc">Small condensed-caps label on a light-red field — categorizes cards (audience, phase, topic, status). The <strong>soft variant</strong> (neutral chip, sentence case) is quieter for dense metadata lists where many tags sit together — e.g. areas of expertise on the Search by Expertise cards.</p>
       <div class="ref-demo">
         <span class="demo-tag">Prospective students</span>
         <span class="demo-tag" style="margin-left:8px;">Current students</span>
@@ -770,7 +770,7 @@ the work is the harvest; the harvest is the work.</pre>
 
   <section class="ref-cat" id="quotes">
     <p class="ref-cat-name">Element</p>
-    <h2 class="ref-cat-title">Quotes &amp; pullquotes</h2>
+    <h2 class="ref-cat-title">Quotes and pullquotes</h2>
     <div class="ref-block">
       <div class="ref-block-meta"><p class="ref-block-name">Quote</p><code class="ref-block-tag">core/quote</code></div>
       <p class="ref-block-desc">Inline blockquote with optional citation. Left red rule, italic serif.</p>
@@ -827,14 +827,14 @@ the work is the harvest; the harvest is the work.</pre>
   <div class="ref-tier" id="modules">
     <p class="ref-tier-k">Tier 3</p>
     <h2>Modules</h2>
-    <p class="ref-tier-desc">Elements composed into one reusable unit. The tiebreaker: a module composes two or more named pieces. Some are core container blocks (Media &amp; Text); others become custom blocks (card, carousel, modal). A module's variations live together — see Cards.</p>
+    <p class="ref-tier-desc">Elements composed into one reusable unit. The tiebreaker: a module composes two or more named pieces. Some are core container blocks (Media and Text); others become custom blocks (card, carousel, modal). A module's variations live together — see Cards.</p>
   </div>
 
   <section class="ref-cat" id="media-text">
     <p class="ref-cat-name">Module</p>
-    <h2 class="ref-cat-title">Media &amp; Text</h2>
+    <h2 class="ref-cat-title">Media and Text</h2>
     <div class="ref-block">
-      <div class="ref-block-meta"><p class="ref-block-name">Media &amp; Text</p><code class="ref-block-tag">core/media-text</code></div>
+      <div class="ref-block-meta"><p class="ref-block-name">Media and Text</p><code class="ref-block-tag">core/media-text</code></div>
       <p class="ref-block-desc">Paired image + text columns. Defaults to media-on-the-left; add <code>has-media-on-the-right</code> to flip. Stacks below 700px. <span class="wp">WP: core container block — composite, so it lives at the Module tier.</span></p>
       <div class="ref-demo">
         <div class="wp-block-media-text">
@@ -862,7 +862,7 @@ the work is the harvest; the harvest is the work.</pre>
 
     <div class="ref-block">
       <div class="ref-block-meta"><p class="ref-block-name">Link card — no large image</p><code class="ref-block-tag">.card (link) · hover: top-rule wipe</code></div>
-      <p class="ref-block-desc">When the whole card points to <strong>one</strong> destination and has no hero image, use this instead of the media card's zoom. The hover signature is different on purpose: a red top-rule wipes in left-to-right, the title turns red, the arrow advances, and the shadow deepens (no underline — the card cues do the work). An optional <strong>52px circular thumbnail</strong> adds a visual anchor without making it an image card (it gets a gentle zoom on hover too). Used by the Degrees &amp; Programs directory. <span class="wp">WP: custom block or a Group with the link applied to the title (<code>card-link</code> stretched ::after) — one link only, so no nested interactive elements.</span></p>
+      <p class="ref-block-desc">When the whole card points to <strong>one</strong> destination and has no hero image, use this instead of the media card's zoom. The hover signature is different on purpose: a red top-rule wipes in left-to-right, the title turns red, the arrow advances, and the shadow deepens (no underline — the card cues do the work). An optional <strong>52px circular thumbnail</strong> adds a visual anchor without making it an image card (it gets a gentle zoom on hover too). Used by the Degrees and Programs directory. <span class="wp">WP: custom block or a Group with the link applied to the title (<code>card-link</code> stretched ::after) — one link only, so no nested interactive elements.</span></p>
       <div class="ref-demo">
         <div class="demo-linkgrid">
           <article class="demo-linkcard">
@@ -879,7 +879,7 @@ the work is the harvest; the harvest is the work.</pre>
             <div class="demo-linkcard-head">
               <span class="demo-linkcard-thumb"><img src="assets/img/photo-1500595046743-cd271d694d30.jpg" alt="" loading="lazy" /></span>
               <div class="demo-linkcard-headings">
-                <h3 class="demo-linkcard-title"><a href="#">Animal &amp; Dairy Science</a></h3>
+                <h3 class="demo-linkcard-title"><a href="#">Animal and Dairy Science</a></h3>
                 <span class="demo-linkcard-type">Master's</span>
               </div>
             </div>
@@ -931,11 +931,11 @@ the work is the harvest; the harvest is the work.</pre>
       <p class="ref-block-desc">Horizontally scroll-snapping 4:5 photo cards with a serif label; 44px round arrows scroll one card at a time. <span class="wp">WP: custom block.</span></p>
       <div class="ref-demo">
         <div class="carousel-track" id="demoCarouselTrack">
-          <a href="#" class="carousel-card" style="background-image:url('assets/img/photo-1625246333195-78d9c38ad449.jpg');"><span>Plants &amp; Horticulture</span></a>
-          <a href="#" class="carousel-card" style="background-image:url('assets/img/photo-1500595046743-cd271d694d30.jpg');"><span>Animals &amp; Dairy</span></a>
-          <a href="#" class="carousel-card" style="background-image:url('assets/img/photo-1473973266408-ed4e27abdd47.jpg');"><span>Crops &amp; Soil</span></a>
-          <a href="#" class="carousel-card" style="background-image:url('assets/img/photo-1498936178812-4b2e558d2937.jpg');"><span>Insects &amp; Pollinators</span></a>
-          <a href="#" class="carousel-card" style="background-image:url('assets/img/photo-1466692476868-aef1dfb1e735.jpg');"><span>Food, Health &amp; Nutrition</span></a>
+          <a href="#" class="carousel-card" style="background-image:url('assets/img/photo-1625246333195-78d9c38ad449.jpg');"><span>Plants and Horticulture</span></a>
+          <a href="#" class="carousel-card" style="background-image:url('assets/img/photo-1500595046743-cd271d694d30.jpg');"><span>Animals and Dairy</span></a>
+          <a href="#" class="carousel-card" style="background-image:url('assets/img/photo-1473973266408-ed4e27abdd47.jpg');"><span>Crops and Soil</span></a>
+          <a href="#" class="carousel-card" style="background-image:url('assets/img/photo-1498936178812-4b2e558d2937.jpg');"><span>Insects and Pollinators</span></a>
+          <a href="#" class="carousel-card" style="background-image:url('assets/img/photo-1466692476868-aef1dfb1e735.jpg');"><span>Food, Health and Nutrition</span></a>
         </div>
         <div class="carousel-controls">
           <button class="carousel-arrow" aria-label="Previous" id="demoCarouselPrev"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M9 1L3 7l6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg></button>
@@ -949,7 +949,7 @@ the work is the harvest; the harvest is the work.</pre>
     <p class="ref-cat-name">Module</p>
     <h2 class="ref-cat-title">Modal</h2>
     <div class="ref-block">
-      <div class="ref-block-meta"><p class="ref-block-name">Generic &amp; selection modal</p><code class="ref-block-tag">.programs-modal-backdrop / .programs-modal</code></div>
+      <div class="ref-block-meta"><p class="ref-block-name">Generic and selection modal</p><code class="ref-block-tag">.programs-modal-backdrop / .programs-modal</code></div>
       <p class="ref-block-desc">Backdrop + dialog scaffolding: centered on desktop, bottom sheet under 640px, with click-outside / Esc / close-button dismiss. The selection variant wires it up as a filter picker with a count-tracking apply button.</p>
       <div class="ref-demo">
         <button type="button" class="btn btn-filled" id="demoBasicModalOpen">Open modal</button>
@@ -962,7 +962,7 @@ the work is the harvest; the harvest is the work.</pre>
     <p class="ref-cat-name">Module</p>
     <h2 class="ref-cat-title">Filters</h2>
     <div class="ref-block">
-      <div class="ref-block-meta"><p class="ref-block-name">Filter buttons &amp; chips</p><code class="ref-block-tag">.programs-filter-btn / .programs-chip</code></div>
+      <div class="ref-block-meta"><p class="ref-block-name">Filter buttons and chips</p><code class="ref-block-tag">.programs-filter-btn / .programs-chip</code></div>
       <p class="ref-block-desc">Pill pickers that open a modal — <code>.is-primary</code> marks the primary axis, <code>.is-active</code> shows a selection (with count badge). Applied values surface as black chips; click one to remove it (hover turns it red).</p>
       <div class="ref-demo">
         <div class="programs-filter-row">
@@ -972,7 +972,7 @@ the work is the harvest; the harvest is the work.</pre>
         </div>
         <div class="programs-active-chips" style="margin-top:20px;">
           <button type="button" class="programs-chip">Bachelor's<span aria-hidden="true">×</span><span class="sr-only">Remove filter</span></button>
-          <button type="button" class="programs-chip">Animal &amp; Dairy Science<span aria-hidden="true">×</span><span class="sr-only">Remove filter</span></button>
+          <button type="button" class="programs-chip">Animal and Dairy Science<span aria-hidden="true">×</span><span class="sr-only">Remove filter</span></button>
         </div>
       </div>
     </div>
@@ -1043,10 +1043,10 @@ the work is the harvest; the harvest is the work.</pre>
     <div class="ref-linkgrid">
       <a class="ref-linkcard" href="../homepage.html"><span class="n">Template</span><span class="t">Homepage</span></a>
       <a class="ref-linkcard" href="../academics.html"><span class="n">Template</span><span class="t">Academics landing</span></a>
-      <a class="ref-linkcard" href="programs/programs.html"><span class="n">Template</span><span class="t">Degrees &amp; Programs</span></a>
+      <a class="ref-linkcard" href="programs/programs.html"><span class="n">Template</span><span class="t">Degrees and Programs</span></a>
       <a class="ref-linkcard" href="program-detail/program-detail.html"><span class="n">Template</span><span class="t">Program detail</span></a>
       <a class="ref-linkcard" href="directory/directory.html"><span class="n">Template</span><span class="t">Our People directory</span></a>
-      <a class="ref-linkcard" href="experts/experts.html"><span class="n">Template</span><span class="t">Our Experts (expertise-first)</span></a>
+      <a class="ref-linkcard" href="experts/experts.html"><span class="n">Template</span><span class="t">Search by Expertise (expertise-first)</span></a>
       <a class="ref-linkcard" href="interior-page/interior-page.html"><span class="n">Template</span><span class="t">Interior page</span></a>
       <a class="ref-linkcard" href="interior-page-sidebar/interior-page-sidebar.html"><span class="n">Template</span><span class="t">Interior page with sidebar</span></a>
     </div>

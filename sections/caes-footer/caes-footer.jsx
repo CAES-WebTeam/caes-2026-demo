@@ -20,7 +20,7 @@ window.CaesFooter = function CaesFooter() {
     ] },
     { title: "Students", links: [
       { label: "Academics", href: "#" },
-      { label: "Student Life & Resources", href: "#" },
+      { label: "Student Life and Resources", href: "#" },
     ] },
     { title: "Departments", links: [
       { label: "Academic Departments", href: "#" },
@@ -31,18 +31,18 @@ window.CaesFooter = function CaesFooter() {
       { label: "Research Areas", href: "#" },
       { label: "Awards", href: "#" },
       { label: "Programs", href: "#" },
-      { label: "Grants & Partnerships", href: "#" },
+      { label: "Grants and Partnerships", href: "#" },
       { label: "Where We Work", href: "#" },
       { label: "Our Impact", href: "#" },
     ] },
-    { title: "Extension & Outreach", links: [
+    { title: "Extension and Outreach", links: [
       { label: "UGA Extension", href: "#" },
       { label: "Commodity Teams", href: "#" },
       { label: "Economic Development", href: "#" },
       { label: "Urban Programs", href: "#" },
       { label: "Georgia 4-H", href: "#" },
     ] },
-    { title: "Alumni & Giving", links: [
+    { title: "Alumni and Giving", links: [
       { label: "Get Connected", href: "#" },
       { label: "Get Involved", href: "#" },
       { label: "Giving", href: "#" },
