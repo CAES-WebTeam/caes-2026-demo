@@ -677,14 +677,16 @@ function DoubleDawgsModal({ program, pairs, intro, url, onClose }) {
               const mast = at === -1 ? "" : label.slice(at + 3);
               return (
                 <li key={label} className="dd-pair">
-                  <span className="dd-pair-deg">{bach}</span>
-                  {mast && (
-                    <>
-                      <span className="dd-pair-sep" aria-hidden="true">/</span>
-                      <span className="sr-only"> paired with </span>
-                      <span className="dd-pair-deg">{mast}</span>
-                    </>
-                  )}
+                  {mast && <span className="dd-pair-brace" aria-hidden="true" />}
+                  <span className="dd-pair-degs">
+                    <span className="dd-pair-deg">{bach}</span>
+                    {mast && (
+                      <>
+                        <span className="sr-only"> paired with </span>
+                        <span className="dd-pair-deg">{mast}</span>
+                      </>
+                    )}
+                  </span>
                 </li>
               );
             })}
