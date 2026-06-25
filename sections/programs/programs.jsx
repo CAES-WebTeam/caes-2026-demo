@@ -608,13 +608,13 @@ function FilterModal({ title, subtitle, options, selected, counts, onApply, onCl
 function DoubleDawgsNote({ programName, onClick }) {
   return (
     <span className="dd-note-line">
-      This program can be taken as a{" "}
+      Can be taken as a{" "}
       <button
         type="button"
         className="dd-note"
         onClick={onClick}
-        aria-label={`Double Dawgs pairings for ${programName}`}
-      >Double Dawgs</button> pairing.
+        aria-label={`Double Dawgs programs for ${programName}`}
+      >Double Dawgs</button> program
     </span>
   );
 }
@@ -682,7 +682,7 @@ function DoubleDawgsModal({ program, pairs, intro, url, onClose }) {
                     <span className="dd-pair-deg">{bach}</span>
                     {mast && (
                       <>
-                        <span className="sr-only"> paired with </span>
+                        <span className="sr-only"> and </span>
                         <span className="dd-pair-deg">{mast}</span>
                       </>
                     )}

@@ -227,7 +227,7 @@ window.ProgramDetailPage = function ProgramDetailPage() {
             </p>
             <div className="pd3-dd-grid">
               <div className="pd3-dd-main">
-                <p className="pd3-dd-pairs-title">Pair Horticulture with</p>
+                <p className="pd3-dd-pairs-title">Double Dawgs programs with Horticulture</p>
                 <ul className="pd3-dd-pairs" role="list">
                   {DD_PAIRS.map((m) => <li key={m}>{m}</li>)}
                 </ul>
