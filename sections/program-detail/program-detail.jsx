@@ -9,6 +9,14 @@ const { useState: useStatePD3, useEffect: useEffectPD3, useRef: useRefPD3 } = Re
 window.ProgramDetailPage = function ProgramDetailPage() {
   const IMG = window.IMG;
 
+  // Double Dawgs logo lives in /uploads; resolve the path the same way
+  // _shared.jsx does so it works standalone and composed.
+  const DD_LOGO = window.location.pathname.includes("/sections/")
+    ? "../../uploads/NewDoubleDawgsLogo.png"
+    : "uploads/NewDoubleDawgsLogo.png";
+  // The master's programs Horticulture (BSA) can pair with under Double Dawgs.
+  const DD_PAIRS = ["Horticulture (MS)", "Plant Protection and Pest Management (MPPPM)"];
+
   const SECTIONS = [
     { id: "about", label: "About" },
     { id: "coursework", label: "Coursework" },
@@ -16,6 +24,7 @@ window.ProgramDetailPage = function ProgramDetailPage() {
     { id: "hands-on", label: "Hands-On Learning" },
     { id: "careers", label: "Careers" },
     { id: "paying", label: "Paying for College" },
+    { id: "double-dawgs", label: "Double Dawgs" },
     { id: "faq", label: "FAQ" },
     { id: "connect", label: "Connect" },
   ];
@@ -206,11 +215,41 @@ window.ProgramDetailPage = function ProgramDetailPage() {
         {/* Paying for college (composed from the info-cards pattern) */}
         <InfoCards id="paying" tint />
 
+        {/* Double Dawgs */}
+        <section id="double-dawgs" className="pd3-section">
+          <div className="pd3-inner">
+            <h2 className="section-kicker">Double Dawgs</h2>
+            <p className="section-display">Earn a master's in five years or less.</p>
+            <p className="pd3-intro">
+              Horticulture can be taken as a Double Dawgs program — a UGA pathway that lets ambitious
+              students earn both a bachelor's and a master's degree in five years or less, saving time
+              and money while positioning themselves for success after graduation.
+            </p>
+            <div className="pd3-dd-grid">
+              <div className="pd3-dd-main">
+                <p className="pd3-dd-pairs-title">Pair Horticulture with</p>
+                <ul className="pd3-dd-pairs" role="list">
+                  {DD_PAIRS.map((m) => <li key={m}>{m}</li>)}
+                </ul>
+                <a href="#" className="btn btn-filled pd3-dd-link">Learn more about Double Dawgs</a>
+              </div>
+              <div className="pd3-dd-logo-wrap">
+                <img
+                  className="pd3-dd-logo"
+                  src={DD_LOGO}
+                  alt="Double Dawgs — The University of Georgia Advantage"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* FAQ (composed from the faq pattern) */}
-        <Faq id="faq" />
+        <Faq id="faq" tint />
 
         {/* Connect (composed from the connect pattern) */}
-        <ConnectBlock id="connect" tint />
+        <ConnectBlock id="connect" />
       </div>
 
       {/* ---------- Closing CTA (composed from the closing-cta pattern) ---------- */}

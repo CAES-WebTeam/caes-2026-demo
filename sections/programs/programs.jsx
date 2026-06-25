@@ -608,13 +608,13 @@ function FilterModal({ title, subtitle, options, selected, counts, onApply, onCl
 function DoubleDawgsNote({ programName, onClick }) {
   return (
     <span className="dd-note-line">
-      This program is part of{" "}
+      This program can be taken as a{" "}
       <button
         type="button"
         className="dd-note"
         onClick={onClick}
         aria-label={`Double Dawgs pairings for ${programName}`}
-      >Double Dawgs</button>.
+      >Double Dawgs</button> pairing.
     </span>
   );
 }
