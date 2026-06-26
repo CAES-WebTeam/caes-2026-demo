@@ -1,0 +1,32 @@
+Name,Notes,Section,Parent task
+Theme Setup,"Umbrella task for theme.json, template parts, and templates. See PORTING.md -> Detail - Theme. Theme work is broken into the subtasks below.",Development,
+Design tokens (THM-tokens),"Map design tokens to theme.json settings (palette/type/spacing/layout). Do first - everything styled reads from it. Spec: PORTING.md THM-tokens.",,Theme Setup
+Core-block base styles (THM-coreblocks),"Core-block styles to theme.json styles.blocks.* (Elements tier). Spec: PORTING.md THM-coreblocks.",,Theme Setup
+Connect dept promo card (THM-btn-promo),"Core Button style variation (red, full-width, trailing arrow). Spec: PORTING.md THM-btn-promo.",,Theme Setup
+Berry decor (THM-berry),"Decorative theme style + asset, applied on homepage. Spec: PORTING.md THM-berry.",,Theme Setup
+"Site header, UGA bar + masthead (PART-header)","Header template part: UGA global bar + masthead (BLK-brand + BLK-nav mega-menu + core Search). Depends on: BLK-brand, BLK-nav. Spec: PORTING.md PART-header.",,Theme Setup
+"Site footer, CAES + UGA (PART-footer)","Footer template part: CAES footer (BLK-brand dark + core blocks) + BLK-uga-footer. Depends on: BLK-brand, BLK-uga-footer. Spec: PORTING.md PART-footer.",,Theme Setup
+Homepage (TPL-home),"Landing-page template; front page = a static Page edited in the normal editor. Spec: PORTING.md TPL-home.",,Theme Setup
+Interior-page template (TPL-interior),"Shared interior template (Academics landing, Interior page): locked breadcrumb + featured-image fade. Spec: PORTING.md TPL-interior.",,Theme Setup
+Interior + sidebar (TPL-interior-sidebar),"Interior template variant + sidebar rail (BLK-nav section-rail). Depends on: TPL-interior, BLK-nav. Spec: PORTING.md TPL-interior-sidebar.",,Theme Setup
+Degrees & Programs (TPL-programs-archive),"Unique archive template for the program CPT. Depends on: CPT-program. Spec: PORTING.md TPL-programs-archive.",,Theme Setup
+Program detail (TPL-program-single),"Single-program template + BLK-on-page-nav. Depends on: CPT-program. Spec: PORTING.md TPL-program-single.",,Theme Setup
+Directory (TPL-directory),"Unique template; faceted list via MOD-personnel. Spec: PORTING.md TPL-directory.",,Theme Setup
+Experts (TPL-experts),"Unique template; expertise view via MOD-personnel. Spec: PORTING.md TPL-experts.",,Theme Setup
+Announcement bar (PAT-announce),"Static pattern; dismiss behavior dropped. Spec: PORTING.md PAT-announce.",Development,
+Impact mosaic (PAT-mosaic),"Core-block pattern; CSS stretched-link + fade-up (no JS). Spec: PORTING.md PAT-mosaic.",Development,
+Read all about (PAT-read-about),"Static pattern. Spec: PORTING.md PAT-read-about.",Development,
+Phase cards (PAT-phase-cards),"Editor-filled pattern (tag/title/body). Spec: PORTING.md PAT-phase-cards.",Development,
+Info cards (PAT-info-cards),"Editor-filled pattern (title/copy/link). Spec: PORTING.md PAT-info-cards.",Development,
+FAQ (PAT-faq),"Core details block + pattern. Spec: PORTING.md PAT-faq.",Development,
+Closing CTA (PAT-closing-cta),"Static pattern. Spec: PORTING.md PAT-closing-cta.",Development,
+Brand / logo lockup (BLK-brand),"New uga-caes/brand; bundled logo enum (CAES/UGA/Extension); template-part only. Build before PART-header/PART-footer. Spec: PORTING.md BLK-brand.",Development,
+Navigation (BLK-nav),"New uga-caes/navigation; modes mega-menu/section-rail; template-part only. Spec: PORTING.md BLK-nav.",Development,
+Hero carousel (BLK-hero),"New uga-caes/hero-carousel; build as a carousel; model on caes-hub. Spec: PORTING.md BLK-hero.",Development,
+Feature tabs (BLK-feature-tabs),"New uga-caes/feature-tabs; synced panel swaps on select. Spec: PORTING.md BLK-feature-tabs.",Development,
+News (BLK-news),"New uga-caes/news; pulls from Field Report (mechanism TBD). Spec: PORTING.md BLK-news.",Development,
+UGA footer (BLK-uga-footer),"New uga-caes/uga-footer; migrate from caes-faculty-2023. Build before PART-footer. Spec: PORTING.md BLK-uga-footer.",Development,
+Interior section footer (BLK-section-footer),"New uga-caes/section-footer resolver block + synced pattern. Depends on: TPL-interior. Spec: PORTING.md BLK-section-footer.",Development,
+Scroll-spy subnav (BLK-on-page-nav),"New uga-caes/on-page-nav (sticky + active-link tracking). Spec: PORTING.md BLK-on-page-nav.",Development,
+Directory/Experts + profile cards (MOD-personnel),"Reuse/extend uga-caes/personnel: faceted lists + cards linking to Field Report. Additive only - live on other sites. Data source OPEN. Spec: PORTING.md MOD-personnel + modify-with-care.",Development,
+"Program CPT, data model (CPT-program)","Register program CPT in the plugin. Field inventory in PORTING.md. Build before program templates. Spec: PORTING.md CPT-program.",Development,
