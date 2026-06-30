@@ -56,8 +56,8 @@ One list of tasks for porting the demo into the theme (`caes-main-2026`) + plugi
 # Reference notes (context for devs / LLMs)
 
 ## Targets
-- **Theme** — `caes-main-2026` (`/Users/aaw97657/Documents/_CODE/github/caes-main-2026`). Block theme, `theme.json` v3 with **empty `settings`**; empty `parts/`, `patterns/`, `templates/`, `src/scss/`, `functions.php`. Build: `wp-scripts build`. WP ≥ 6.9, PHP ≥ 8.5.
-- **Plugin** — `caes-blocks` (`/Users/aaw97657/Documents/_CODE/github/caes-blocks`). Mature, theme-agnostic block library, namespace `uga-caes/`, server-rendered (`render.php`), `@wordpress/scripts`. **Already live on other CAES sites** — existing-block changes must stay backward-compatible.
+- **Theme** — `caes-main-2026` (`https://github.com/CAES-WebTeam/caes-main-2026`). Block theme, `theme.json` v3 with **empty `settings`**; empty `parts/`, `patterns/`, `templates/`, `src/scss/`, `functions.php`. Build: `wp-scripts build`. WP ≥ 6.9, PHP ≥ 8.5.
+- **Plugin** — `caes-blocks` (`https://github.com/CAES-WebTeam/caes-blocks`). Mature, theme-agnostic block library, namespace `uga-caes/`, server-rendered (`render.php`), `@wordpress/scripts`. **Already live on other CAES sites** — existing-block changes must stay backward-compatible.
 
 ## Guiding principle
 **Blocks provide structure/behavior; themes provide presentation.** A plugin block must work in any theme, so its `style.scss` carries only minimal structural CSS — colors/type/spacing come from the theme via tokens the theme can override (`--wp--preset--*` from `theme.json`). Most pieces split: the functional part = a plugin block (new or existing), its styling = the theme.
