@@ -21,12 +21,13 @@ One list of tasks for porting the demo into the theme (`caes-main-2026`) + plugi
 | Experts | Ashley | Unique template; expertise view via MOD-personnel (same DB). Source: `experts`. | Templates | TPL-experts |
 | **Patterns** | | Theme patterns of core blocks (+ referenced plugin blocks). Editor-insertable layouts. | | |
 | Announcement bar | Ashley | Static pattern (place in a template part). Dismiss behavior dropped (would need `view.js`/cookie + a block). Source: `announcement`. | Patterns | PAT-announce |
-| Impact mosaic | | Pattern of core blocks, classes pre-baked. No JS: stretched-link = CSS utility; fade-up = CSS scroll-driven (degrades to visible). Uses: STY-card, STY-card-link, STY-reveal, STY-section-type. Source: `impact-mosaic`. | Patterns | PAT-mosaic |
-| Read all about | | Static pattern (full-bleed red strip, oversized italic lockup). Uses: STY-section-type. Source: `read-all-about`. | Patterns | PAT-read-about |
-| Phase cards | | Editor-filled pattern (tag/title/body). Low-structure narrative. Uses: STY-section-type, STY-link-arrow. Source: `phase-cards`. | Patterns | PAT-phase-cards |
-| Info cards | | Editor-filled pattern (title/copy/link). Used in program-detail's Paying-for-College band. Uses: STY-card, STY-card-link, STY-link-arrow, STY-section-type. Source: `info-cards`. | Patterns | PAT-info-cards |
-| FAQ | | Core `details` block + pattern (heading + stacked details). Single-open dropped. Uses: STY-section-type. Source: `faq`. | Patterns | PAT-faq |
-| Closing CTA | | Static pattern ("Ready to grow your future?"): heading + red rule + copy + dual core Buttons. Uses: STY-button, STY-red-rule, STY-section-type. Source: `closing-cta`. | Patterns | PAT-closing-cta |
+| Impact mosaic | Ashley | Pattern of core blocks, classes pre-baked. No JS: stretched-link = CSS utility; fade-up = CSS scroll-driven (degrades to visible). Uses: STY-card, STY-card-link, STY-reveal, STY-section-type. Source: `impact-mosaic`. | Patterns | PAT-mosaic |
+| Read all about | Ashley | Static pattern (full-bleed red strip, oversized italic lockup). Uses: STY-section-type. Source: `read-all-about`. | Patterns | PAT-read-about |
+| Cards — narrative variant | Ashley | Card pattern, narrative visual variation (tag/title/body). Low-structure. Uses: STY-card, STY-section-type, STY-link-arrow. Source: `phase-cards`. | Patterns | PAT-cards-narrative |
+| Cards — linked variant | Ashley | Card pattern, linked visual variation (title/copy/link). Used in program-detail's Paying-for-College band. Uses: STY-card, STY-card-link, STY-link-arrow, STY-section-type. Source: `info-cards`. | Patterns | PAT-cards-linked |
+| Cards — numbered variant | Ashley | Card pattern, numbered visual variation (big number on top + body). Matches the program-detail "How to Prepare" look; the CPT-driven version is rendered by BLK-program-fields. Uses: STY-card, STY-section-type. Source: `program-detail` (`pd3-prep-card`). | Patterns | PAT-cards-numbered |
+| FAQ | Ashley | Core `details` block + pattern (heading + stacked details). Single-open dropped. Uses: STY-section-type. Source: `faq`. | Patterns | PAT-faq |
+| Closing CTA | Ashley | Static pattern ("Ready to grow your future?"): heading + red rule + copy + dual core Buttons. Uses: STY-button, STY-red-rule, STY-section-type. Source: `closing-cta`. | Patterns | PAT-closing-cta |
 | **Plugin blocks (new)** | | New `uga-caes/` server-rendered blocks. Minimal structural CSS; look comes from theme tokens. | | |
 | Brand / logo lockup | Ashley | New `uga-caes/brand` — CAES lockup for all sites. Bundled logo enum (CAES, UGA wordmark; Extension later); not media library. Variant attr (light/dark/mono) via `--wp--preset--color--*` tokens. Template-part contexts only. Folds in the home-link wrapper. Build before PART-header/PART-footer. Prior art: `caes-faculty-2023`. Source: `_shared.jsx`. | Plugin blocks (new) | BLK-brand |
 | Navigation | | New `uga-caes/navigation`; modes `mega-menu` (site nav) and `section-rail` (hierarchy-aware parent/siblings/current). Server-rendered from page hierarchy/menu; mobile collapse built in; template-part only. Source: `_shared.jsx` (CollapsibleNav). | Plugin blocks (new) | BLK-nav |
@@ -66,12 +67,12 @@ Theme-owned (Theme Setup → `STY`). Consumers emit the class; they do not resty
 
 | Primitive | Class / token (demo) | Used by | ID |
 |---|---|---|---|
-| Card look: shadow + hover + image zoom | `--shadow-card` / `--shadow-card-hover` + `--ratio-*` (standardize into `.card`) | PAT-mosaic, PAT-info-cards, BLK-news, BLK-feature-tabs, MOD-personnel | STY-card |
-| Stretched "whole card is a link" | `.card-link` | PAT-mosaic, PAT-info-cards, BLK-news, MOD-personnel | STY-card-link |
+| Card look: shadow + hover + image zoom | `--shadow-card` / `--shadow-card-hover` + `--ratio-*` (standardize into `.card`) | PAT-mosaic, PAT-cards-narrative, PAT-cards-linked, BLK-news, BLK-feature-tabs, MOD-personnel | STY-card |
+| Stretched "whole card is a link" | `.card-link` | PAT-mosaic, PAT-cards-linked, BLK-news, MOD-personnel | STY-card-link |
 | Fade-up on scroll into view | mosaic's `is-armed`/`is-revealed` (standardize into a CSS scroll-driven utility) | PAT-mosaic (+ optional) | STY-reveal |
 | Button variations | `.btn-filled` / `.btn-white` / `.btn-outline-white` → core Button styles | BLK-hero, PAT-closing-cta, PART-header, TPL-program-single, THM-btn-promo | STY-button |
 | Eyebrow + kicker + display + lead | `.eyebrow` `.section-kicker` `.section-display` `.section-lead` | most patterns + section blocks | STY-section-type |
-| Red arrow link | `.link-arrow` | BLK-news, PAT-phase-cards, PAT-info-cards, MOD-personnel, TPL-program-single | STY-link-arrow |
+| Red arrow link | `.link-arrow` | BLK-news, PAT-cards-narrative, PAT-cards-linked, MOD-personnel, TPL-program-single | STY-link-arrow |
 | Red divider rule | `.red-rule` → core Separator style | PAT-closing-cta, TPL-program-single | STY-red-rule |
 
 ## Existing blocks — modify with care
@@ -97,6 +98,7 @@ Theme-owned (Theme Setup → `STY`). Consumers emit the class; they do not resty
 
 ## Decisions log
 _Newest first._
+- "Phase cards" / "Info cards" renamed to Cards — narrative / linked variants (PAT-cards-narrative, PAT-cards-linked): they're the same card concept in different visual variations.
 - Program archive search is its own block (BLK-program-search), not a Query loop — the demo has search + 3 faceted filter modals + cards/table toggle + grouping + Double Dawgs modal. Added an **Interest** taxonomy (primary filter axis) with an emoji term-meta field.
 - Restructured into one umbrella/subtask task list (IDs last column); reference moved to the end. Owner/status dropped (tracked in Asana).
 - `caes-individual-personnel` is out — no individual profile pages on the new sites; all profile cards link to Field Report.
